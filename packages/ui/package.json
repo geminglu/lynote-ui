@@ -313,6 +313,14 @@
     "type-check": "tsc -p tsconfig.json --noEmit",
     "prepublishOnly": "pnpm build"
   },
+  "homepage": "https://github.com/geminglu/lynote-ui",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/geminglu/lynote-ui"
+  },
+  "bugs": {
+    "url": "https://github.com/geminglu/lynote-ui/issues"
+  },
   "keywords": [
     "react",
     "ui",
