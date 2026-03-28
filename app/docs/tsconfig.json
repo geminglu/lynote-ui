@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.app.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@": ["./src/*"],
+      "lynote-ui": ["packages/ui/src/index.ts"],
+      "lynote-ui/*": ["packages/ui/src/*"]
+    }
+  },
+  "include": ["docs", "src"]
+}

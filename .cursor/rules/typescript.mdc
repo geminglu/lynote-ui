@@ -1,0 +1,151 @@
+---
+globs: *.ts,*.tsx
+description: TypeScript 编码规范和最佳实践
+---
+
+# TypeScript 编码规范
+
+## 代码规范
+
+### TypeScript 规范
+
+- 使用严格模式（Strict Mode）
+- 优先使用类型推断，必要时显式声明类型
+- 使用 `interface` 定义对象类型，`type` 用于联合类型和工具类型
+- 组件 Props 使用 `React.ComponentProps` 或自定义接口
+- 避免使用 `any`，优先使用 `unknown` 或具体类型
+
+## 类型定义规范
+
+### 组件 Props 类型
+
+- 使用 `PropsType` 作为组件 props 的类型名
+- 继承自 `ComponentProps<"element">` 并扩展自定义属性
+- 使用 `Omit` 和 `Pick` 进行类型操作
+
+```typescript
+export type PropsType = ComponentProps<"button"> &
+  Omit<VariantPropsType, "iconModel"> & {
+    // 自定义属性
+    loading?: boolean;
+    icon?: React.ReactNode;
+  };
+```
+
+### 变体类型
+
+- 从 theme 包导入 `VariantProps` 类型
+- 使用 `VariantProps<typeof componentVariants>` 获取变体类型
+
+```typescript
+import { VariantProps } from "./variant";
+type VariantPropsType = VariantProps<typeof buttonVariants>;
+```
+
+### 枚举定义
+
+- 使用 `const enum` 定义状态枚举
+- 使用字符串字面量类型
+
+```typescript
+export const enum LoadingStatus {
+  PENDING = "pending",
+  FULFILLED = "fulfilled",
+  REJECTED = "rejected",
+}
+```
+
+## 组件实现规范
+
+### 函数组件
+
+- 使用 `FC<PropsType>` 类型注解
+- 使用 `forwardRef` 处理 ref 转发
+- 解构 props 时保留 `...restProps`
+
+```typescript
+const Component: FC<PropsType> = ({
+  className,
+  variant,
+  size,
+  ...restProps
+}) => {
+  // 组件实现
+};
+```
+
+### 事件处理
+
+- 使用具体的事件类型
+- 支持 Promise 返回值用于异步操作
+
+```typescript
+onClick?: (
+  e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+) => void | Promise<unknown>;
+```
+
+## 导入规范
+
+- 优先使用命名导入
+- 按以下顺序组织导入：
+  1. React 相关
+  2. 第三方库
+  3. 内部包（@lynote/*）
+  4. 相对路径导入
+
+```typescript
+import { FC } from "react";
+import { motion } from "motion/react";
+import { cn } from "@lynote/utils";
+import { PropsType } from "./type";
+```
+
+## 注释规范
+
+- 复杂逻辑必须添加注释
+- 使用 JSDoc 格式注释复杂属性
+- 组件 Props 使用 TypeScript 类型定义，无需额外注释
+- 中文注释说明功能特性
+- 使用 `/**` 多行注释格式
+
+```typescript
+/**
+ * 按钮组件
+ * @param loading - 是否显示加载状态
+ * @param size - 按钮尺寸
+ * @param variant - 按钮变体
+ */
+export type PropsType = {
+  /**
+   * 是否显示加载状态
+   * 当为 true 时，按钮会显示加载图标并禁用点击
+   */
+  loading?: boolean;
+
+  /**
+   * 按钮尺寸
+   * @default "md"
+   */
+  size?: "sm" | "md" | "lg";
+};
+```
+
+## README 文件
+
+- 每个包应包含 README.md
+- 说明包的用途、安装和使用方法
+
+## 依赖管理
+
+### 添加依赖
+
+- 使用 `pnpm add <package>` 添加依赖
+- 开发依赖使用 `-D` 标志
+- 工作空间依赖使用 `workspace:*` 协议
+
+### 版本管理
+
+- 遵循语义化版本控制
+- 定期更新依赖，注意破坏性变更
+- 锁定文件（pnpm-lock.yaml）应提交到版本控制

@@ -1,0 +1,7 @@
+{
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "tailwindCSS.classFunctions": ["cva", "cx"],
+    "tailwindCSS.experimental.classRegex": [
+      ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ]
+}

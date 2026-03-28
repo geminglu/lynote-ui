@@ -1,0 +1,203 @@
+---
+alwaysApply: true
+description: 命名规范和代码风格约定
+---
+
+# 命名规范和代码风格
+
+## 文件命名规范
+
+### 目录命名
+
+- 使用 kebab-case：`button`, `input-field`, `form-control`
+- 组件目录：`packages/components/src/component-name/`
+- 核心包目录：`packages/core/package-name/`
+
+### 文件命名
+
+- 组件文件：PascalCase - `Button.tsx`, `InputField.tsx`
+- 类型文件：kebab-case - `type.ts`, `button-type.ts`
+- 工具文件：kebab-case - `use-button.ts`, `button-utils.ts`
+- 配置文件：kebab-case - `package.json`, `tsconfig.json`
+
+## 代码命名规范
+
+### 组件命名
+
+- 组件名：PascalCase - `Button`, `InputField`, `FormRoot`
+- 组件文件：与组件名一致 - `src/button/index.tsx`
+
+```typescript
+// ✅ 正确
+const Button: FC<PropsType> = () => { /* ... */ };
+const InputField = forwardRef<HTMLInputElement, PropsType>(() => { /* ... */ });
+
+// ❌ 错误
+const button: FC<PropsType> = () => { /* ... */ };
+const input_field: FC<PropsType> = () => { /* ... */ };
+```
+
+### 类型命名
+
+- 接口：PascalCase - `PropsType`, `ButtonProps`, `FormConfig`
+- 类型别名：PascalCase - `Size`, `Variant`, `LoadingStatus`
+- 枚举：PascalCase - `LoadingStatus`, `ButtonVariant`
+
+```typescript
+// ✅ 正确
+export type PropsType = ComponentProps<"button"> & {
+  loading?: boolean;
+  size?: Size;
+};
+
+export const enum LoadingStatus {
+  PENDING = "pending",
+  FULFILLED = "fulfilled",
+  REJECTED = "rejected",
+}
+
+// ❌ 错误
+export type propsType = ComponentProps<"button">;
+export const enum loading_status { /* ... */ }
+```
+
+### 变量和函数命名
+
+- 变量：camelCase - `isLoading`, `buttonRef`, `handleClick`
+- 函数：camelCase - `handleSubmit`, `validateForm`, `getButtonSize`
+- 常量：UPPER_SNAKE_CASE - `DEFAULT_SIZE`, `MAX_LENGTH`
+
+```typescript
+// ✅ 正确
+const [isLoading, setIsLoading] = useState(false);
+const buttonRef = useRef<HTMLButtonElement>(null);
+const handleClick = (e: React.MouseEvent) => { /* ... */ };
+
+const DEFAULT_SIZE = "md";
+const MAX_INPUT_LENGTH = 100;
+
+// ❌ 错误
+const [is_loading, set_is_loading] = useState(false);
+const button_ref = useRef<HTMLButtonElement>(null);
+const handle_click = (e: React.MouseEvent) => { /* ... */ };
+```
+
+### Hook 命名
+
+- 自定义 Hook：`use` 前缀 + PascalCase - `useButton`, `useInputState`
+- Hook 文件：kebab-case - `use-button.ts`, `use-input-state.ts`
+
+```typescript
+// ✅ 正确
+export const useButton = (props: PropsType) => { /* ... */ };
+export const useInputState = (props: InputProps) => { /* ... */ };
+
+// ❌ 错误
+export const use_button = (props: PropsType) => { /* ... */ };
+export const useinputstate = (props: InputProps) => { /* ... */ };
+```
+
+## 包命名规范
+
+### 内部包命名
+
+- 格式：`lynote-ui`
+- 组件包：`lynote-ui`
+- 核心包：`@lynote/utils`, `@lynote/icon`
+
+### 导出命名
+
+- 默认导出：组件名 - `export default Button`
+- 命名导出：PascalCase - `export { Button, ButtonProps }`
+- 类型导出：PascalCase - `export type { PropsType, Size }`
+
+```typescript
+// ✅ 正确
+export { default } from "./Button";
+export type { PropsType, Size } from "./type";
+export { ButtonVariants } from "./variants";
+
+// ❌ 错误
+export { default as button } from "./Button";
+export type { propsType, size } from "./type";
+```
+
+## CSS 类名规范
+
+### Tailwind 类名
+
+- 使用 Tailwind 预定义类名
+- 自定义类名使用 kebab-case
+- 数据属性使用 kebab-case
+
+```typescript
+// ✅ 正确
+className="flex items-center justify-center rounded-md"
+data-slot="input-field"
+data-focus={isFocus}
+
+// ❌ 错误
+className="flex items_center justify_center rounded_md"
+data-slot="inputField"
+data-focus={isFocus}
+```
+
+### 变体类名
+
+- 使用语义化的变体名
+- 状态类名：`loading`, `disabled`, `active`
+- 尺寸类名：`sm`, `md`, `lg`, `xl`
+
+```typescript
+// ✅ 正确
+const buttonVariants = cva("base-styles", {
+  variants: {
+    variant: {
+      primary: "bg-blue-500",
+      secondary: "bg-gray-500",
+      danger: "bg-red-500",
+    },
+    size: {
+      sm: "h-8 px-3",
+      md: "h-10 px-4",
+      lg: "h-12 px-6",
+    },
+  },
+});
+```
+
+## 注释规范
+
+### JSDoc 注释
+
+- 使用 JSDoc 格式注释组件属性
+- 中文注释说明功能特性
+- 使用 `/**` 多行注释格式
+
+```typescript
+/**
+ * 按钮组件
+ * @param loading - 是否显示加载状态
+ * @param size - 按钮尺寸
+ * @param variant - 按钮变体
+ */
+export type PropsType = {
+  /**
+   * 是否显示加载状态
+   * 当为 true 时，按钮会显示加载图标并禁用点击
+   */
+  loading?: boolean;
+
+  /**
+   * 按钮尺寸
+   * @default "md"
+   */
+  size?: "sm" | "md" | "lg";
+
+  /**
+   * 按钮变体样式
+   * @default "default"
+   */
+  variant?: "default" | "outline" | "ghost";
+};
+```

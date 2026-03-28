@@ -1,0 +1,135 @@
+---
+description: 开发工作流程和最佳实践
+---
+
+# 开发工作流程
+
+## 开发环境设置
+
+### 依赖安装
+
+```bash
+# 安装所有依赖
+pnpm install
+
+```
+
+### 开发脚本
+
+```bash
+# 构建所有包
+pnpm build
+
+# 代码检查
+pnpm lint
+
+# 自动修复代码格式
+pnpm lint:fix
+
+# 运行 Storybook
+cd app/storybook && pnpm dev
+```
+
+## 组件开发流程
+
+### 1. 创建新组件
+
+1. 在 `packages/components/src/` 下创建组件目录（使用 kebab-case 命名）
+2. 创建标准文件结构：
+   - `packages/components/src/component-name/index.tsx` - 主组件（包含组件实现和导出）
+   - `packages/components/src/component-name/demos/` - 演示文件目录
+   - `packages/components/src/component-name/README.md` - 组件文档
+3. 对于复杂组件，可以添加：
+   - `type.ts` - 类型定义（如果类型复杂）
+   - `components/` - 子组件目录
+   - `hooks/` - 自定义 hooks
+   - `context/` - 上下文定义
+4. 在 `packages/components/src/index.ts` 中添加组件导出
+
+### 2. 组件实现步骤
+
+1. 定义类型接口 (`type.ts`)
+2. 实现主组件 (`ComponentName.tsx`)
+3. 编写演示文件 (`demos/`)
+
+### 3. 测试和验证
+
+1. 在 Storybook 中查看组件效果
+2. 运行 `pnpm lint` 检查代码质量
+3. 运行 `pnpm build` 确保构建成功
+
+## 代码质量保证
+
+### 提交前检查
+
+项目配置了 husky 和 lint-staged：
+
+- 自动运行 ESLint 检查
+- 自动运行 Prettier 格式化
+- 只对暂存的文件进行检查
+
+### 代码规范
+
+- 使用 TypeScript 严格模式
+- 遵循 ESLint 规则
+- 使用 Prettier 统一代码格式
+- 组件使用 PascalCase 命名
+- 文件使用 kebab-case 或 PascalCase
+
+## 构建和发布
+
+### 构建流程
+
+1. 运行 `pnpm build` 构建所有包
+2. 检查 `dist/` 目录下的构建产物
+3. 验证类型定义文件生成正确
+
+### 发布准备
+
+1. 更新版本号
+2. 更新 CHANGELOG
+3. 运行完整测试
+4. 构建并验证
+
+## 文档和演示
+
+### Storybook 集成
+
+- 在 `app/storybook/` 中维护组件演示
+- 使用 `.stories.tsx` 文件定义故事
+- 支持 MDX 格式的文档
+
+### 组件文档
+
+- 每个组件目录包含 `README.md`
+- 使用 JSDoc 注释组件属性
+- 提供使用示例和 API 文档
+- 在 `app/docs/` 中维护完整的组件文档（使用 dumi）
+
+## 调试和问题排查
+
+### 常见问题
+
+1. **构建失败**: 检查 TypeScript 类型错误
+2. **样式不生效**: 确认 Tailwind 配置和类名
+3. **依赖问题**: 检查 `package.json` 和 workspace 配置
+
+### 调试工具
+
+- 使用 React DevTools 调试组件
+- 使用浏览器开发者工具检查样式
+- 使用 TypeScript 编译器检查类型错误
+
+## 性能优化
+
+### 构建优化
+
+- 使用 esbuild 进行快速构建
+- 外部化内部依赖避免重复打包
+- 生成 source map 便于调试
+
+### 运行时优化
+
+- 使用 React.memo 优化重渲染
+- 合理使用 useMemo 和 useCallback
+- 避免不必要的状态更新

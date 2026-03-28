@@ -1,0 +1,173 @@
+---
+globs: **/*.tsx
+description: 样式系统和主题配置规范
+---
+
+# 样式系统和主题规范
+
+## 组件变体系统
+
+### CVA 变体定义模式
+
+```typescript
+import { cva } from "@lynote/utils";
+
+export const buttonVariants = cva(
+  // 基础样式
+  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        outline: "border border-input bg-background hover:bg-accent",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default: "h-10 px-4 py-2",
+        sm: "h-9 rounded-md px-3",
+        lg: "h-11 rounded-md px-8",
+        icon: "h-10 w-10",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+);
+```
+
+### 变体类型导出
+
+```typescript
+export type VariantProps<T extends (...args: any) => any> = Parameters<T>[0];
+```
+
+## 样式工具函数
+
+### 类名合并工具 ([packages/core/lib/src/utils.ts](mdc:packages/core/lib/src/utils.ts))
+
+```typescript
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+```
+
+### 使用模式
+
+```typescript
+import { cn } from "@lynote/utils";
+import { buttonVariants } from "./variant";
+
+className={cn(
+  buttonVariants({
+    variant,
+    size,
+    color,
+    disabled,
+  }),
+  className
+)}
+```
+
+## 组件样式集成
+
+### 数据属性样式
+
+使用 `data-*` 属性进行状态相关的样式控制：
+
+```typescript
+<div
+  data-slot="input"
+  data-focus={isFocus}
+  data-disabled={disabled}
+  className={cn(inputVariants({ size, variant }))}
+>
+```
+
+### 条件样式
+
+```typescript
+className={cn(
+  buttonVariants({
+    variant,
+    size,
+    iconModel: !!(icon && !children),
+    loading: !!loadingStatus,
+    disabled,
+  }),
+  className
+)}
+```
+
+## 动画样式集成
+
+### Motion 组件样式
+
+```typescript
+import { motion } from "motion/react";
+
+<motion.span
+  className={buttonIconVariants()}
+  initial={{ opacity: 0, scale: 0.8 }}
+  animate={{ opacity: 1, scale: 1 }}
+  exit={{ opacity: 0, scale: 0.8 }}
+>
+  {icon}
+</motion.span>
+```
+
+## 响应式设计
+
+### Tailwind 响应式前缀
+
+- 使用 Tailwind 的响应式前缀：`sm:`, `md:`, `lg:`, `xl:`
+- 移动优先的设计原则
+
+```typescript
+const responsiveVariants = cva(
+  "text-sm md:text-base lg:text-lg",
+  {
+    variants: {
+      size: {
+        sm: "h-8 px-2 sm:h-9 sm:px-3",
+        md: "h-10 px-4 sm:h-11 sm:px-6",
+        lg: "h-12 px-6 sm:h-14 sm:px-8",
+      },
+    },
+  }
+);
+```
+
+## 主题定制
+
+### CSS 变量集成
+
+在主题包中定义 CSS 变量：
+
+```css
+/* packages/components/src/style/index.css */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --primary: 222.2 47.4% 11.2%;
+  --primary-foreground: 210 40% 98%;
+  /* ... 其他颜色变量 */
+}
+```
+
+### 暗色主题支持
+
+```css
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  /* ... 暗色主题变量 */
+}
+```

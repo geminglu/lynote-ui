@@ -1,0 +1,189 @@
+---
+globs: packages/components/**/*.tsx,packages/components/**/*.ts
+description: 组件开发模式和最佳实践
+---
+
+# 组件开发模式
+
+## 组件结构模式
+
+### 标准组件结构
+
+每个组件应包含以下文件：
+
+- `ComponentName.tsx` - 主组件实现
+- `type.ts` - 类型定义
+- `index.ts` - 导出文件
+- `hook.ts` - 自定义 hooks（可选）
+- `components/` - 子组件目录（可选）
+
+### 组件实现模式
+
+#### 1. 基础组件结构
+
+```typescript
+import { FC } from "react";
+import { cn } from "@lynote/utils";
+import { componentVariants } from "@lynote/theme";
+import { PropsType } from "./type";
+
+const Component: FC<PropsType> = ({
+  className,
+  variant,
+  size,
+  children,
+  ...restProps
+}) => {
+  return (
+    <div
+      {...restProps}
+      className={cn(
+        componentVariants({ variant, size }),
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
+};
+
+export default Component;
+```
+
+#### 2. 带 ref 转发的组件
+
+```typescript
+import { forwardRef } from "react";
+
+const Component = forwardRef<HTMLInputElement, PropsType>(
+  ({ className, ...props }, ref) => {
+    return (
+      <input
+        ref={ref}
+        {...props}
+        className={cn(componentVariants(), className)}
+      />
+    );
+  }
+);
+```
+
+#### 3. 带状态管理的组件
+
+```typescript
+const Component: FC<PropsType> = (props) => {
+  const { state, handlers } = useComponent(props);
+
+  return (
+    <div className={cn(componentVariants(state), props.className)}>
+      {/* 组件内容 */}
+    </div>
+  );
+};
+```
+
+## 样式系统集成
+
+### 使用 CVA (Class Variance Authority)
+
+- 从 `@lynote/theme` 导入变体函数
+- 使用 `cn()` 工具函数合并类名
+- 支持条件样式和变体
+
+```typescript
+import { buttonVariants } from "@lynote/theme";
+import { cn } from "@lynote/utils";
+
+className={cn(
+  buttonVariants({
+    variant,
+    size,
+    color,
+    disabled,
+  }),
+  className
+)}
+```
+
+### 数据属性模式
+
+使用 `data-*` 属性进行状态标记：
+
+```typescript
+<div
+  data-slot="input"
+  data-focus={isFocus}
+  data-disabled={disabled}
+  className={cn(inputVariants())}
+>
+```
+
+## 动画集成
+
+### 使用 Motion 组件
+
+```typescript
+import { AnimatePresence, motion } from "motion/react";
+
+<AnimatePresence>
+  {loading && (
+    <motion.span
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <LoadingIcon />
+    </motion.span>
+  )}
+</AnimatePresence>
+```
+
+## 表单集成
+
+### 使用 React Hook Form
+
+```typescript
+import { FormProvider } from "react-hook-form";
+
+const FormRoot = <TFormValues extends FieldValues>({
+  onSubmit = () => {},
+  ...props
+}: FormPropsType<TFormValues>) => {
+  return (
+    <FormProvider {...props}>
+      <form onSubmit={props.handleSubmit(onSubmit)}>
+        {props.children}
+      </form>
+    </FormProvider>
+  );
+};
+```
+
+## 自定义 Hooks 模式
+
+### 状态管理 Hook
+
+```typescript
+export const useComponent = (props: PropsType) => {
+  const [state, setState] = useState(initialState);
+
+  const handlers = {
+    handleClick: (e: React.MouseEvent) => {
+      // 处理逻辑
+    },
+  };
+
+  return { state, handlers };
+};
+```
+
+## 组件导出模式
+
+### 标准导出结构
+
+```typescript
+// index.ts
+export { default } from "./ComponentName";
+export type { PropsType } from "./type";
+export * from "./type";
+```

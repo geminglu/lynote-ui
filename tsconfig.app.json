@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "."
+  },
+  "include": [
+    "app",
+    "packages",
+    "app/docs/**/*.ts",
+    "app/docs/**/.*.ts",
+    "app/docs/.*/*.ts",
+    "app/docs/.*/**/*.tsx"
+  ],
+  "exclude": ["packages/core/icon/**", "packages/core/lib/**"]
+}
