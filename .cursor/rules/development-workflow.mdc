@@ -34,17 +34,17 @@ cd app/storybook && pnpm dev
 
 ### 1. 创建新组件
 
-1. 在 `packages/components/src/` 下创建组件目录（使用 kebab-case 命名）
+1. 在 `packages/ui/src/` 下创建组件目录（使用 kebab-case 命名）
 2. 创建标准文件结构：
-   - `packages/components/src/component-name/index.tsx` - 主组件（包含组件实现和导出）
-   - `packages/components/src/component-name/demos/` - 演示文件目录
-   - `packages/components/src/component-name/README.md` - 组件文档
+   - `packages/ui/src/component-name/index.tsx` - 主组件（包含组件实现和导出）
+   - `packages/ui/src/component-name/demos/` - 演示文件目录
+   - `packages/ui/src/component-name/README.md` - 组件文档
 3. 对于复杂组件，可以添加：
    - `type.ts` - 类型定义（如果类型复杂）
    - `components/` - 子组件目录
    - `hooks/` - 自定义 hooks
    - `context/` - 上下文定义
-4. 在 `packages/components/src/index.ts` 中添加组件导出
+4. 在 `packages/ui/src/index.ts` 中添加组件导出
 
 ### 2. 组件实现步骤
 

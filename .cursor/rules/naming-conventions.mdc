@@ -103,7 +103,6 @@ export const useinputstate = (props: InputProps) => { /* ... */ };
 
 - 格式：`lynote-ui`
 - 组件包：`lynote-ui`
-- 核心包：`@lynote/utils`, `@lynote/icon`
 
 ### 导出命名
 

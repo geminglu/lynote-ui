@@ -1,9 +1,9 @@
 ---
 alwaysApply: true
-description: GML UI 项目结构和架构指南
+description: lynote-ui 项目结构和架构指南
 ---
 
-# GML UI 项目结构指南
+# lynote-ui 项目结构指南
 
 这是一个基于 React + TypeScript + Tailwind CSS 的组件库项目，采用 monorepo 架构。
 
@@ -13,16 +13,15 @@ description: GML UI 项目结构和架构指南
 
 - `packages/` - 所有包的主目录
 - `app/` - 应用目录（包含 docs 和 storybook）
-- `build/` - 构建脚本
 - 配置文件：`package.json`, `pnpm-workspace.yaml`, `tsconfig.json`, `eslint.config.js`
 
 ### 包结构 (`packages/`)
 
-#### `components/` - UI 组件包
+#### `packages/ui/` - UI 组件包
 
-所有组件统一放在 `packages/components/src/` 目录下，每个组件是一个子目录：
+所有组件统一放在 `packages/ui/src/` 目录下，每个组件是一个子目录：
 
-- `packages/components/` - 组件包根目录
+- `packages/ui/` - 组件包根目录
   - `src/` - 所有组件源码
     - `button/` - 按钮组件
     - `input/` - 输入框组件
@@ -36,20 +35,9 @@ description: GML UI 项目结构和架构指南
   - `index.ts` - 包入口文件
   - `package.json` - 包配置
 
-#### `core/` - 核心功能包
-
-- `lib/` - 工具库包 (`@lynote/utils`)
-  - `src/` - 工具函数源码
-    - `utils.ts` - 工具函数（如 `cn`）
-    - `cva.ts` - CVA 相关工具
-    - `index.ts` - 导出文件
-- `icon/` - 图标系统包 (`@lynote/icon`)
-  - `src/icons/` - 图标组件
-  - `src/index.ts` - 导出文件
-
 ### 组件标准结构
 
-每个组件位于 `packages/components/src/component-name/` 目录下：
+每个组件位于 `packages/ui/src/component-name/` 目录下：
 
 ```text
 component-name/

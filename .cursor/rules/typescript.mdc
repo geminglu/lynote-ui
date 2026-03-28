@@ -46,8 +46,12 @@ type VariantPropsType = VariantProps<typeof buttonVariants>;
 
 - 使用 `const enum` 定义状态枚举
 - 使用字符串字面量类型
+- 需要写明注释
 
 ```typescript
+/**
+ * Loading 状态
+ */
 export const enum LoadingStatus {
   PENDING = "pending",
   FULFILLED = "fulfilled",
@@ -62,6 +66,7 @@ export const enum LoadingStatus {
 - 使用 `FC<PropsType>` 类型注解
 - 使用 `forwardRef` 处理 ref 转发
 - 解构 props 时保留 `...restProps`
+- 需要写明注释
 
 ```typescript
 const Component: FC<PropsType> = ({
@@ -106,6 +111,7 @@ import { PropsType } from "./type";
 - 复杂逻辑必须添加注释
 - 使用 JSDoc 格式注释复杂属性
 - 组件 Props 使用 TypeScript 类型定义，无需额外注释
+- 每个React组件都要写明组件介绍
 - 中文注释说明功能特性
 - 使用 `/**` 多行注释格式
 
@@ -128,7 +134,27 @@ export type PropsType = {
    * @default "md"
    */
   size?: "sm" | "md" | "lg";
+  className: string;
+  children: ReactNode
 };
+```
+
+```tsx
+/**
+ * 按钮组件
+ */
+function Button({
+  className,
+  children
+}: PropsType) {
+  return (
+    <button
+      data-slot="button"
+      className={cn(buttonVariants({ variant, size, className }))}
+      {...props}
+    />
+  );
+}
 ```
 
 ## README 文件
