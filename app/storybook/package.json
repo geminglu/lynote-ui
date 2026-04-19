@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "lint": "eslint .",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "start": "storybook dev -p 6006",
+    "build": "storybook build"
   },
   "dependencies": {
     "lucide-react": "^0.555.0",
