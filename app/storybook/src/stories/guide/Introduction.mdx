@@ -1,0 +1,27 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="指南/开始使用" />
+
+# Storybook 指南
+
+这里用于集中展示 `lynote-ui` 组件库的交互状态、视觉表现和开发约束。
+
+## 你可以在这里做什么
+
+- 查看组件的基础用法、变体、尺寸和边界状态
+- 用 Controls 面板动态调整 props
+- 用右上角工具栏切换浅色 / 深色主题
+- 在 Docs 页面查看组件说明和示例源码
+- 使用 a11y 面板辅助检查组件可访问性
+
+## 当前约定
+
+- `packages/ui` 中的 `README.md` 和 `demos/` 继续服务 dumi
+- `app/storybook` 单独维护 Storybook 文档与示例
+- Storybook 里的示例优先覆盖真实业务场景，而不只是最小演示
+
+## 建议的补充顺序
+
+1. 先完善高频基础组件，如 `Button`、`Input`、`Checkbox`
+2. 再补表单与弹层组件，如 `Form`、`Dialog`、`Popover`
+3. 最后处理复杂组合组件，如 `Table`、`Chart`、`Sidebar`

@@ -22,7 +22,6 @@ const SHARED_IGNORES = [
   "**/.history",
   "**/.husky",
   "**/.vscode",
-  "**/storybook",
 ];
 
 const SHARED_GLOBALS = {

@@ -65,12 +65,12 @@ import { Slider } from "lynote-ui";
 
 滑块组件。
 
-| 参数          | 说明         | 类型                                                | 默认值 |
-| ------------- | ------------ | --------------------------------------------------- | ------ |
-| value         | 当前值       | `number \| number[]`                                | -      |
-| defaultValue  | 默认值       | `number \| number[]`                                | -      |
-| onValueChange | 值变化回调   | `(value: number \| number[]) => void`               | -      |
-| min           | 最小值       | `number`                                            | `0`    |
-| max           | 最大值       | `number`                                            | `100`  |
-| step          | 步长         | `number`                                            | `1`    |
-| className     | 自定义类名   | `string`                                            | -      |
+| 参数          | 说明       | 类型                                  | 默认值 |
+| ------------- | ---------- | ------------------------------------- | ------ |
+| value         | 当前值     | `number \| number[]`                  | -      |
+| defaultValue  | 默认值     | `number \| number[]`                  | -      |
+| onValueChange | 值变化回调 | `(value: number \| number[]) => void` | -      |
+| min           | 最小值     | `number`                              | `0`    |
+| max           | 最大值     | `number`                              | `100`  |
+| step          | 步长       | `number`                              | `1`    |
+| className     | 自定义类名 | `string`                              | -      |
