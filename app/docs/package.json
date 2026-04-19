@@ -13,8 +13,9 @@
     "dev": "dumi dev",
     "build": "father build",
     "build:watch": "father dev",
+    "llms:build": "node ./scripts/generate-component-markdown.mjs",
     "predocs:build": "pnpm --filter lynote-ui build",
-    "docs:build": "dumi build",
+    "docs:build": "dumi build && pnpm llms:build",
     "docs:preview": "dumi preview",
     "doctor": "father doctor",
     "prepublishOnly": "father doctor && npm run build"
