@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "lint": "eslint .",
-    "start": "storybook dev -p 6006",
+    "dev": "storybook dev -p 6006",
     "build": "storybook build"
   },
   "dependencies": {
