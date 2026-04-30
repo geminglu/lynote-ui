@@ -6,7 +6,7 @@ demo:
   cols: 1
 group:
   title: 表单
-  order: 3
+  order: 4
 nav: 组件
 toc: content
 background: #111
@@ -39,31 +39,41 @@ pnpm add lynote-ui
 import { Checkbox } from "lynote-ui";
 ```
 
-```ts [全局] | pure
-import { Checkbox } from "gml-ui";
-```
-
 :::
 
-复选框用于在一组可选项中进行多项选择时。
+用于在选中、未选中和不确定状态之间切换。
+
+## 使用建议
+
+- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
+- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
+- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
+
+## 组件结构
+
+```tsx | pure
+<Checkbox />
+```
 
 ## 代码演示
 
 <code src="./demos/base.tsx">基本用法</code>
 
-<code src="./demos/disabled.tsx">禁用状态</code>
+<code src="./demos/controlled.tsx">受控用法</code>
 
-<code src="./demos/controlled.tsx">受控模式</code>
+<code src="./demos/disabled.tsx">禁用状态</code>
 
 ## API
 
 ### Checkbox
 
-| 参数            | 说明                        | 类型                                                  | 默认值  |
-| --------------- | --------------------------- | ----------------------------------------------------- | ------- |
-| checked         | 指定当前是否选中            | `boolean`                                             | -       |
-| defaultChecked  | 初始是否选中                | `boolean`                                             | `false` |
-| disabled        | 是否禁用                    | `boolean`                                             | `false` |
-| onCheckedChange | 选中状态改变时的回调        | `(checked: boolean) => void`                          | -       |
-| className       | 自定义类名                  | `string`                                              | -       |
-| ...props        | 其他 Radix UI Checkbox 属性 | `React.ComponentProps<typeof CheckboxPrimitive.Root>` | -       |
+Checkbox 组件。
+
+| 参数            | 说明                   | 类型                         | 默认值 |
+| --------------- | ---------------------- | ---------------------------- | ------ |
+| checked         | 选中状态，受控模式使用 | `boolean \| "indeterminate"` | -      |
+| defaultChecked  | 默认选中状态           | `boolean`                    | -      |
+| onCheckedChange | 选中状态变化回调       | `(checked: boolean) => void` | -      |
+| disabled        | 是否禁用               | `boolean`                    | false  |
+| required        | 是否必填               | `boolean`                    | false  |
+| className       | 自定义类名             | `string`                     | -      |

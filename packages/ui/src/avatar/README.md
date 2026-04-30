@@ -6,7 +6,7 @@ demo:
   cols: 1
 group:
   title: 数据展示
-  order: 4
+  order: 6
 nav: 组件
 toc: content
 background: #111
@@ -36,48 +36,101 @@ pnpm add lynote-ui
 :::code-group
 
 ```ts [单个] | pure
-import { Avatar, AvatarImage, AvatarFallback } from "lynote-ui";
-```
-
-```ts [全局] | pure
-import { Avatar, AvatarImage, AvatarFallback } from "gml-ui";
+import {
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+  AvatarBadge,
+  AvatarGroup,
+  AvatarGroupCount,
+} from "lynote-ui";
 ```
 
 :::
 
-头像组件，用于展示用户头像或图片。
+展示用户或实体头像，支持图片、降级文本、角标和头像组。
+
+## 使用建议
+
+- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
+- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
+- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
+
+## 组件结构
+
+```tsx | pure
+<Avatar>
+  <AvatarImage />
+  <AvatarFallback />
+  <AvatarBadge />
+  <AvatarGroup />
+</Avatar>
+```
 
 ## 代码演示
 
 <code src="./demos/base.tsx">基本用法</code>
 
+<code src="./demos/group.tsx">分组</code>
+
 ## API
 
 ### Avatar
 
-头像的根容器组件。
+Avatar 组件。
 
-| 参数      | 说明         | 类型                                                | 默认值 |
-| --------- | ------------ | --------------------------------------------------- | ------ |
-| className | 自定义类名   | `string`                                            | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof AvatarPrimitive.Root>` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### AvatarImage
 
-头像的图片组件。
+AvatarImage 组件。
 
-| 参数      | 说明         | 类型                                                 | 默认值 |
-| --------- | ------------ | ---------------------------------------------------- | ------ |
-| src       | 图片地址     | `string`                                             | -      |
-| alt       | 图片描述     | `string`                                             | -      |
-| className | 自定义类名   | `string`                                             | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof AvatarPrimitive.Image>` | -      |
+| 参数      | 说明       | 类型     | 默认值 |
+| --------- | ---------- | -------- | ------ |
+| src       | 图片地址   | `string` | -      |
+| alt       | 替代文本   | `string` | -      |
+| className | 自定义类名 | `string` | -      |
 
 ### AvatarFallback
 
-头像的备用内容，当图片加载失败时显示。
+AvatarFallback 组件。
 
-| 参数      | 说明         | 类型                                                    | 默认值 |
-| --------- | ------------ | ------------------------------------------------------- | ------ |
-| className | 自定义类名   | `string`                                                | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof AvatarPrimitive.Fallback>` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
+
+### AvatarBadge
+
+AvatarBadge 组件。
+
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
+
+### AvatarGroup
+
+AvatarGroup 组件。
+
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
+
+### AvatarGroupCount
+
+AvatarGroupCount 组件。
+
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |

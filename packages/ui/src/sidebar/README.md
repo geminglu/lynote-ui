@@ -6,7 +6,7 @@ demo:
   cols: 1
 group:
   title: 布局
-  order: 6
+  order: 2
 nav: 组件
 toc: content
 background: #111
@@ -37,8 +37,8 @@ pnpm add lynote-ui
 
 ```ts [单个] | pure
 import {
-  Sidebar,
   SidebarProvider,
+  Sidebar,
   SidebarTrigger,
   SidebarContent,
   SidebarHeader,
@@ -52,13 +52,29 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-  useSidebar,
 } from "lynote-ui";
 ```
 
 :::
 
-侧边栏组件，用于创建可折叠的侧边导航栏。
+用于应用主导航和辅助操作区域，支持折叠、移动端抽屉和菜单项。
+
+## 使用建议
+
+- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
+- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
+- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
+
+## 组件结构
+
+```tsx | pure
+<SidebarProvider>
+  <Sidebar />
+  <SidebarTrigger />
+  <SidebarContent />
+  <SidebarHeader />
+</SidebarProvider>
+```
 
 ## 代码演示
 
@@ -68,153 +84,166 @@ import {
 
 ### SidebarProvider
 
-侧边栏提供者组件，用于管理侧边栏状态。
+SidebarProvider 组件。
 
-| 参数         | 说明             | 类型                          | 默认值 |
-| ------------ | ---------------- | ----------------------------- | ------ |
-| defaultOpen  | 默认是否打开     | `boolean`                     | -      |
-| open         | 是否打开（受控） | `boolean`                     | -      |
-| onOpenChange | 打开状态变化回调 | `(open: boolean) => void`     | -      |
-| ...props     | 其他原生属性     | `React.ComponentProps<"div">` | -      |
+| 参数          | 说明                   | 类型                                  | 默认值 |
+| ------------- | ---------------------- | ------------------------------------- | ------ |
+| value         | 当前值，受控模式使用   | `string \| string[]`                  | -      |
+| defaultValue  | 默认值，非受控模式使用 | `string \| string[]`                  | -      |
+| open          | 是否打开，受控模式使用 | `boolean`                             | -      |
+| defaultOpen   | 默认是否打开           | `boolean`                             | false  |
+| onOpenChange  | 打开状态变化回调       | `(open: boolean) => void`             | -      |
+| onValueChange | 值变化回调             | `(value: string \| string[]) => void` | -      |
+| disabled      | 是否禁用               | `boolean`                             | false  |
+| className     | 自定义类名             | `string`                              | -      |
+| children      | 子组件                 | `React.ReactNode`                     | -      |
 
 ### Sidebar
 
-侧边栏的根容器组件。
+Sidebar 组件。
 
-| 参数        | 说明         | 类型                                                     | 默认值      |
-| ----------- | ------------ | -------------------------------------------------------- | ----------- |
-| variant     | 侧边栏变体   | `"sidebar" \| "inset" \| "floating" \| "floating-inset"` | `"sidebar"` |
-| collapsible | 是否可折叠   | `"offcanvas" \| "icon" \| false`                         | -           |
-| className   | 自定义类名   | `string`                                                 | -           |
-| ...props    | 其他原生属性 | `React.ComponentProps<"aside">`                          | -           |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### SidebarTrigger
 
-侧边栏触发器按钮。
+SidebarTrigger 组件。
 
-| 参数     | 说明             | 类型                                  | 默认值 |
-| -------- | ---------------- | ------------------------------------- | ------ |
-| ...props | 其他 Button 属性 | `React.ComponentProps<typeof Button>` | -      |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
 
 ### SidebarContent
 
-侧边栏内容区域。
+SidebarContent 组件。
 
-| 参数      | 说明         | 类型                          | 默认值 |
-| --------- | ------------ | ----------------------------- | ------ |
-| className | 自定义类名   | `string`                      | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<"div">` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### SidebarHeader
 
-侧边栏头部区域。
+SidebarHeader 组件。
 
-| 参数      | 说明         | 类型                          | 默认值 |
-| --------- | ------------ | ----------------------------- | ------ |
-| className | 自定义类名   | `string`                      | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<"div">` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### SidebarFooter
 
-侧边栏底部区域。
+SidebarFooter 组件。
 
-| 参数      | 说明         | 类型                          | 默认值 |
-| --------- | ------------ | ----------------------------- | ------ |
-| className | 自定义类名   | `string`                      | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<"div">` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### SidebarGroup
 
-侧边栏分组容器。
+SidebarGroup 组件。
 
-| 参数      | 说明         | 类型                          | 默认值 |
-| --------- | ------------ | ----------------------------- | ------ |
-| className | 自定义类名   | `string`                      | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<"div">` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### SidebarGroupLabel
 
-侧边栏分组标签。
+SidebarGroupLabel 组件。
 
-| 参数      | 说明         | 类型                          | 默认值 |
-| --------- | ------------ | ----------------------------- | ------ |
-| className | 自定义类名   | `string`                      | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<"div">` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### SidebarGroupContent
 
-侧边栏分组内容。
+SidebarGroupContent 组件。
 
-| 参数      | 说明         | 类型                          | 默认值 |
-| --------- | ------------ | ----------------------------- | ------ |
-| className | 自定义类名   | `string`                      | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<"div">` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### SidebarMenu
 
-侧边栏菜单容器。
+SidebarMenu 组件。
 
-| 参数      | 说明         | 类型                         | 默认值 |
-| --------- | ------------ | ---------------------------- | ------ |
-| className | 自定义类名   | `string`                     | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<"ul">` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### SidebarMenuItem
 
-侧边栏菜单项。
+SidebarMenuItem 组件。
 
-| 参数      | 说明         | 类型                         | 默认值 |
-| --------- | ------------ | ---------------------------- | ------ |
-| className | 自定义类名   | `string`                     | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<"li">` | -      |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
 
 ### SidebarMenuButton
 
-侧边栏菜单按钮。
+SidebarMenuButton 组件。
 
-| 参数      | 说明         | 类型                             | 默认值 |
-| --------- | ------------ | -------------------------------- | ------ |
-| isActive  | 是否激活     | `boolean`                        | -      |
-| tooltip   | 工具提示内容 | `string \| React.ReactNode`      | -      |
-| className | 自定义类名   | `string`                         | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<"button">` | -      |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
 
 ### SidebarMenuSub
 
-侧边栏子菜单。
+SidebarMenuSub 组件。
 
-| 参数     | 说明         | 类型                         | 默认值 |
-| -------- | ------------ | ---------------------------- | ------ |
-| ...props | 其他原生属性 | `React.ComponentProps<"ul">` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### SidebarMenuSubButton
 
-侧边栏子菜单按钮。
+SidebarMenuSubButton 组件。
 
-| 参数     | 说明         | 类型                             | 默认值 |
-| -------- | ------------ | -------------------------------- | ------ |
-| ...props | 其他原生属性 | `React.ComponentProps<"button">` | -      |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
 
 ### SidebarMenuSubItem
 
-侧边栏子菜单项。
+SidebarMenuSubItem 组件。
 
-| 参数     | 说明         | 类型                         | 默认值 |
-| -------- | ------------ | ---------------------------- | ------ |
-| ...props | 其他原生属性 | `React.ComponentProps<"li">` | -      |
-
-### useSidebar
-
-侧边栏 Hook，用于访问侧边栏状态和方法。
-
-返回值：
-
-| 属性          | 说明               | 类型                        |
-| ------------- | ------------------ | --------------------------- |
-| state         | 侧边栏状态         | `"expanded" \| "collapsed"` |
-| open          | 是否打开           | `boolean`                   |
-| setOpen       | 设置打开状态       | `(open: boolean) => void`   |
-| openMobile    | 移动端是否打开     | `boolean`                   |
-| setOpenMobile | 设置移动端打开状态 | `(open: boolean) => void`   |
-| isMobile      | 是否为移动端       | `boolean`                   |
-| toggleSidebar | 切换侧边栏         | `() => void`                |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |

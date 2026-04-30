@@ -38,98 +38,153 @@ pnpm add lynote-ui
 ```ts [单个] | pure
 import {
   Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
+  DialogPortal,
+  DialogClose,
+  DialogOverlay,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
 } from "lynote-ui";
-```
-
-```ts [全局] | pure
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "gml-ui";
 ```
 
 :::
 
-对话框组件，用于显示模态对话框。
+在当前页面上方展示需要用户处理的弹层内容。
+
+## 使用建议
+
+- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
+- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
+- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
+
+## 组件结构
+
+```tsx | pure
+<Dialog>
+  <DialogTrigger />
+  <DialogPortal />
+  <DialogClose />
+  <DialogOverlay />
+</Dialog>
+```
 
 ## 代码演示
 
 <code src="./demos/base.tsx">基本用法</code>
 
+<code src="./demos/controlled.tsx">受控用法</code>
+
 ## API
 
 ### Dialog
 
-对话框的根容器组件。
+Dialog 组件。
 
-| 参数         | 说明             | 类型                                                | 默认值 |
-| ------------ | ---------------- | --------------------------------------------------- | ------ |
-| open         | 是否打开         | `boolean`                                           | -      |
-| defaultOpen  | 默认是否打开     | `boolean`                                           | -      |
-| onOpenChange | 打开状态变化回调 | `(open: boolean) => void`                           | -      |
-| ...props     | 其他原生属性     | `React.ComponentProps<typeof DialogPrimitive.Root>` | -      |
+| 参数          | 说明                   | 类型                                  | 默认值 |
+| ------------- | ---------------------- | ------------------------------------- | ------ |
+| value         | 当前值，受控模式使用   | `string \| string[]`                  | -      |
+| defaultValue  | 默认值，非受控模式使用 | `string \| string[]`                  | -      |
+| open          | 是否打开，受控模式使用 | `boolean`                             | -      |
+| defaultOpen   | 默认是否打开           | `boolean`                             | false  |
+| onOpenChange  | 打开状态变化回调       | `(open: boolean) => void`             | -      |
+| onValueChange | 值变化回调             | `(value: string \| string[]) => void` | -      |
+| disabled      | 是否禁用               | `boolean`                             | false  |
+| className     | 自定义类名             | `string`                              | -      |
+| children      | 子组件                 | `React.ReactNode`                     | -      |
 
 ### DialogTrigger
 
-触发对话框的按钮。
+DialogTrigger 组件。
 
-| 参数     | 说明         | 类型                                                   | 默认值 |
-| -------- | ------------ | ------------------------------------------------------ | ------ |
-| ...props | 其他原生属性 | `React.ComponentProps<typeof DialogPrimitive.Trigger>` | -      |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+
+### DialogPortal
+
+DialogPortal 组件。
+
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
+
+### DialogClose
+
+DialogClose 组件。
+
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+
+### DialogOverlay
+
+DialogOverlay 组件。
+
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### DialogContent
 
-对话框的内容区域。
+DialogContent 组件。
 
-| 参数            | 说明             | 类型                                                   | 默认值 |
-| --------------- | ---------------- | ------------------------------------------------------ | ------ |
-| showCloseButton | 是否显示关闭按钮 | `boolean`                                              | `true` |
-| className       | 自定义类名       | `string`                                               | -      |
-| ...props        | 其他原生属性     | `React.ComponentProps<typeof DialogPrimitive.Content>` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### DialogHeader
 
-对话框的头部区域。
+DialogHeader 组件。
 
-| 参数      | 说明              | 类型                          | 默认值 |
-| --------- | ----------------- | ----------------------------- | ------ |
-| className | 自定义类名        | `string`                      | -      |
-| ...props  | 其他原生 div 属性 | `React.ComponentProps<"div">` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### DialogFooter
 
-对话框的底部区域。
+DialogFooter 组件。
 
-| 参数      | 说明              | 类型                          | 默认值 |
-| --------- | ----------------- | ----------------------------- | ------ |
-| className | 自定义类名        | `string`                      | -      |
-| ...props  | 其他原生 div 属性 | `React.ComponentProps<"div">` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### DialogTitle
 
-对话框的标题。
+DialogTitle 组件。
 
-| 参数      | 说明         | 类型                                                 | 默认值 |
-| --------- | ------------ | ---------------------------------------------------- | ------ |
-| className | 自定义类名   | `string`                                             | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof DialogPrimitive.Title>` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### DialogDescription
 
-对话框的描述内容。
+DialogDescription 组件。
 
-| 参数      | 说明         | 类型                                                       | 默认值 |
-| --------- | ------------ | ---------------------------------------------------------- | ------ |
-| className | 自定义类名   | `string`                                                   | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof DialogPrimitive.Description>` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |

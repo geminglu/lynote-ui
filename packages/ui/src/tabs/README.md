@@ -5,8 +5,8 @@ subtitle: Tabs 标签页
 demo:
   cols: 1
 group:
-  title: 数据展示
-  order: 8
+  title: 导航
+  order: 3
 nav: 组件
 toc: content
 background: #111
@@ -41,51 +41,78 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "lynote-ui";
 
 :::
 
-标签页组件，用于在不同内容视图之间切换。
+用于在同一页面中切换相关内容面板。
+
+## 使用建议
+
+- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
+- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
+- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
+
+## 组件结构
+
+```tsx | pure
+<Tabs>
+  <TabsList />
+  <TabsTrigger />
+  <TabsContent />
+</Tabs>
+```
 
 ## 代码演示
 
 <code src="./demos/base.tsx">基本用法</code>
 
+<code src="./demos/controlled.tsx">受控用法</code>
+
+<code src="./demos/vertical.tsx">垂直方向</code>
+
 ## API
 
 ### Tabs
 
-标签页的根容器组件。
+Tabs 组件。
 
-| 参数          | 说明             | 类型                                              | 默认值 |
-| ------------- | ---------------- | ------------------------------------------------- | ------ |
-| value         | 当前激活的标签值 | `string`                                          | -      |
-| defaultValue  | 默认激活的标签值 | `string`                                          | -      |
-| onValueChange | 值变化回调       | `(value: string) => void`                         | -      |
-| className     | 自定义类名       | `string`                                          | -      |
-| ...props      | 其他原生属性     | `React.ComponentProps<typeof TabsPrimitive.Root>` | -      |
+| 参数          | 说明                   | 类型                                  | 默认值 |
+| ------------- | ---------------------- | ------------------------------------- | ------ |
+| value         | 当前值，受控模式使用   | `string \| string[]`                  | -      |
+| defaultValue  | 默认值，非受控模式使用 | `string \| string[]`                  | -      |
+| open          | 是否打开，受控模式使用 | `boolean`                             | -      |
+| defaultOpen   | 默认是否打开           | `boolean`                             | false  |
+| onOpenChange  | 打开状态变化回调       | `(open: boolean) => void`             | -      |
+| onValueChange | 值变化回调             | `(value: string \| string[]) => void` | -      |
+| disabled      | 是否禁用               | `boolean`                             | false  |
+| className     | 自定义类名             | `string`                              | -      |
+| children      | 子组件                 | `React.ReactNode`                     | -      |
 
 ### TabsList
 
-标签页列表容器。
+TabsList 组件。
 
-| 参数      | 说明         | 类型                                              | 默认值 |
-| --------- | ------------ | ------------------------------------------------- | ------ |
-| className | 自定义类名   | `string`                                          | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof TabsPrimitive.List>` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### TabsTrigger
 
-标签页触发器。
+TabsTrigger 组件。
 
-| 参数      | 说明         | 类型                                                 | 默认值 |
-| --------- | ------------ | ---------------------------------------------------- | ------ |
-| value     | 标签值       | `string`                                             | -      |
-| className | 自定义类名   | `string`                                             | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof TabsPrimitive.Trigger>` | -      |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
 
 ### TabsContent
 
-标签页内容区域。
+TabsContent 组件。
 
-| 参数      | 说明         | 类型                                                 | 默认值 |
-| --------- | ------------ | ---------------------------------------------------- | ------ |
-| value     | 标签值       | `string`                                             | -      |
-| className | 自定义类名   | `string`                                             | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof TabsPrimitive.Content>` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |

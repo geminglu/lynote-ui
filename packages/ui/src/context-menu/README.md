@@ -1,12 +1,12 @@
 ---
 category: Components
-title: ContextMenu 上下文菜单
-subtitle: ContextMenu 上下文菜单
+title: ContextMenu 右键菜单
+subtitle: ContextMenu 右键菜单
 demo:
   cols: 1
 group:
   title: 导航
-  order: 4
+  order: 3
 nav: 组件
 toc: content
 background: #111
@@ -38,24 +38,43 @@ pnpm add lynote-ui
 ```ts [单个] | pure
 import {
   ContextMenu,
+  ContextMenuPortal,
   ContextMenuTrigger,
   ContextMenuContent,
-  ContextMenuItem,
+  ContextMenuGroup,
   ContextMenuLabel,
-  ContextMenuSeparator,
-  ContextMenuCheckboxItem,
-  ContextMenuRadioGroup,
-  ContextMenuRadioItem,
+  ContextMenuItem,
   ContextMenuSub,
   ContextMenuSubTrigger,
   ContextMenuSubContent,
+  ContextMenuCheckboxItem,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
+  ContextMenuSeparator,
   ContextMenuShortcut,
 } from "lynote-ui";
 ```
 
 :::
 
-上下文菜单组件，用于在右键点击时显示菜单。
+在右键或长按时展示上下文操作菜单。
+
+## 使用建议
+
+- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
+- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
+- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
+
+## 组件结构
+
+```tsx | pure
+<ContextMenu>
+  <ContextMenuPortal />
+  <ContextMenuTrigger />
+  <ContextMenuContent />
+  <ContextMenuGroup />
+</ContextMenu>
+```
 
 ## 代码演示
 
@@ -65,122 +84,171 @@ import {
 
 ### ContextMenu
 
-上下文菜单的根容器组件。
+ContextMenu 组件。
 
-| 参数     | 说明         | 类型                                                     | 默认值 |
-| -------- | ------------ | -------------------------------------------------------- | ------ |
-| ...props | 其他原生属性 | `React.ComponentProps<typeof ContextMenuPrimitive.Root>` | -      |
+| 参数          | 说明                   | 类型                                  | 默认值 |
+| ------------- | ---------------------- | ------------------------------------- | ------ |
+| value         | 当前值，受控模式使用   | `string \| string[]`                  | -      |
+| defaultValue  | 默认值，非受控模式使用 | `string \| string[]`                  | -      |
+| open          | 是否打开，受控模式使用 | `boolean`                             | -      |
+| defaultOpen   | 默认是否打开           | `boolean`                             | false  |
+| onOpenChange  | 打开状态变化回调       | `(open: boolean) => void`             | -      |
+| onValueChange | 值变化回调             | `(value: string \| string[]) => void` | -      |
+| disabled      | 是否禁用               | `boolean`                             | false  |
+| className     | 自定义类名             | `string`                              | -      |
+| children      | 子组件                 | `React.ReactNode`                     | -      |
+
+### ContextMenuPortal
+
+ContextMenuPortal 组件。
+
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### ContextMenuTrigger
 
-触发上下文菜单的元素。
+ContextMenuTrigger 组件。
 
-| 参数     | 说明         | 类型                                                        | 默认值 |
-| -------- | ------------ | ----------------------------------------------------------- | ------ |
-| ...props | 其他原生属性 | `React.ComponentProps<typeof ContextMenuPrimitive.Trigger>` | -      |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
 
 ### ContextMenuContent
 
-上下文菜单的内容区域。
+ContextMenuContent 组件。
 
-| 参数      | 说明         | 类型                                                        | 默认值 |
-| --------- | ------------ | ----------------------------------------------------------- | ------ |
-| className | 自定义类名   | `string`                                                    | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof ContextMenuPrimitive.Content>` | -      |
+| 参数        | 说明           | 类型                                                                       | 默认值 |
+| ----------- | -------------- | -------------------------------------------------------------------------- | ------ |
+| side        | 弹层出现方向   | `"top" \| "bottom" \| "left" \| "right" \| "inline-start" \| "inline-end"` | -      |
+| align       | 弹层对齐方式   | `"start" \| "center" \| "end"`                                             | -      |
+| sideOffset  | 与锚点的间距   | `number`                                                                   | -      |
+| alignOffset | 对齐方向偏移量 | `number`                                                                   | -      |
+| className   | 自定义类名     | `string`                                                                   | -      |
+| children    | 内容           | `React.ReactNode`                                                          | -      |
 
-### ContextMenuItem
+### ContextMenuGroup
 
-上下文菜单项。
+ContextMenuGroup 组件。
 
-| 参数      | 说明         | 类型                                                     | 默认值      |
-| --------- | ------------ | -------------------------------------------------------- | ----------- |
-| variant   | 菜单项变体   | `"default" \| "destructive"`                             | `"default"` |
-| inset     | 是否内缩     | `boolean`                                                | -           |
-| className | 自定义类名   | `string`                                                 | -           |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof ContextMenuPrimitive.Item>` | -           |
-
-### ContextMenuCheckboxItem
-
-上下文菜单复选框项。
-
-| 参数            | 说明             | 类型                                                             | 默认值 |
-| --------------- | ---------------- | ---------------------------------------------------------------- | ------ |
-| checked         | 是否选中         | `boolean`                                                        | -      |
-| onCheckedChange | 选中状态变化回调 | `(checked: boolean) => void`                                     | -      |
-| className       | 自定义类名       | `string`                                                         | -      |
-| ...props        | 其他原生属性     | `React.ComponentProps<typeof ContextMenuPrimitive.CheckboxItem>` | -      |
-
-### ContextMenuRadioGroup
-
-上下文菜单单选组。
-
-| 参数          | 说明         | 类型                                                           | 默认值 |
-| ------------- | ------------ | -------------------------------------------------------------- | ------ |
-| value         | 当前值       | `string`                                                       | -      |
-| onValueChange | 值变化回调   | `(value: string) => void`                                      | -      |
-| ...props      | 其他原生属性 | `React.ComponentProps<typeof ContextMenuPrimitive.RadioGroup>` | -      |
-
-### ContextMenuRadioItem
-
-上下文菜单单选项。
-
-| 参数      | 说明         | 类型                                                          | 默认值 |
-| --------- | ------------ | ------------------------------------------------------------- | ------ |
-| value     | 选项值       | `string`                                                      | -      |
-| className | 自定义类名   | `string`                                                      | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof ContextMenuPrimitive.RadioItem>` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### ContextMenuLabel
 
-上下文菜单标签。
+ContextMenuLabel 组件。
 
-| 参数      | 说明         | 类型                                                      | 默认值 |
-| --------- | ------------ | --------------------------------------------------------- | ------ |
-| inset     | 是否内缩     | `boolean`                                                 | -      |
-| className | 自定义类名   | `string`                                                  | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof ContextMenuPrimitive.Label>` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
-### ContextMenuSeparator
+### ContextMenuItem
 
-上下文菜单分隔符。
+ContextMenuItem 组件。
 
-| 参数      | 说明         | 类型                                                          | 默认值 |
-| --------- | ------------ | ------------------------------------------------------------- | ------ |
-| className | 自定义类名   | `string`                                                      | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof ContextMenuPrimitive.Separator>` | -      |
-
-### ContextMenuShortcut
-
-上下文菜单快捷键提示。
-
-| 参数      | 说明               | 类型                           | 默认值 |
-| --------- | ------------------ | ------------------------------ | ------ |
-| className | 自定义类名         | `string`                       | -      |
-| ...props  | 其他原生 span 属性 | `React.ComponentProps<"span">` | -      |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
 
 ### ContextMenuSub
 
-上下文菜单子菜单。
+ContextMenuSub 组件。
 
-| 参数     | 说明         | 类型                                                    | 默认值 |
-| -------- | ------------ | ------------------------------------------------------- | ------ |
-| ...props | 其他原生属性 | `React.ComponentProps<typeof ContextMenuPrimitive.Sub>` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### ContextMenuSubTrigger
 
-上下文菜单子菜单触发器。
+ContextMenuSubTrigger 组件。
 
-| 参数      | 说明         | 类型                                                           | 默认值 |
-| --------- | ------------ | -------------------------------------------------------------- | ------ |
-| inset     | 是否内缩     | `boolean`                                                      | -      |
-| className | 自定义类名   | `string`                                                       | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof ContextMenuPrimitive.SubTrigger>` | -      |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
 
 ### ContextMenuSubContent
 
-上下文菜单子菜单内容。
+ContextMenuSubContent 组件。
 
-| 参数      | 说明         | 类型                                                           | 默认值 |
-| --------- | ------------ | -------------------------------------------------------------- | ------ |
-| className | 自定义类名   | `string`                                                       | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof ContextMenuPrimitive.SubContent>` | -      |
+| 参数        | 说明           | 类型                                                                       | 默认值 |
+| ----------- | -------------- | -------------------------------------------------------------------------- | ------ |
+| side        | 弹层出现方向   | `"top" \| "bottom" \| "left" \| "right" \| "inline-start" \| "inline-end"` | -      |
+| align       | 弹层对齐方式   | `"start" \| "center" \| "end"`                                             | -      |
+| sideOffset  | 与锚点的间距   | `number`                                                                   | -      |
+| alignOffset | 对齐方向偏移量 | `number`                                                                   | -      |
+| className   | 自定义类名     | `string`                                                                   | -      |
+| children    | 内容           | `React.ReactNode`                                                          | -      |
+
+### ContextMenuCheckboxItem
+
+ContextMenuCheckboxItem 组件。
+
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+
+### ContextMenuRadioGroup
+
+ContextMenuRadioGroup 组件。
+
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
+
+### ContextMenuRadioItem
+
+ContextMenuRadioItem 组件。
+
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+
+### ContextMenuSeparator
+
+ContextMenuSeparator 组件。
+
+| 参数        | 说明       | 类型                         | 默认值       |
+| ----------- | ---------- | ---------------------------- | ------------ |
+| orientation | 方向       | `"horizontal" \| "vertical"` | "horizontal" |
+| className   | 自定义类名 | `string`                     | -            |
+
+### ContextMenuShortcut
+
+ContextMenuShortcut 组件。
+
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |

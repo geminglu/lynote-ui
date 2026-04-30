@@ -38,100 +38,163 @@ pnpm add lynote-ui
 ```ts [单个] | pure
 import {
   Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
+  SelectGroup,
   SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
 } from "lynote-ui";
-```
-
-```ts [全局] | pure
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "gml-ui";
 ```
 
 :::
 
-下拉选择器。
+用于从预设选项中选择一个值，支持分组、禁用和弹层定位。
+
+## 使用建议
+
+- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
+- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
+- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
+
+## 组件结构
+
+```tsx | pure
+<Select>
+  <SelectGroup />
+  <SelectValue />
+  <SelectTrigger />
+  <SelectContent />
+</Select>
+```
 
 ## 代码演示
 
 <code src="./demos/base.tsx">基本用法</code>
 
-<code src="./demos/size.tsx">尺寸用法</code>
-
 <code src="./demos/disabled.tsx">禁用状态</code>
 
 <code src="./demos/group.tsx">分组</code>
+
+<code src="./demos/size.tsx">尺寸</code>
 
 ## API
 
 ### Select
 
-下拉选择器的根组件。
+Select 组件。
 
-| 参数          | 说明                      | 类型                                                | 默认值  |
-| ------------- | ------------------------- | --------------------------------------------------- | ------- |
-| value         | 当前选中的值              | `string`                                            | -       |
-| defaultValue  | 默认选中的值              | `string`                                            | -       |
-| onValueChange | 值改变时的回调            | `(value: string) => void`                           | -       |
-| disabled      | 是否禁用                  | `boolean`                                           | `false` |
-| ...props      | 其他 Radix UI Select 属性 | `React.ComponentProps<typeof SelectPrimitive.Root>` | -       |
-
-### SelectTrigger
-
-下拉选择器的触发器。
-
-| 参数      | 说明                             | 类型                                                   | 默认值      |
-| --------- | -------------------------------- | ------------------------------------------------------ | ----------- |
-| size      | 触发器尺寸                       | `"sm" \| "default"`                                    | `"default"` |
-| className | 自定义类名                       | `string`                                               | -           |
-| ...props  | 其他 Radix UI SelectTrigger 属性 | `React.ComponentProps<typeof SelectPrimitive.Trigger>` | -           |
-
-### SelectValue
-
-显示当前选中的值。
-
-| 参数        | 说明                           | 类型                                                 | 默认值 |
-| ----------- | ------------------------------ | ---------------------------------------------------- | ------ |
-| placeholder | 占位文本                       | `string`                                             | -      |
-| ...props    | 其他 Radix UI SelectValue 属性 | `React.ComponentProps<typeof SelectPrimitive.Value>` | -      |
-
-### SelectContent
-
-下拉选择器的内容容器。
-
-| 参数      | 说明                             | 类型                                                   | 默认值     |
-| --------- | -------------------------------- | ------------------------------------------------------ | ---------- |
-| position  | 定位方式                         | `"popper" \| "item-aligned"`                           | `"popper"` |
-| align     | 对齐方式                         | `"start" \| "center" \| "end"`                         | `"center"` |
-| className | 自定义类名                       | `string`                                               | -          |
-| ...props  | 其他 Radix UI SelectContent 属性 | `React.ComponentProps<typeof SelectPrimitive.Content>` | -          |
-
-### SelectItem
-
-下拉选择器的选项。
-
-| 参数      | 说明                          | 类型                                                | 默认值  |
-| --------- | ----------------------------- | --------------------------------------------------- | ------- |
-| value     | 选项的值                      | `string`                                            | -       |
-| disabled  | 是否禁用                      | `boolean`                                           | `false` |
-| className | 自定义类名                    | `string`                                            | -       |
-| ...props  | 其他 Radix UI SelectItem 属性 | `React.ComponentProps<typeof SelectPrimitive.Item>` | -       |
+| 参数          | 说明                   | 类型                                  | 默认值 |
+| ------------- | ---------------------- | ------------------------------------- | ------ |
+| value         | 当前值，受控模式使用   | `string \| string[]`                  | -      |
+| defaultValue  | 默认值，非受控模式使用 | `string \| string[]`                  | -      |
+| open          | 是否打开，受控模式使用 | `boolean`                             | -      |
+| defaultOpen   | 默认是否打开           | `boolean`                             | false  |
+| onOpenChange  | 打开状态变化回调       | `(open: boolean) => void`             | -      |
+| onValueChange | 值变化回调             | `(value: string \| string[]) => void` | -      |
+| disabled      | 是否禁用               | `boolean`                             | false  |
+| className     | 自定义类名             | `string`                              | -      |
+| children      | 子组件                 | `React.ReactNode`                     | -      |
 
 ### SelectGroup
 
-下拉选择器的分组容器。
+SelectGroup 组件。
+
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
+
+### SelectValue
+
+SelectValue 组件。
+
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
+
+### SelectTrigger
+
+SelectTrigger 组件。
+
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+
+### SelectContent
+
+SelectContent 组件。
+
+| 参数        | 说明           | 类型                                                                       | 默认值 |
+| ----------- | -------------- | -------------------------------------------------------------------------- | ------ |
+| side        | 弹层出现方向   | `"top" \| "bottom" \| "left" \| "right" \| "inline-start" \| "inline-end"` | -      |
+| align       | 弹层对齐方式   | `"start" \| "center" \| "end"`                                             | -      |
+| sideOffset  | 与锚点的间距   | `number`                                                                   | -      |
+| alignOffset | 对齐方向偏移量 | `number`                                                                   | -      |
+| className   | 自定义类名     | `string`                                                                   | -      |
+| children    | 内容           | `React.ReactNode`                                                          | -      |
 
 ### SelectLabel
 
-下拉选择器的标签。
+SelectLabel 组件。
+
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
+
+### SelectItem
+
+SelectItem 组件。
+
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
 
 ### SelectSeparator
 
-下拉选择器的分隔符。
+SelectSeparator 组件。
+
+| 参数        | 说明       | 类型                         | 默认值       |
+| ----------- | ---------- | ---------------------------- | ------------ |
+| orientation | 方向       | `"horizontal" \| "vertical"` | "horizontal" |
+| className   | 自定义类名 | `string`                     | -            |
+
+### SelectScrollUpButton
+
+SelectScrollUpButton 组件。
+
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+
+### SelectScrollDownButton
+
+SelectScrollDownButton 组件。
+
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |

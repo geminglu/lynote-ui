@@ -6,7 +6,7 @@ demo:
   cols: 1
 group:
   title: 导航
-  order: 6
+  order: 3
 nav: 组件
 toc: content
 background: #111
@@ -42,15 +42,32 @@ import {
   NavigationMenuItem,
   NavigationMenuTrigger,
   NavigationMenuContent,
+  NavigationMenuPositioner,
   NavigationMenuLink,
-  NavigationMenuViewport,
   NavigationMenuIndicator,
 } from "lynote-ui";
 ```
 
 :::
 
-导航菜单组件，用于创建网站的主要导航结构。
+用于站点导航，支持触发器、内容面板、视口和指示器。
+
+## 使用建议
+
+- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
+- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
+- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
+
+## 组件结构
+
+```tsx | pure
+<NavigationMenu>
+  <NavigationMenuList />
+  <NavigationMenuItem />
+  <NavigationMenuTrigger />
+  <NavigationMenuContent />
+</NavigationMenu>
+```
 
 ## 代码演示
 
@@ -60,71 +77,95 @@ import {
 
 ### NavigationMenu
 
-导航菜单的根容器组件。
+NavigationMenu 组件。
 
-| 参数      | 说明         | 类型                                                        | 默认值 |
-| --------- | ------------ | ----------------------------------------------------------- | ------ |
-| viewport  | 是否显示视口 | `boolean`                                                   | `true` |
-| className | 自定义类名   | `string`                                                    | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof NavigationMenuPrimitive.Root>` | -      |
+| 参数          | 说明                   | 类型                                  | 默认值 |
+| ------------- | ---------------------- | ------------------------------------- | ------ |
+| value         | 当前值，受控模式使用   | `string \| string[]`                  | -      |
+| defaultValue  | 默认值，非受控模式使用 | `string \| string[]`                  | -      |
+| open          | 是否打开，受控模式使用 | `boolean`                             | -      |
+| defaultOpen   | 默认是否打开           | `boolean`                             | false  |
+| onOpenChange  | 打开状态变化回调       | `(open: boolean) => void`             | -      |
+| onValueChange | 值变化回调             | `(value: string \| string[]) => void` | -      |
+| disabled      | 是否禁用               | `boolean`                             | false  |
+| className     | 自定义类名             | `string`                              | -      |
+| children      | 子组件                 | `React.ReactNode`                     | -      |
 
 ### NavigationMenuList
 
-导航菜单列表容器。
+NavigationMenuList 组件。
 
-| 参数      | 说明         | 类型                                                        | 默认值 |
-| --------- | ------------ | ----------------------------------------------------------- | ------ |
-| className | 自定义类名   | `string`                                                    | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof NavigationMenuPrimitive.List>` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### NavigationMenuItem
 
-导航菜单项。
+NavigationMenuItem 组件。
 
-| 参数      | 说明         | 类型                                                        | 默认值 |
-| --------- | ------------ | ----------------------------------------------------------- | ------ |
-| className | 自定义类名   | `string`                                                    | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof NavigationMenuPrimitive.Item>` | -      |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
 
 ### NavigationMenuTrigger
 
-导航菜单触发器。
+NavigationMenuTrigger 组件。
 
-| 参数      | 说明         | 类型                                                           | 默认值 |
-| --------- | ------------ | -------------------------------------------------------------- | ------ |
-| className | 自定义类名   | `string`                                                       | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof NavigationMenuPrimitive.Trigger>` | -      |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
 
 ### NavigationMenuContent
 
-导航菜单内容区域。
+NavigationMenuContent 组件。
 
-| 参数      | 说明         | 类型                                                           | 默认值 |
-| --------- | ------------ | -------------------------------------------------------------- | ------ |
-| className | 自定义类名   | `string`                                                       | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof NavigationMenuPrimitive.Content>` | -      |
+| 参数        | 说明           | 类型                                                                       | 默认值 |
+| ----------- | -------------- | -------------------------------------------------------------------------- | ------ |
+| side        | 弹层出现方向   | `"top" \| "bottom" \| "left" \| "right" \| "inline-start" \| "inline-end"` | -      |
+| align       | 弹层对齐方式   | `"start" \| "center" \| "end"`                                             | -      |
+| sideOffset  | 与锚点的间距   | `number`                                                                   | -      |
+| alignOffset | 对齐方向偏移量 | `number`                                                                   | -      |
+| className   | 自定义类名     | `string`                                                                   | -      |
+| children    | 内容           | `React.ReactNode`                                                          | -      |
+
+### NavigationMenuPositioner
+
+NavigationMenuPositioner 组件。
+
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### NavigationMenuLink
 
-导航菜单链接。
+NavigationMenuLink 组件。
 
-| 参数      | 说明         | 类型                                                        | 默认值 |
-| --------- | ------------ | ----------------------------------------------------------- | ------ |
-| className | 自定义类名   | `string`                                                    | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof NavigationMenuPrimitive.Link>` | -      |
-
-### NavigationMenuViewport
-
-导航菜单视口。
-
-| 参数     | 说明         | 类型                                                            | 默认值 |
-| -------- | ------------ | --------------------------------------------------------------- | ------ |
-| ...props | 其他原生属性 | `React.ComponentProps<typeof NavigationMenuPrimitive.Viewport>` | -      |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
 
 ### NavigationMenuIndicator
 
-导航菜单指示器。
+NavigationMenuIndicator 组件。
 
-| 参数     | 说明         | 类型                                                             | 默认值 |
-| -------- | ------------ | ---------------------------------------------------------------- | ------ |
-| ...props | 其他原生属性 | `React.ComponentProps<typeof NavigationMenuPrimitive.Indicator>` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |

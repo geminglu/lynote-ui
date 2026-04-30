@@ -1,12 +1,12 @@
 ---
 category: Components
-title: RadioGroup 单选框组
-subtitle: RadioGroup 单选框组
+title: RadioGroup 单选组
+subtitle: RadioGroup 单选组
 demo:
   cols: 1
 group:
   title: 表单
-  order: 5
+  order: 4
 nav: 组件
 toc: content
 background: #111
@@ -39,44 +39,58 @@ pnpm add lynote-ui
 import { RadioGroup, RadioGroupItem } from "lynote-ui";
 ```
 
-```ts [全局] | pure
-import { RadioGroup, RadioGroupItem } from "gml-ui";
-```
-
 :::
 
-单选框，用于在多个选项中选择一个。
+用于在一组选项中选择一个值。
+
+## 使用建议
+
+- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
+- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
+- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
+
+## 组件结构
+
+```tsx | pure
+<RadioGroup>
+  <RadioGroupItem />
+</RadioGroup>
+```
 
 ## 代码演示
 
 <code src="./demos/base.tsx">基本用法</code>
 
-<code src="./demos/disabled.tsx">禁用状态</code>
+<code src="./demos/controlled.tsx">受控用法</code>
 
-<code src="./demos/controlled.tsx">受控模式</code>
+<code src="./demos/disabled.tsx">禁用状态</code>
 
 ## API
 
 ### RadioGroup
 
-单选框组的根容器组件。
+RadioGroup 组件。
 
-| 参数          | 说明                          | 类型                                                    | 默认值  |
-| ------------- | ----------------------------- | ------------------------------------------------------- | ------- |
-| value         | 当前选中的值                  | `string`                                                | -       |
-| defaultValue  | 默认选中的值                  | `string`                                                | -       |
-| onValueChange | 值改变时的回调                | `(value: string) => void`                               | -       |
-| disabled      | 是否禁用整个组                | `boolean`                                               | `false` |
-| className     | 自定义类名                    | `string`                                                | -       |
-| ...props      | 其他 Radix UI RadioGroup 属性 | `React.ComponentProps<typeof RadioGroupPrimitive.Root>` | -       |
+| 参数          | 说明                   | 类型                                  | 默认值 |
+| ------------- | ---------------------- | ------------------------------------- | ------ |
+| value         | 当前值，受控模式使用   | `string \| string[]`                  | -      |
+| defaultValue  | 默认值，非受控模式使用 | `string \| string[]`                  | -      |
+| open          | 是否打开，受控模式使用 | `boolean`                             | -      |
+| defaultOpen   | 默认是否打开           | `boolean`                             | false  |
+| onOpenChange  | 打开状态变化回调       | `(open: boolean) => void`             | -      |
+| onValueChange | 值变化回调             | `(value: string \| string[]) => void` | -      |
+| disabled      | 是否禁用               | `boolean`                             | false  |
+| className     | 自定义类名             | `string`                              | -      |
+| children      | 子组件                 | `React.ReactNode`                     | -      |
 
 ### RadioGroupItem
 
-单选框项。
+RadioGroupItem 组件。
 
-| 参数      | 说明                              | 类型                                                    | 默认值  |
-| --------- | --------------------------------- | ------------------------------------------------------- | ------- |
-| value     | 选项的值                          | `string`                                                | -       |
-| disabled  | 是否禁用                          | `boolean`                                               | `false` |
-| className | 自定义类名                        | `string`                                                | -       |
-| ...props  | 其他 Radix UI RadioGroupItem 属性 | `React.ComponentProps<typeof RadioGroupPrimitive.Item>` | -       |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |

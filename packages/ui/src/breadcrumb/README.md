@@ -6,7 +6,7 @@ demo:
   cols: 1
 group:
   title: 导航
-  order: 1
+  order: 3
 nav: 组件
 toc: content
 background: #111
@@ -49,7 +49,24 @@ import {
 
 :::
 
-面包屑组件，用于显示当前页面在导航层级中的位置。
+用于展示页面层级路径，帮助用户理解当前位置并快速返回上级。
+
+## 使用建议
+
+- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
+- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
+- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
+
+## 组件结构
+
+```tsx | pure
+<Breadcrumb>
+  <BreadcrumbList />
+  <BreadcrumbItem />
+  <BreadcrumbLink />
+  <BreadcrumbPage />
+</Breadcrumb>
+```
 
 ## 代码演示
 
@@ -59,64 +76,73 @@ import {
 
 ### Breadcrumb
 
-面包屑的根容器组件。
+Breadcrumb 组件。
 
-| 参数     | 说明              | 类型                          | 默认值 |
-| -------- | ----------------- | ----------------------------- | ------ |
-| ...props | 其他原生 nav 属性 | `React.ComponentProps<"nav">` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### BreadcrumbList
 
-面包屑列表容器。
+BreadcrumbList 组件。
 
-| 参数      | 说明             | 类型                         | 默认值 |
-| --------- | ---------------- | ---------------------------- | ------ |
-| className | 自定义类名       | `string`                     | -      |
-| ...props  | 其他原生 ol 属性 | `React.ComponentProps<"ol">` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### BreadcrumbItem
 
-面包屑单个项目。
+BreadcrumbItem 组件。
 
-| 参数      | 说明             | 类型                         | 默认值 |
-| --------- | ---------------- | ---------------------------- | ------ |
-| className | 自定义类名       | `string`                     | -      |
-| ...props  | 其他原生 li 属性 | `React.ComponentProps<"li">` | -      |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
 
 ### BreadcrumbLink
 
-面包屑链接。
+BreadcrumbLink 组件。
 
-| 参数      | 说明               | 类型                        | 默认值  |
-| --------- | ------------------ | --------------------------- | ------- |
-| asChild   | 是否作为子元素渲染 | `boolean`                   | `false` |
-| className | 自定义类名         | `string`                    | -       |
-| ...props  | 其他原生 a 属性    | `React.ComponentProps<"a">` | -       |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
 
 ### BreadcrumbPage
 
-面包屑当前页面。
+BreadcrumbPage 组件。
 
-| 参数      | 说明               | 类型                           | 默认值 |
-| --------- | ------------------ | ------------------------------ | ------ |
-| className | 自定义类名         | `string`                       | -      |
-| ...props  | 其他原生 span 属性 | `React.ComponentProps<"span">` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### BreadcrumbSeparator
 
-面包屑分隔符。
+BreadcrumbSeparator 组件。
 
-| 参数      | 说明             | 类型                         | 默认值 |
-| --------- | ---------------- | ---------------------------- | ------ |
-| className | 自定义类名       | `string`                     | -      |
-| children  | 自定义分隔符内容 | `React.ReactNode`            | -      |
-| ...props  | 其他原生 li 属性 | `React.ComponentProps<"li">` | -      |
+| 参数        | 说明       | 类型                         | 默认值       |
+| ----------- | ---------- | ---------------------------- | ------------ |
+| orientation | 方向       | `"horizontal" \| "vertical"` | "horizontal" |
+| className   | 自定义类名 | `string`                     | -            |
 
 ### BreadcrumbEllipsis
 
-面包屑省略号。
+BreadcrumbEllipsis 组件。
 
-| 参数      | 说明               | 类型                           | 默认值 |
-| --------- | ------------------ | ------------------------------ | ------ |
-| className | 自定义类名         | `string`                       | -      |
-| ...props  | 其他原生 span 属性 | `React.ComponentProps<"span">` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |

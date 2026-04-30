@@ -6,9 +6,10 @@ demo:
   cols: 1
 group:
   title: 表单
-  order: 8
+  order: 4
 nav: 组件
 toc: content
+background: #111
 compact: true
 ---
 
@@ -35,42 +36,51 @@ pnpm add lynote-ui
 :::code-group
 
 ```ts [单个] | pure
-import { Slider } from "lynote-ui/slider";
-```
-
-```ts [全局] | pure
 import { Slider } from "lynote-ui";
 ```
 
 :::
 
-滑块组件，用于选择数值范围。
+用于在连续或离散范围内选择数值，支持单值和多值。
+
+## 使用建议
+
+- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
+- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
+- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
+
+## 组件结构
+
+```tsx | pure
+<Slider />
+```
 
 ## 代码演示
 
 <code src="./demos/base.tsx">基本用法</code>
 
-<code src="./demos/range.tsx" description="用两个值的数组作为范围滑块。">分布范围</code>
+<code src="./demos/controlled.tsx">受控用法</code>
 
-<code src="./demos/multiple.tsx" description="用两个值的数组作为范围滑块。">用一个多重数值的数组来表示多个滑块。</code>
+<code src="./demos/multiple.tsx">多值选择</code>
 
-<code src="./demos/vertical.tsx" description="使用 orientation=“vertical” 作为垂直滑块。">垂直方向</code>
+<code src="./demos/range.tsx">范围选择</code>
 
-<code src="./demos/controlled.tsx">受控
-</code>
+<code src="./demos/vertical.tsx">垂直方向</code>
 
 ## API
 
 ### Slider
 
-滑块组件。
+Slider 组件。
 
-| 参数          | 说明       | 类型                                  | 默认值 |
-| ------------- | ---------- | ------------------------------------- | ------ |
-| value         | 当前值     | `number \| number[]`                  | -      |
-| defaultValue  | 默认值     | `number \| number[]`                  | -      |
-| onValueChange | 值变化回调 | `(value: number \| number[]) => void` | -      |
-| min           | 最小值     | `number`                              | `0`    |
-| max           | 最大值     | `number`                              | `100`  |
-| step          | 步长       | `number`                              | `1`    |
-| className     | 自定义类名 | `string`                              | -      |
+| 参数          | 说明                 | 类型                         | 默认值       |
+| ------------- | -------------------- | ---------------------------- | ------------ |
+| value         | 当前值，受控模式使用 | `number[]`                   | -            |
+| defaultValue  | 默认值               | `number[]`                   | -            |
+| min           | 最小值               | `number`                     | 0            |
+| max           | 最大值               | `number`                     | 100          |
+| step          | 步进值               | `number`                     | 1            |
+| orientation   | 方向                 | `"horizontal" \| "vertical"` | "horizontal" |
+| disabled      | 是否禁用             | `boolean`                    | false        |
+| onValueChange | 值变化回调           | `(value: number[]) => void`  | -            |
+| className     | 自定义类名           | `string`                     | -            |

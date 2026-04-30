@@ -5,8 +5,8 @@ subtitle: ButtonGroup 按钮组
 demo:
   cols: 1
 group:
-  title: 表单
-  order: 2
+  title: 通用
+  order: 1
 nav: 组件
 toc: content
 background: #111
@@ -41,7 +41,22 @@ import { ButtonGroup, ButtonGroupText, ButtonGroupSeparator } from "lynote-ui";
 
 :::
 
-按钮组组件，用于将多个按钮组合在一起。
+将多个按钮或相关控件组合为一个紧凑操作区。
+
+## 使用建议
+
+- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
+- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
+- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
+
+## 组件结构
+
+```tsx | pure
+<ButtonGroup>
+  <ButtonGroupText />
+  <ButtonGroupSeparator />
+</ButtonGroup>
+```
 
 ## 代码演示
 
@@ -51,30 +66,36 @@ import { ButtonGroup, ButtonGroupText, ButtonGroupSeparator } from "lynote-ui";
 
 ### ButtonGroup
 
-按钮组的根容器组件。
+ButtonGroup 组件。
 
-| 参数        | 说明              | 类型                          | 默认值         |
-| ----------- | ----------------- | ----------------------------- | -------------- |
-| orientation | 按钮组方向        | `"horizontal" \| "vertical"`  | `"horizontal"` |
-| className   | 自定义类名        | `string`                      | -              |
-| ...props    | 其他原生 div 属性 | `React.ComponentProps<"div">` | -              |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
 
 ### ButtonGroupText
 
-按钮组中的文本元素。
+ButtonGroupText 组件。
 
-| 参数      | 说明               | 类型                          | 默认值  |
-| --------- | ------------------ | ----------------------------- | ------- |
-| asChild   | 是否作为子元素渲染 | `boolean`                     | `false` |
-| className | 自定义类名         | `string`                      | -       |
-| ...props  | 其他原生 div 属性  | `React.ComponentProps<"div">` | -       |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
 
 ### ButtonGroupSeparator
 
-按钮组分隔符。
+ButtonGroupSeparator 组件。
 
-| 参数        | 说明                | 类型                                     | 默认值       |
-| ----------- | ------------------- | ---------------------------------------- | ------------ |
-| orientation | 分隔符方向          | `"horizontal" \| "vertical"`             | `"vertical"` |
-| className   | 自定义类名          | `string`                                 | -            |
-| ...props    | 其他 Separator 属性 | `React.ComponentProps<typeof Separator>` | -            |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |

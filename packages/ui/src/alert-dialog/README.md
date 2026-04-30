@@ -6,7 +6,7 @@ demo:
   cols: 1
 group:
   title: 反馈
-  order: 4
+  order: 5
 nav: 组件
 toc: content
 background: #111
@@ -38,119 +38,177 @@ pnpm add lynote-ui
 ```ts [单个] | pure
 import {
   AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogPortal,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogMedia,
+  AlertDialogTitle,
+  AlertDialogDescription,
   AlertDialogAction,
   AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
 } from "lynote-ui";
-```
-
-```ts [全局] | pure
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "gml-ui";
 ```
 
 :::
 
-警告对话框组件，用于显示需要用户确认的重要操作。
+用于需要用户确认的重要操作，例如删除、退出或不可逆操作。
+
+## 使用建议
+
+- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
+- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
+- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
+
+## 组件结构
+
+```tsx | pure
+<AlertDialog>
+  <AlertDialogTrigger />
+  <AlertDialogPortal />
+  <AlertDialogOverlay />
+  <AlertDialogContent />
+</AlertDialog>
+```
 
 ## 代码演示
 
 <code src="./demos/base.tsx">基本用法</code>
 
+<code src="./demos/destructive.tsx">危险操作</code>
+
 ## API
 
 ### AlertDialog
 
-警告对话框的根容器组件。
+AlertDialog 组件。
 
-| 参数         | 说明             | 类型                                                     | 默认值 |
-| ------------ | ---------------- | -------------------------------------------------------- | ------ |
-| open         | 是否打开         | `boolean`                                                | -      |
-| defaultOpen  | 默认是否打开     | `boolean`                                                | -      |
-| onOpenChange | 打开状态变化回调 | `(open: boolean) => void`                                | -      |
-| ...props     | 其他原生属性     | `React.ComponentProps<typeof AlertDialogPrimitive.Root>` | -      |
+| 参数          | 说明                   | 类型                                  | 默认值 |
+| ------------- | ---------------------- | ------------------------------------- | ------ |
+| value         | 当前值，受控模式使用   | `string \| string[]`                  | -      |
+| defaultValue  | 默认值，非受控模式使用 | `string \| string[]`                  | -      |
+| open          | 是否打开，受控模式使用 | `boolean`                             | -      |
+| defaultOpen   | 默认是否打开           | `boolean`                             | false  |
+| onOpenChange  | 打开状态变化回调       | `(open: boolean) => void`             | -      |
+| onValueChange | 值变化回调             | `(value: string \| string[]) => void` | -      |
+| disabled      | 是否禁用               | `boolean`                             | false  |
+| className     | 自定义类名             | `string`                              | -      |
+| children      | 子组件                 | `React.ReactNode`                     | -      |
 
 ### AlertDialogTrigger
 
-触发警告对话框的按钮。
+AlertDialogTrigger 组件。
 
-| 参数     | 说明         | 类型                                                        | 默认值 |
-| -------- | ------------ | ----------------------------------------------------------- | ------ |
-| ...props | 其他原生属性 | `React.ComponentProps<typeof AlertDialogPrimitive.Trigger>` | -      |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+
+### AlertDialogPortal
+
+AlertDialogPortal 组件。
+
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
+
+### AlertDialogOverlay
+
+AlertDialogOverlay 组件。
+
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### AlertDialogContent
 
-警告对话框的内容区域。
+AlertDialogContent 组件。
 
-| 参数      | 说明         | 类型                                                        | 默认值 |
-| --------- | ------------ | ----------------------------------------------------------- | ------ |
-| className | 自定义类名   | `string`                                                    | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof AlertDialogPrimitive.Content>` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### AlertDialogHeader
 
-警告对话框的头部区域。
+AlertDialogHeader 组件。
 
-| 参数      | 说明              | 类型                          | 默认值 |
-| --------- | ----------------- | ----------------------------- | ------ |
-| className | 自定义类名        | `string`                      | -      |
-| ...props  | 其他原生 div 属性 | `React.ComponentProps<"div">` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### AlertDialogFooter
 
-警告对话框的底部区域。
+AlertDialogFooter 组件。
 
-| 参数      | 说明              | 类型                          | 默认值 |
-| --------- | ----------------- | ----------------------------- | ------ |
-| className | 自定义类名        | `string`                      | -      |
-| ...props  | 其他原生 div 属性 | `React.ComponentProps<"div">` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
+
+### AlertDialogMedia
+
+AlertDialogMedia 组件。
+
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### AlertDialogTitle
 
-警告对话框的标题。
+AlertDialogTitle 组件。
 
-| 参数      | 说明         | 类型                                                      | 默认值 |
-| --------- | ------------ | --------------------------------------------------------- | ------ |
-| className | 自定义类名   | `string`                                                  | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof AlertDialogPrimitive.Title>` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### AlertDialogDescription
 
-警告对话框的描述内容。
+AlertDialogDescription 组件。
 
-| 参数      | 说明         | 类型                                                            | 默认值 |
-| --------- | ------------ | --------------------------------------------------------------- | ------ |
-| className | 自定义类名   | `string`                                                        | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof AlertDialogPrimitive.Description>` | -      |
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子内容     | `React.ReactNode` | -      |
+| id        | 元素 id    | `string`          | -      |
 
 ### AlertDialogAction
 
-警告对话框的确认按钮。
+AlertDialogAction 组件。
 
-| 参数      | 说明         | 类型                                                       | 默认值 |
-| --------- | ------------ | ---------------------------------------------------------- | ------ |
-| className | 自定义类名   | `string`                                                   | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof AlertDialogPrimitive.Action>` | -      |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
 
 ### AlertDialogCancel
 
-警告对话框的取消按钮。
+AlertDialogCancel 组件。
 
-| 参数      | 说明         | 类型                                                       | 默认值 |
-| --------- | ------------ | ---------------------------------------------------------- | ------ |
-| className | 自定义类名   | `string`                                                   | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof AlertDialogPrimitive.Cancel>` | -      |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |

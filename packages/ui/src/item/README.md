@@ -6,7 +6,7 @@ demo:
   cols: 1
 group:
   title: 数据展示
-  order: 12
+  order: 6
 nav: 组件
 toc: content
 background: #111
@@ -36,12 +36,40 @@ pnpm add lynote-ui
 :::code-group
 
 ```ts [单个] | pure
-import { Item, ItemGroup, ItemSeparator } from "lynote-ui";
+import {
+  ItemGroup,
+  ItemSeparator,
+  Item,
+  ItemMedia,
+  ItemContent,
+  ItemTitle,
+  ItemDescription,
+  ItemActions,
+  ItemHeader,
+  ItemFooter,
+} from "lynote-ui";
 ```
 
 :::
 
-列表项组件，用于构建列表和菜单项。
+用于构建列表、菜单或信息块中的复合条目。
+
+## 使用建议
+
+- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
+- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
+- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
+
+## 组件结构
+
+```tsx | pure
+<ItemGroup>
+  <ItemSeparator />
+  <Item />
+  <ItemMedia />
+  <ItemContent />
+</ItemGroup>
+```
 
 ## 代码演示
 
@@ -51,30 +79,120 @@ import { Item, ItemGroup, ItemSeparator } from "lynote-ui";
 
 ### ItemGroup
 
-列表项分组容器。
+ItemGroup 组件。
 
-| 参数      | 说明              | 类型                          | 默认值 |
-| --------- | ----------------- | ----------------------------- | ------ |
-| className | 自定义类名        | `string`                      | -      |
-| ...props  | 其他原生 div 属性 | `React.ComponentProps<"div">` | -      |
-
-### Item
-
-列表项组件。
-
-| 参数      | 说明               | 类型                                | 默认值      |
-| --------- | ------------------ | ----------------------------------- | ----------- |
-| variant   | 列表项变体         | `"default" \| "outline" \| "muted"` | `"default"` |
-| size      | 列表项尺寸         | `"default" \| "sm"`                 | `"default"` |
-| asChild   | 是否作为子元素渲染 | `boolean`                           | `false`     |
-| className | 自定义类名         | `string`                            | -           |
-| ...props  | 其他原生 div 属性  | `React.ComponentProps<"div">`       | -           |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
 
 ### ItemSeparator
 
-列表项分隔符。
+ItemSeparator 组件。
 
-| 参数      | 说明                | 类型                                     | 默认值 |
-| --------- | ------------------- | ---------------------------------------- | ------ |
-| className | 自定义类名          | `string`                                 | -      |
-| ...props  | 其他 Separator 属性 | `React.ComponentProps<typeof Separator>` | -      |
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+
+### Item
+
+Item 组件。
+
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+
+### ItemMedia
+
+ItemMedia 组件。
+
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+
+### ItemContent
+
+ItemContent 组件。
+
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+
+### ItemTitle
+
+ItemTitle 组件。
+
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+
+### ItemDescription
+
+ItemDescription 组件。
+
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+
+### ItemActions
+
+ItemActions 组件。
+
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+
+### ItemHeader
+
+ItemHeader 组件。
+
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+
+### ItemFooter
+
+ItemFooter 组件。
+
+| 参数      | 说明       | 类型                      | 默认值 |
+| --------- | ---------- | ------------------------- | ------ |
+| value     | 组件值     | `string`                  | -      |
+| disabled  | 是否禁用   | `boolean`                 | false  |
+| className | 自定义类名 | `string`                  | -      |
+| children  | 内容       | `React.ReactNode`         | -      |
+| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
