@@ -81,23 +81,29 @@ import {
 
 <code src="./demos/size.tsx">尺寸</code>
 
+<code src="./demos/objectValues.tsx">对象值</code>
+
 ## API
 
 ### Select
 
 Select 组件。
 
-| 参数          | 说明                   | 类型                                  | 默认值 |
-| ------------- | ---------------------- | ------------------------------------- | ------ |
-| value         | 当前值，受控模式使用   | `string \| string[]`                  | -      |
-| defaultValue  | 默认值，非受控模式使用 | `string \| string[]`                  | -      |
-| open          | 是否打开，受控模式使用 | `boolean`                             | -      |
-| defaultOpen   | 默认是否打开           | `boolean`                             | false  |
-| onOpenChange  | 打开状态变化回调       | `(open: boolean) => void`             | -      |
-| onValueChange | 值变化回调             | `(value: string \| string[]) => void` | -      |
-| disabled      | 是否禁用               | `boolean`                             | false  |
-| className     | 自定义类名             | `string`                              | -      |
-| children      | 子组件                 | `React.ReactNode`                     | -      |
+| 参数                 | 说明                                                                                          | 类型                                                                                                  | 默认值  |
+| -------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ------- |
+| value                | 当前值，受控模式使用                                                                          | `string \| string[]`                                                                                  | -       |
+| defaultValue         | 默认值，非受控模式使用                                                                        | `string \| string[]`                                                                                  | -       |
+| open                 | 是否打开，受控模式使用                                                                        | `boolean`                                                                                             | -       |
+| defaultOpen          | 默认是否打开                                                                                  | `boolean`                                                                                             | false   |
+| onOpenChange         | 打开状态变化回调                                                                              | `(open: boolean) => void`                                                                             | -       |
+| onValueChange        | 值变化回调                                                                                    | `(value: string \| string[]) => void`                                                                 | -       |
+| disabled             | 是否禁用                                                                                      | `boolean`                                                                                             | false   |
+| className            | 自定义类名                                                                                    | `string`                                                                                              | -       |
+| children             | 子组件                                                                                        | `React.ReactNode`                                                                                     | -       |
+| items                | 选择弹出窗口中渲染的项的数据结构。当指定时，`<Select.Value>` 会渲染选中项的标签而不是原始值。 | `Record<string, React.ReactNode> \| { label: React.ReactNode; value: any }[] \| Group[] \| undefined` | -       |
+| multiple             | 是否可以选择多个项目。                                                                        | `boolean \| undefined`                                                                                | `false` |
+| onOpenChangeComplete | 当选择弹出窗口打开或关闭时，任何动画完成后都会调用事件处理程序。                              | `((open: boolean) => void) \| undefined`                                                              | -       |
+| readOnly             | 用户是否应该无法从选择弹出窗口中选择其他选项。                                                | `boolean`                                                                                             | `false` |
 
 ### SelectGroup
 
@@ -198,3 +204,9 @@ SelectScrollDownButton 组件。
 | className | 自定义类名 | `string`                  | -      |
 | children  | 内容       | `React.ReactNode`         | -      |
 | onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+
+### Group
+
+| 参数  | 说明  | 类型                  | 默认值 |
+| ----- | ----- | --------------------- | ------ |
+| items | style | `ReadonlyArray<Item>` | -      |

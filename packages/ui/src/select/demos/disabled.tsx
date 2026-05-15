@@ -7,28 +7,45 @@ import {
 } from "lynote-ui";
 
 const App: React.FC = () => {
+  const items1 = [
+    { value: "apple", label: "苹果" },
+    { value: "banana", label: "香蕉" },
+    { value: "orange", label: "橙子" },
+  ];
+  const items2 = [
+    { value: "apple", label: "苹果" },
+    { value: "banana", label: "香蕉" },
+    { value: "orange", label: "橙子", disabled: true },
+  ];
   return (
     <div className="flex flex-col gap-4">
-      <Select disabled>
+      <Select items={items1} disabled>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="禁用状态" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="apple">苹果</SelectItem>
-          <SelectItem value="banana">香蕉</SelectItem>
-          <SelectItem value="orange">橙子</SelectItem>
+          {items1.map((item) => (
+            <SelectItem key={item.value} value={item.value}>
+              {item.label}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
-      <Select>
+
+      <Select items={items2}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="正常状态" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="apple">苹果</SelectItem>
-          <SelectItem value="banana" disabled>
-            香蕉（禁用）
-          </SelectItem>
-          <SelectItem value="orange">橙子</SelectItem>
+          {items2.map((item) => (
+            <SelectItem
+              key={item.value}
+              value={item.value}
+              disabled={item.disabled}
+            >
+              {item.label}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
     </div>
