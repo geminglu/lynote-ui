@@ -59,6 +59,7 @@ import {
 - 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
 - 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
 - `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
+- 多选时 `SelectValue` 默认使用 Badge 展示选中值；空间不足时默认显示 `+N...`，可通过 `renderOverflow` 自定义折叠内容。
 
 ## 组件结构
 
@@ -82,6 +83,8 @@ import {
 <code src="./demos/size.tsx">尺寸</code>
 
 <code src="./demos/objectValues.tsx">对象值</code>
+
+<code src="./demos/multiple.tsx">多选</code>
 
 ## API
 
@@ -119,11 +122,24 @@ SelectGroup 组件。
 
 SelectValue 组件。
 
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
+| 参数           | 说明                                                                                                                                                          | 类型                                                                                                                        | 默认值 |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ------ |
+| className      | 自定义类名                                                                                                                                                    | `string`                                                                                                                    | -      |
+| children       | 子内容。多选时如果传入自定义 children，将不会使用默认 Badge 多选展示                                                                                          | `React.ReactNode \| ((value: any) => React.ReactNode)`                                                                      | -      |
+| placeholder    | 未选择时的占位内容                                                                                                                                            | `React.ReactNode`                                                                                                           | -      |
+| renderOverflow | 多选值单行展示空间不足时的自定义折叠内容。未传入时默认使用 Badge 展示 `+N...`，传入后直接渲染返回内容。`hiddenValues` 和 `visibleValues` 为对应的完整选项数据 | `(info: { hiddenCount: number; hiddenValues: SelectLabeledItem[]; visibleValues: SelectLabeledItem[] }) => React.ReactNode` | -      |
+| id             | 元素 id                                                                                                                                                       | `string`                                                                                                                    | -      |
+
+#### 多选折叠展示
+
+```tsx | pure
+<SelectValue
+  placeholder="选择多个选项"
+  renderOverflow={({ hiddenCount }) => (
+    <span className="text-muted-foreground text-xs">还有 {hiddenCount} 项</span>
+  )}
+/>
+```
 
 ### SelectTrigger
 

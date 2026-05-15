@@ -5,8 +5,90 @@ import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import * as React from "react";
 
 import { cn } from "../../lib";
+import { SelectContext } from "./context";
+import { SelectMultipleValue } from "./SelectMultipleValue";
+import type {
+  SelectContextValue,
+  SelectValueOverflowRenderInfo,
+  SelectValueProps,
+} from "./type";
 
-const Select = SelectPrimitive.Root;
+function Select<Value, Multiple extends boolean | undefined = false>({
+  value,
+  defaultValue,
+  onValueChange,
+  items,
+  multiple,
+  disabled,
+  readOnly,
+  itemToStringLabel,
+  isItemEqualToValue,
+  ...props
+}: SelectPrimitive.Root.Props<Value, Multiple>) {
+  const isControlled = value !== undefined;
+  const [uncontrolledValue, setUncontrolledValue] = React.useState<unknown>(
+    () => defaultValue ?? (multiple ? [] : null),
+  );
+  const currentValue = isControlled ? value : uncontrolledValue;
+
+  const handleValueChange = React.useCallback(
+    (
+      nextValue: SelectPrimitive.Root.Props<Value, Multiple>["value"],
+      eventDetails: SelectPrimitive.Root.ChangeEventDetails,
+    ) => {
+      onValueChange?.(
+        nextValue as Parameters<NonNullable<typeof onValueChange>>[0],
+        eventDetails,
+      );
+
+      if (!isControlled && !eventDetails.isCanceled) {
+        setUncontrolledValue(nextValue);
+      }
+    },
+    [isControlled, onValueChange],
+  );
+
+  const contextValue = React.useMemo<SelectContextValue>(
+    () => ({
+      disabled,
+      isItemEqualToValue:
+        isItemEqualToValue as SelectContextValue["isItemEqualToValue"],
+      itemToStringLabel:
+        itemToStringLabel as SelectContextValue["itemToStringLabel"],
+      items,
+      multiple,
+      readOnly,
+      setValue: handleValueChange as SelectContextValue["setValue"],
+    }),
+    [
+      disabled,
+      handleValueChange,
+      isItemEqualToValue,
+      itemToStringLabel,
+      items,
+      multiple,
+      readOnly,
+    ],
+  );
+
+  return (
+    <SelectContext.Provider value={contextValue}>
+      <SelectPrimitive.Root
+        value={
+          currentValue as SelectPrimitive.Root.Props<Value, Multiple>["value"]
+        }
+        onValueChange={handleValueChange}
+        items={items}
+        multiple={multiple}
+        disabled={disabled}
+        readOnly={readOnly}
+        itemToStringLabel={itemToStringLabel}
+        isItemEqualToValue={isItemEqualToValue}
+        {...props}
+      />
+    </SelectContext.Provider>
+  );
+}
 
 function SelectGroup({ className, ...props }: SelectPrimitive.Group.Props) {
   return (
@@ -18,13 +100,38 @@ function SelectGroup({ className, ...props }: SelectPrimitive.Group.Props) {
   );
 }
 
-function SelectValue({ className, ...props }: SelectPrimitive.Value.Props) {
+function SelectValue({
+  className,
+  children,
+  placeholder,
+  renderOverflow,
+  ...props
+}: SelectValueProps) {
+  const selectContext = React.useContext(SelectContext);
+  const shouldRenderMultipleBadges =
+    selectContext?.multiple && children == null;
+
   return (
     <SelectPrimitive.Value
       data-slot="select-value"
-      className={cn("flex flex-1 text-left", className)}
+      className={cn(
+        "flex min-w-0 flex-1 flex-wrap text-start",
+        shouldRenderMultipleBadges && "items-center overflow-hidden",
+        className,
+      )}
+      placeholder={placeholder}
       {...props}
-    />
+    >
+      {shouldRenderMultipleBadges
+        ? (value) => (
+            <SelectMultipleValue
+              placeholder={placeholder}
+              renderOverflow={renderOverflow}
+              value={value}
+            />
+          )
+        : children}
+    </SelectPrimitive.Value>
   );
 }
 
@@ -36,12 +143,19 @@ function SelectTrigger({
 }: SelectPrimitive.Trigger.Props & {
   size?: "sm" | "default";
 }) {
+  const selectContext = React.useContext(SelectContext);
+  const isMultiple = Boolean(selectContext?.multiple);
+
   return (
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
       data-size={size}
+      data-multiple={isMultiple ? true : undefined}
       className={cn(
-        "border-input focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 data-placeholder:text-muted-foreground dark:bg-input/30 dark:hover:bg-input/50 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 flex w-fit select-none items-center justify-between gap-1.5 whitespace-nowrap rounded-lg border bg-transparent py-2 pl-2.5 pr-2 text-sm outline-none transition-colors disabled:cursor-not-allowed disabled:opacity-50 data-[size=default]:h-8 data-[size=sm]:h-7 data-[size=sm]:rounded-[min(var(--radius-md),10px)] *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "border-input focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 data-placeholder:text-muted-foreground dark:bg-input/30 dark:hover:bg-input/50 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 flex w-fit select-none items-center justify-between gap-1.5 rounded-lg border bg-transparent py-2 pl-2.5 pr-2 text-sm outline-none transition-colors disabled:cursor-not-allowed disabled:opacity-50 data-[size=sm]:rounded-[min(var(--radius-md),10px)] *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        isMultiple
+          ? "h-auto min-h-8 whitespace-normal py-1.5 *:data-[slot=select-value]:line-clamp-none"
+          : "whitespace-nowrap data-[size=default]:h-8 data-[size=sm]:h-7 *:data-[slot=select-value]:line-clamp-1",
         className,
       )}
       {...props}
@@ -200,3 +314,5 @@ export {
   SelectTrigger,
   SelectValue,
 };
+
+export type { SelectValueOverflowRenderInfo, SelectValueProps };
