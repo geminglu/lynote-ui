@@ -102,15 +102,17 @@ function SelectMultipleValue({
   const selectedItems = values.map((itemValue) =>
     resolveSelectedItem(itemValue, selectContext),
   );
-  const visibleValues = values.slice(0, visibleCount);
+  const visibleItemValues = values.slice(0, visibleCount);
   const hiddenCount = values.length - visibleCount;
   const renderOverflowContent = (count: number) => {
     const hiddenItems = selectedItems.slice(values.length - count);
+    const visibleItems = selectedItems.slice(0, values.length - count);
 
     if (renderOverflow) {
       return renderOverflow({
         hiddenCount: count,
         hiddenValues: hiddenItems,
+        visibleValues: visibleItems,
       });
     }
 
@@ -178,7 +180,7 @@ function SelectMultipleValue({
       ref={containerRef}
       className="relative flex min-w-0 flex-1 items-center gap-1 overflow-hidden"
     >
-      {visibleValues.map((itemValue, index) =>
+      {visibleItemValues.map((itemValue, index) =>
         renderValueBadge(itemValue, labels[index], index),
       )}
       {hiddenCount > 0 ? renderOverflowContent(hiddenCount) : null}

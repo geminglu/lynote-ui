@@ -30,6 +30,7 @@ export type SelectContextValue = {
 export type SelectValueOverflowRenderInfo = {
   hiddenCount: number;
   hiddenValues: SelectLabeledItem[];
+  visibleValues: SelectLabeledItem[];
 };
 
 export type SelectValueProps = SelectPrimitive.Value.Props & {
