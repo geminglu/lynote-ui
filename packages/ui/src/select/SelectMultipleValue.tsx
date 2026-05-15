@@ -156,7 +156,7 @@ function SelectMultipleValue({
 
             const nextValue = values.filter((selectedValue) => {
               if (
-                selectContext.isItemEqualToValue?.(selectedValue, itemValue)
+                selectContext.isItemEqualToValue?.(itemValue, selectedValue)
               ) {
                 return false;
               }
