@@ -15,9 +15,9 @@ import {
 const App: React.FC = () => {
   return (
     <Popover>
-      <PopoverTrigger asChild>
-        <Button variant="outline">Open Popover</Button>
-      </PopoverTrigger>
+      <PopoverTrigger
+        render={<Button variant="outline">Open Popover</Button>}
+      />
       <PopoverContent className="w-64" align="start">
         <PopoverHeader>
           <PopoverTitle>Dimensions</PopoverTitle>

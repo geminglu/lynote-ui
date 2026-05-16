@@ -7,7 +7,7 @@ import {
 const App: React.FC = () => {
   return (
     <ResizablePanelGroup
-      direction="horizontal"
+      orientation="horizontal"
       className="max-w-xl rounded-lg border"
     >
       <ResizablePanel defaultSize={25} minSize={15}>
@@ -17,7 +17,7 @@ const App: React.FC = () => {
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={50}>
-        <ResizablePanelGroup direction="vertical">
+        <ResizablePanelGroup orientation="vertical">
           <ResizablePanel defaultSize={70}>
             <div className="flex h-full items-center justify-center p-3 text-sm">
               主编辑区

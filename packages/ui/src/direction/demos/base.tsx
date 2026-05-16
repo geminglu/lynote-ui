@@ -13,7 +13,7 @@ function DirectionPreview() {
 
 const App: React.FC = () => {
   return (
-    <DirectionProvider dir="rtl">
+    <DirectionProvider direction="rtl">
       <DirectionPreview />
     </DirectionProvider>
   );

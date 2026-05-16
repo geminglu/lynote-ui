@@ -1,5 +1,7 @@
 "use client";
 
+import { format } from "date-fns";
+import { ChevronDownIcon } from "lucide-react";
 import {
   Button,
   Calendar,
@@ -9,24 +11,23 @@ import {
 } from "lynote-ui";
 import * as React from "react";
 
-import { format } from "date-fns";
-import { ChevronDownIcon } from "lucide-react";
-
 const App: React.FC = () => {
   const [date, setDate] = React.useState<Date>();
 
   return (
     <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          data-empty={!date}
-          className="data-[empty=true]:text-muted-foreground w-[212px] justify-between text-left font-normal"
-        >
-          {date ? format(date, "yyyy-MM-dd") : <span>Pick a date</span>}
-          <ChevronDownIcon data-icon="inline-end" />
-        </Button>
-      </PopoverTrigger>
+      <PopoverTrigger
+        render={
+          <Button
+            variant="outline"
+            data-empty={!date}
+            className="data-[empty=true]:text-muted-foreground w-[212px] justify-between text-left font-normal"
+          >
+            {date ? format(date, "yyyy-MM-dd") : <span>Pick a date</span>}
+            <ChevronDownIcon data-icon="inline-end" />
+          </Button>
+        }
+      />
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar
           mode="single"

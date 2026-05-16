@@ -24,16 +24,18 @@ const App: React.FC = () => {
       <Field>
         <FieldLabel htmlFor="date-picker-optional">Date</FieldLabel>
         <Popover open={open} onOpenChange={setOpen}>
-          <PopoverTrigger asChild>
-            <Button
-              variant="outline"
-              id="date-picker-optional"
-              className="w-32 justify-between font-normal"
-            >
-              {date ? format(date, "PPP") : "Select date"}
-              <ChevronDownIcon data-icon="inline-end" />
-            </Button>
-          </PopoverTrigger>
+          <PopoverTrigger
+            render={
+              <Button
+                variant="outline"
+                id="date-picker-optional"
+                className="w-32 justify-between font-normal"
+              >
+                {date ? format(date, "PPP") : "Select date"}
+                <ChevronDownIcon data-icon="inline-end" />
+              </Button>
+            }
+          />
           <PopoverContent className="w-auto overflow-hidden p-0" align="start">
             <Calendar
               mode="single"

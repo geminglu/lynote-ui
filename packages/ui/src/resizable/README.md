@@ -17,7 +17,7 @@ Resizable 用于把页面拆分成多个可拖拽调整大小的面板,典型场
 
 ## 特性
 
-- **水平 / 垂直方向**:`direction="horizontal" | "vertical"`。
+- **水平 / 垂直方向**:`orientation="horizontal" | "vertical"`(默认 `"horizontal"`)。
 - **可嵌套**:在 Panel 内继续放 PanelGroup 实现多层网格。
 - **支持最小 / 最大尺寸**:`minSize` / `maxSize` 限制拖拽范围。
 - **可视化把手**:`<ResizableHandle withHandle />` 在分隔条上显示一个把手。
@@ -64,11 +64,11 @@ import {
 
 ### ResizablePanelGroup
 
-| 参数       | 说明                        | 类型                         | 默认值 |
-| ---------- | --------------------------- | ---------------------------- | ------ |
-| direction  | 排列方向                    | `"horizontal" \| "vertical"` | -      |
-| autoSaveId | 保存布局的 localStorage key | `string`                     | -      |
-| className  | 自定义类名                  | `string`                     | -      |
+| 参数        | 说明                        | 类型                         | 默认值         |
+| ----------- | --------------------------- | ---------------------------- | -------------- |
+| orientation | 排列方向                    | `"horizontal" \| "vertical"` | `"horizontal"` |
+| autoSaveId  | 保存布局的 localStorage key | `string`                     | -              |
+| className   | 自定义类名                  | `string`                     | -              |
 
 ### ResizablePanel
 

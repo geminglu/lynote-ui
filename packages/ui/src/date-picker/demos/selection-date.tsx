@@ -19,15 +19,17 @@ const App: React.FC = () => {
     <Field className="mx-auto w-44">
       <FieldLabel htmlFor="date">Date of birth</FieldLabel>
       <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            id="date"
-            className="justify-start font-normal"
-          >
-            {date ? date.toLocaleDateString() : "Select date"}
-          </Button>
-        </PopoverTrigger>
+        <PopoverTrigger
+          render={
+            <Button
+              variant="outline"
+              id="date"
+              className="justify-start font-normal"
+            >
+              {date ? date.toLocaleDateString() : "Select date"}
+            </Button>
+          }
+        />
         <PopoverContent className="w-auto overflow-hidden p-0" align="start">
           <Calendar
             mode="single"

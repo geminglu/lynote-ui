@@ -7,7 +7,7 @@ import {
 const App: React.FC = () => {
   return (
     <ResizablePanelGroup
-      direction="vertical"
+      orientation="vertical"
       className="h-[300px] max-w-md rounded-lg border"
     >
       <ResizablePanel defaultSize={40}>

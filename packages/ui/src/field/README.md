@@ -108,13 +108,13 @@ import {
 
 <code src="./demos/layout.tsx" description="通过 `Field` 组件的 `orientation` 属性可以控制字段的布局方向，支持 `vertical`、`horizontal` 和 `responsive` 三种模式。`responsive` 模式会根据父容器宽度自动切换布局。">表单布局</code>
 
-<code src="./demos/login.tsx" description="一个常见的登录表单示例，包含用户名、密码输入及"记住我"选项，演示如何组合 `Field` 与多种基础控件构建完整业务表单。">登录表单</code>
+<code src="./demos/login.tsx" description="一个常见的登录表单示例，包含用户名、密码输入及‘记住我’选项，演示如何组合 `Field` 与多种基础控件构建完整业务表单。">登录表单</code>
 
 <code src="./demos/textarea.tsx" description="对于文本区域字段，将字段对象传递给 `<Textarea />` 组件。若要显示错误信息，请向 `<Textarea />` 组件添加 aria-invalid 属性，并向 `<Field />` 组件添加 data-invalid 属性。">文本域</code>
 
 <code src="./demos/select.tsx" description="对于部分组件，在 `<Select />` 组件上使用 field.value 和 field.onChange。要显示错误，请在 `<SelectTrigger />` 组件中添加 aria-invalid prop，在 `<Field />` 组件中添加 data-invalid prop。">选择器</code>
 
-<code src="./demos/checkbox.tsx" description="对于复选框数组，使用 field.value 和 field.onChange 并进行数组操作。要显示错误，请将 aria-invalid prop 添加到 `<Checkbox />` 组件，将 data-invalid prop 添加到 `<Field />` 组件中。记得在 `<FieldGroup />` 组件中添加 data-slot=\"checkbox-group\"，以便正确的样式和间距。">复选框</code>
+<code src="./demos/checkbox.tsx" description="对于复选框数组，使用 field.value 和 field.onChange 并进行数组操作。要显示错误，请将 aria-invalid prop 添加到 `<Checkbox />` 组件，将 data-invalid prop 添加到 `<Field />` 组件中。记得在 `<FieldGroup />` 组件中添加 data-slot='checkbox-group'，以便正确的样式和间距。">复选框</code>
 
 <code src="./demos/radioGroup.tsx" description="对于单选组，在 `<RadioGroup />` 组件上使用 field.value 和 field.onChange。要显示错误，将 aria-invalid prop 添加到 `<RadioGroupItem />` 组件中，在 `<Field />` 组件中添加 data-invalid prop。">单选框</code>
 

@@ -1,5 +1,7 @@
 "use client";
 
+import { addDays, format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
 import {
   Button,
   Calendar,
@@ -10,9 +12,6 @@ import {
   PopoverTrigger,
 } from "lynote-ui";
 import * as React from "react";
-
-import { addDays, format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
 import { type DateRange } from "react-day-picker";
 
 const App: React.FC = () => {
@@ -25,27 +24,29 @@ const App: React.FC = () => {
     <Field className="mx-auto w-60">
       <FieldLabel htmlFor="date-picker-range">Date Picker Range</FieldLabel>
       <Popover>
-        <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            id="date-picker-range"
-            className="justify-start px-2.5 font-normal"
-          >
-            <CalendarIcon data-icon="inline-start" />
-            {date?.from ? (
-              date.to ? (
-                <>
-                  {format(date.from, "yyyy-MM-dd")} -{" "}
-                  {format(date.to, "yyyy-MM-dd")}
-                </>
+        <PopoverTrigger
+          render={
+            <Button
+              variant="outline"
+              id="date-picker-range"
+              className="justify-start px-2.5 font-normal"
+            >
+              <CalendarIcon data-icon="inline-start" />
+              {date?.from ? (
+                date.to ? (
+                  <>
+                    {format(date.from, "yyyy-MM-dd")} -{" "}
+                    {format(date.to, "yyyy-MM-dd")}
+                  </>
+                ) : (
+                  format(date.from, "yyyy-MM-dd")
+                )
               ) : (
-                format(date.from, "yyyy-MM-dd")
-              )
-            ) : (
-              <span>Pick a date</span>
-            )}
-          </Button>
-        </PopoverTrigger>
+                <span>Pick a date</span>
+              )}
+            </Button>
+          }
+        />
         <PopoverContent className="w-auto p-0" align="start">
           <Calendar
             mode="range"

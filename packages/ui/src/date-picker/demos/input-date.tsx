@@ -1,5 +1,6 @@
 "use client";
 
+import { CalendarIcon } from "lucide-react";
 import {
   Calendar,
   Field,
@@ -13,8 +14,6 @@ import {
   PopoverTrigger,
 } from "lynote-ui";
 import * as React from "react";
-
-import { CalendarIcon } from "lucide-react";
 
 function formatDate(date: Date | undefined) {
   if (!date) {
@@ -68,17 +67,19 @@ export function App() {
         />
         <InputGroupAddon align="inline-end">
           <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
-              <InputGroupButton
-                id="date-picker"
-                variant="ghost"
-                size="icon-xs"
-                aria-label="Select date"
-              >
-                <CalendarIcon />
-                <span className="sr-only">Select date</span>
-              </InputGroupButton>
-            </PopoverTrigger>
+            <PopoverTrigger
+              render={
+                <InputGroupButton
+                  id="date-picker"
+                  variant="ghost"
+                  size="icon-xs"
+                  aria-label="Select date"
+                >
+                  <CalendarIcon />
+                  <span className="sr-only">Select date</span>
+                </InputGroupButton>
+              }
+            />
             <PopoverContent
               className="w-auto overflow-hidden p-0"
               align="end"
