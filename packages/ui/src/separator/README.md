@@ -46,6 +46,13 @@ import { Separator } from "lynote-ui/separator";
 
 <code src="./demos/with-text.tsx" description="夹文字的分隔符，常见于登录页的'或'分隔。也可以直接使用 `FieldSeparator`。">带文字</code>
 
+## 最佳实践
+
+- **垂直方向必须有高度**：`orientation="vertical"` 依赖父容器高度，常与 `h-4` / `h-6` 或工具栏高度配合。
+- **避免重复边线**：卡片、表格、列表已经有 border 时，不要再叠加 Separator。
+- **分组语义清晰**：只在内容分组边界使用，不要把它当作装饰线密集插入。
+- **带文字分隔优先复用 FieldSeparator**：表单场景可直接使用 `FieldSeparator`，减少重复布局。
+
 ## API
 
 ### Separator

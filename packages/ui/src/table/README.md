@@ -74,6 +74,8 @@ import {
 
 <code src="./demos/with-actions.tsx" description="带状态徽标 + 行操作菜单 + 标题区的完整业务表格。">业务示例</code>
 
+<code src="./demos/data-table.tsx" description="使用 `@tanstack/react-table` 构建数据表格。">数据表格</code>
+
 ## 最佳实践
 
 - **`TableCaption` 提供标题**:有助于读屏器与 SEO。

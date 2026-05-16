@@ -76,6 +76,10 @@ import {
 
 <code src="./demos/controlled.tsx" description="受控分页 + 自动折叠中间页码。">受控分页</code>
 
+<code src="./demos/simple.tsx" description="只有页码的简单分页">简单用法</code>
+
+<code src="./demos/icons-only.tsx" description="仅使用上一页和下一页按钮，不显示页码。这对于具有每页行数选择器的数据表很有用。">图标分页</code>
+
 ## 最佳实践
 
 - **超过 7 页用省略号**:保留首页、当前页 ±1、末页,其余折叠。

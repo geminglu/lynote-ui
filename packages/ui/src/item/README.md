@@ -72,11 +72,17 @@ import {
 
 <code src="./demos/base.tsx">基本用法</code>
 
-<code src="./demos/with-media.tsx" description="`ItemMedia variant=\"icon\"` 渲染左侧图标；`variant=\"image\"` 用于图片。">带图标</code>
+<code src="./demos/with-media.tsx" description="`ItemMedia variant='icon'` 渲染左侧图标；`variant='image'` 用于图片。">带图标</code>
 
 <code src="./demos/with-action.tsx" description="右侧 `ItemActions` 放置管理按钮，搭配 `Avatar` 渲染用户列表。">用户列表（带操作）</code>
 
 <code src="./demos/sizes.tsx" description="三种尺寸的紧凑度对比。">尺寸</code>
+
+<code src="./demos/variant.tsx" description="三种变体的对比。">变体</code>
+
+<code src="./demos/image.tsx" description="`ItemMedia variant='image'` 用于图片。">图片</code>
+
+<code src="./demos/header.tsx" description="`ItemHeader` 用于图片。">图片</code>
 
 ## 最佳实践
 

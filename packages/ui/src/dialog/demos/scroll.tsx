@@ -10,33 +10,34 @@ import {
   DialogTrigger,
 } from "lynote-ui/dialog";
 
-const App: React.FC = () => {
+export default function App() {
   return (
     <Dialog>
-      <DialogTrigger render={<Button variant="outline">查看服务条款</Button>} />
-      <DialogContent className="max-h-[80vh] sm:max-w-lg">
+      <DialogTrigger render={<Button variant="outline">粘性底部</Button>} />
+      <DialogContent>
         <DialogHeader>
-          <DialogTitle>服务条款</DialogTitle>
+          <DialogTitle>粘性底部</DialogTitle>
           <DialogDescription>
-            请仔细阅读以下内容，滚动到底部以继续。
+            这个对话框有一个粘性底部，当内容滚动时保持可见。
           </DialogDescription>
         </DialogHeader>
-        <div className="max-h-80 overflow-y-auto rounded-md border p-3 text-sm leading-relaxed">
-          {Array.from({ length: 18 }).map((_, i) => (
-            <p key={i} className="mb-3">
-              {i + 1}. 这是服务条款的第 {i + 1}{" "}
-              节，详细描述了使用本服务时双方的权利与义务。
-              请仔细阅读并理解每一项约定。
+        <div className="no-scrollbar -mx-4 max-h-[50vh] overflow-y-auto px-4">
+          {Array.from({ length: 10 }).map((_, index) => (
+            <p key={index} className="mb-4 leading-normal">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>
           ))}
         </div>
         <DialogFooter>
           <DialogClose render={<Button variant="outline">关闭</Button>} />
-          <Button>我已阅读并同意</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
-};
-
-export default App;
+}

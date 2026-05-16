@@ -60,6 +60,8 @@ import { ToggleGroup, ToggleGroupItem } from "lynote-ui/toggle-group";
 
 <code src="./demos/outline.tsx" description="`variant=\"outline\"` 适合带间隙的分体按钮组。">边框变体</code>
 
+<code src="./demos/custom.tsx">自定义样式</code>
+
 ## 最佳实践
 
 - **明确选择 `type`**：单选用 `single`,多选用 `multiple`,不要省略。
@@ -73,7 +75,7 @@ import { ToggleGroup, ToggleGroupItem } from "lynote-ui/toggle-group";
 
 | 参数          | 说明               | 类型                         | 默认值         |
 | ------------- | ------------------ | ---------------------------- | -------------- |
-| type          | 单选或多选         | `"single" \| "multiple"`     | -              |
+| multiple      | 是否多选           | `boolean`                    | `false`        |
 | value         | 当前值(受控)       | `string \| string[]`         | -              |
 | defaultValue  | 默认值(非受控)     | `string \| string[]`         | -              |
 | onValueChange | 值变化回调         | `(value: any) => void`       | -              |

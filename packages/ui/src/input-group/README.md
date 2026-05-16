@@ -67,6 +67,24 @@ import {
 
 <code src="./demos/base.tsx" description="基本搜索、金额、行内按钮组合。">基本用法</code>
 
+<code src="./demos/with-kbd.tsx" description="在右侧叠加快捷键提示,常用于命令面板入口。">快捷键提示</code>
+
+<code src="./demos/textarea.tsx" description="配合 `InputGroupTextarea` 构建带顶部说明和底部操作的多行输入。">多行输入</code>
+
+<code src="./demos/spinner.tsx">Spinner 加载器</code>
+
+<code src="./demos/dropdown.tsx">Dropdown 下拉菜单</code>
+
+<code src="./demos/button.tsx">Button 按钮</code>
+
+<code src="./demos/text.tsx">Text 文本</code>
+
+<code src="./demos/icon.tsx">Icon 图标</code>
+
+<code src="./demos/block-end.tsx" description="使用 `align='block-end'` 将附加组件定位在输入框下方。">底部对齐</code>
+
+<code src="./demos/block-start.tsx" description="使用 `align='block-start'` 将附加组件定位在输入框上方。">顶部对齐</code>
+
 ## 最佳实践
 
 - **`InputGroupInput` 替代 `Input`**:在 InputGroup 内必须使用 `InputGroupInput`,否则边框会重叠。

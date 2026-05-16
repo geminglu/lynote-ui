@@ -46,6 +46,13 @@ import { Kbd, KbdGroup } from "lynote-ui/kbd";
 
 <code src="./demos/in-button.tsx" description="常见于全局搜索 / 命令面板 trigger 的右侧。">嵌入按钮</code>
 
+## 最佳实践
+
+- **保留键盘语义**：单个按键用 `Kbd`，组合键用 `KbdGroup`，不要用普通 `span` 模拟。
+- **按平台选择文案**：macOS 可使用 `⌘` / `⌥`，Windows 场景建议写 `Ctrl` / `Alt`。
+- **只做提示不做交互**：`Kbd` 是展示组件，真正可点击的触发器应使用 `Button` 或菜单项。
+- **和实际快捷键保持一致**：展示快捷键时同步绑定键盘事件，避免用户看到但无法使用。
+
 ## API
 
 ### Kbd

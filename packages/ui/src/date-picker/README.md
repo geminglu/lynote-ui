@@ -5,7 +5,7 @@ subtitle: DatePicker 日期选择器
 demo:
   cols: 1
 group:
-  title: 数据录入
+  title: 表单
   order: 5
 nav: 组件
 toc: content

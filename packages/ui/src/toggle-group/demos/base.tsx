@@ -4,7 +4,7 @@ import { ToggleGroup, ToggleGroupItem } from "lynote-ui";
 const App: React.FC = () => {
   return (
     <div className="space-y-4">
-      <ToggleGroup type="single">
+      <ToggleGroup>
         <ToggleGroupItem value="bold" aria-label="Toggle bold">
           <BoldIcon />
         </ToggleGroupItem>
@@ -15,7 +15,7 @@ const App: React.FC = () => {
           <UnderlineIcon />
         </ToggleGroupItem>
       </ToggleGroup>
-      <ToggleGroup type="multiple">
+      <ToggleGroup multiple>
         <ToggleGroupItem value="bold" aria-label="Toggle bold">
           <BoldIcon />
         </ToggleGroupItem>

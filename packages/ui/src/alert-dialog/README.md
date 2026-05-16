@@ -73,6 +73,10 @@ import {
 
 <code src="./demos/destructive.tsx" description="确认按钮使用 destructive 变体,语义上更直观。">危险操作确认</code>
 
+<code src="./demos/small.tsx" description="使用 `size='sm'` 属性使警告对话框更小。">小尺寸</code>
+
+<code src="./demos/media.tsx" description="使用 `AlertDialogMedia` 组件展示图标或图片。">带媒体</code>
+
 ## 最佳实践
 
 - **标题用问句**:"确认删除?" 而非"删除"——明确这是一个需要决策的问题。

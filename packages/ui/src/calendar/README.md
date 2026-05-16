@@ -5,7 +5,7 @@ subtitle: Calendar 日历
 demo:
   cols: 1
 group:
-  title: 数据录入
+  title: 表单
   order: 5
 nav: 组件
 toc: content
@@ -47,6 +47,16 @@ import { Calendar } from "lynote-ui/calendar";
 <code src="./demos/multiple.tsx" description="多日期选择,适合休假 / 排班场景。">多选模式</code>
 
 <code src="./demos/range.tsx" description="区间选择 + 多月并排,常用于酒店预订。">区间选择</code>
+
+<code src="./demos/presets.tsx" description="预设日期,方便用户选择。">预设日期</code>
+
+<code src="./demos/date-and-time-picker.tsx" description="日期和时间选择,方便用户选择。">日期和时间选择</code>
+
+<code src="./demos/booked-dates.tsx" description="已预订日期,方便用户选择。">已预订日期</code>
+
+<code src="./demos/custom-cell-size.tsx" description="自定义单元格大小,方便用户选择。">自定义单元格大小</code>
+
+<code src="./demos/week-numbers.tsx" description="使用 showWeekNumber 来显示周数。">显示周数</code>
 
 ## 最佳实践
 

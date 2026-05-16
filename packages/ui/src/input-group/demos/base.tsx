@@ -1,6 +1,5 @@
 import { SearchIcon } from "lucide-react";
 import {
-  Button,
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
@@ -21,11 +20,7 @@ const App: React.FC = () => {
         <InputGroupAddon align="inline-end">元</InputGroupAddon>
       </InputGroup>
       <InputGroup>
-        <InputGroupButton>
-          <Button variant="ghost" size="xs">
-            搜索
-          </Button>
-        </InputGroupButton>
+        <InputGroupButton>搜索</InputGroupButton>
         <InputGroupInput placeholder="搜索..." />
       </InputGroup>
     </div>

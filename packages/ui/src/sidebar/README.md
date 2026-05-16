@@ -91,6 +91,10 @@ import {
 
 <code src="./demos/base.tsx" description="完整的侧边栏 + 主内容区布局。">基本用法</code>
 
+<code src="./demos/icon-collapsible.tsx" description="使用 `collapsible=\"icon\"` 和 `tooltip` 构建可折叠图标侧栏。">图标折叠</code>
+
+<code src="./demos/with-footer.tsx" description="组合二级菜单、分隔线和页脚账号区。">带页脚与子菜单</code>
+
 ## 最佳实践
 
 - **`SidebarProvider` 包根节点**:所有 Sidebar 相关组件必须放在 Provider 内部。

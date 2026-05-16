@@ -119,6 +119,10 @@ import {
 
 <code src="./demos/sizes.tsx" description="通过 `className` 覆盖 `sm:max-w-*` 控制对话框宽度。">尺寸</code>
 
+<code src="./demos/no-close-button.tsx" description="没有关闭按钮。">没有关闭按钮</code>
+
+<code src="./demos/scrollable-content.tsx" description="可滚动内容。">可滚动内容</code>
+
 ## 最佳实践
 
 - **使用 `DialogClose` 关闭**：所有"取消 / 关闭 / 我知道了"按钮都应该用 `DialogClose render={...}`，免去手动 `setOpen(false)`。

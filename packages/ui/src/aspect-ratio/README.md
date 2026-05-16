@@ -46,6 +46,13 @@ import { AspectRatio } from "lynote-ui/aspect-ratio";
 
 <code src="./demos/ratios.tsx" description="常用比例对比。">常用比例</code>
 
+## 最佳实践
+
+- **优先包裹媒体容器**：让 `img` / `video` / `iframe` 使用 `h-full w-full object-cover` 铺满比例盒。
+- **给容器设置圆角和裁切**：圆角、边框、阴影建议放在 `AspectRatio` 上，并配合 `overflow-hidden`。
+- **避免包裹未知高度文本**：AspectRatio 会固定高度，长文本可能被压缩或溢出。
+- **结合占位骨架**：图片加载前可以把 `Skeleton` 放进相同比例容器，减少布局跳动。
+
 ## API
 
 ### AspectRatio

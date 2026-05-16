@@ -53,6 +53,12 @@ import {
 
 <code src="./demos/base.tsx">基本用法</code>
 
+<code src="./demos/direction.tsx" description="通过 `direction` 控制抽屉从顶部、右侧、底部或左侧进入。">不同方向</code>
+
+<code src="./demos/controlled.tsx" description="使用 `open` 和 `onOpenChange` 控制抽屉打开状态。">受控状态</code>
+
+<code src="./demos/responsive-dialog.tsx" description="响应式对话框。">响应式对话框</code>
+
 ## 最佳实践
 
 - **优先用于移动端**:桌面端推荐 `Sheet`,体验更轻盈;只有需要手势体验时再用 Drawer。

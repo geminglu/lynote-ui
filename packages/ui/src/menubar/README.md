@@ -58,6 +58,8 @@ import {
 
 <code src="./demos/base.tsx">基本用法</code>
 
+<code src="./demos/advanced.tsx" description="展示快捷键、复选项、单选组和子菜单。">高级菜单</code>
+
 ## 最佳实践
 
 - **按文件 / 编辑 / 视图 / 工具 / 帮助分组**:遵守桌面 App 的惯例。

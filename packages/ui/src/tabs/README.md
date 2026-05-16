@@ -86,7 +86,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "lynote-ui";
 
 <code src="./demos/vertical.tsx">垂直方向</code>
 
-<code src="./demos/line.tsx" description="`TabsList variant=\"line\"` 使用底部下划线作为指示器，更适合内容型页面。">下划线变体</code>
+<code src="./demos/line.tsx" description="`TabsList variant='line'` 使用底部下划线作为指示器，更适合内容型页面。">下划线变体</code>
 
 <code src="./demos/with-icons.tsx" description="在 `TabsTrigger` 内放置图标，组件会自动处理图标尺寸与对齐。">带图标</code>
 

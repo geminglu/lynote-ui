@@ -53,7 +53,13 @@ import {
 
 ## 代码演示
 
-<code src="./demos/base.tsx" description="完整的全局命令面板,带 `⌘K` 快捷键监听与分组建议。">基本用法</code>
+<code src="./demos/base.tsx" description="一个简单的对话框命令菜单。">基本用法</code>
+
+<code src="./demos/shortcuts.tsx" description="带有快捷键提示的命令菜单。">快捷键提示</code>
+
+<code src="./demos/groups.tsx" description="一个包含分组、图标和分隔符的命令菜单。">分组</code>
+
+<code src="./demos/scrollable.tsx" description="一个包含大量选项的命令菜单。">滚动</code>
 
 ## 最佳实践
 

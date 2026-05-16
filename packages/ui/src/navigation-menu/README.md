@@ -50,6 +50,8 @@ import {
 
 <code src="./demos/base.tsx">基本用法</code>
 
+<code src="./demos/featured-links.tsx" description="使用图标、标题和说明构建资源导航面板。">资源导航</code>
+
 ## 最佳实践
 
 - **每个 trigger 包含 2-6 项**:超过会显得拥挤,可考虑拆成多个 trigger。

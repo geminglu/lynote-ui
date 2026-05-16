@@ -1,3 +1,5 @@
+import { Trash2Icon } from "lucide-react";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -6,31 +8,34 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
+  AlertDialogMedia,
   AlertDialogTitle,
   AlertDialogTrigger,
-  Button,
-} from "lynote-ui";
+} from "lynote-ui/alert-dialog";
+import { Button } from "lynote-ui/button";
 
-const App: React.FC = () => {
+export default function App() {
   return (
     <AlertDialog>
-      <AlertDialogTrigger render={<Button variant="destructive" />}>
-        删除项目
-      </AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogTrigger
+        render={<Button variant="destructive">删除聊天</Button>}
+      />
+      <AlertDialogContent size="sm">
         <AlertDialogHeader>
-          <AlertDialogTitle>确认删除？</AlertDialogTitle>
+          <AlertDialogMedia className="bg-destructive/10 text-destructive dark:bg-destructive/20 dark:text-destructive">
+            <Trash2Icon />
+          </AlertDialogMedia>
+          <AlertDialogTitle>删除聊天？</AlertDialogTitle>
           <AlertDialogDescription>
-            该操作不可撤销，项目和相关数据都会被永久删除。
+            这将永久删除此聊天会话。查看 <a href="#">设置</a>
+            删除此聊天期间保存的任何记忆。
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>取消</AlertDialogCancel>
-          <AlertDialogAction variant="destructive">确认删除</AlertDialogAction>
+          <AlertDialogCancel variant="outline">取消</AlertDialogCancel>
+          <AlertDialogAction variant="destructive">删除</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
   );
-};
-
-export default App;
+}

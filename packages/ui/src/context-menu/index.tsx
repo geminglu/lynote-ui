@@ -169,13 +169,16 @@ function ContextMenuCheckboxItem({
       data-slot="context-menu-checkbox-item"
       data-inset={inset}
       className={cn(
-        "outline-hidden focus:bg-accent focus:text-accent-foreground data-inset:pl-7 data-disabled:pointer-events-none data-disabled:opacity-50 relative flex cursor-default select-none items-center gap-1.5 rounded-md py-1 pl-1.5 pr-8 text-sm [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "outline-hidden focus:bg-accent focus:text-accent-foreground data-inset:pl-7 data-disabled:pointer-events-none data-disabled:opacity-50 relative flex cursor-default select-none items-center gap-1.5 rounded-md py-1 pl-7 pr-1.5 text-sm [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         className,
       )}
       checked={checked}
       {...props}
     >
-      <span className="pointer-events-none absolute right-2">
+      <span
+        className="pointer-events-none absolute left-1.5 flex size-4 items-center justify-center"
+        data-slot="context-menu-checkbox-item-indicator"
+      >
         <ContextMenuPrimitive.CheckboxItemIndicator>
           <CheckIcon />
         </ContextMenuPrimitive.CheckboxItemIndicator>
@@ -209,12 +212,15 @@ function ContextMenuRadioItem({
       data-slot="context-menu-radio-item"
       data-inset={inset}
       className={cn(
-        "outline-hidden focus:bg-accent focus:text-accent-foreground data-inset:pl-7 data-disabled:pointer-events-none data-disabled:opacity-50 relative flex cursor-default select-none items-center gap-1.5 rounded-md py-1 pl-1.5 pr-8 text-sm [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "outline-hidden focus:bg-accent focus:text-accent-foreground data-inset:pl-7 data-disabled:pointer-events-none data-disabled:opacity-50 relative flex cursor-default select-none items-center gap-1.5 rounded-md py-1 pl-7 pr-1.5 text-sm [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         className,
       )}
       {...props}
     >
-      <span className="pointer-events-none absolute right-2">
+      <span
+        className="pointer-events-none absolute left-1.5 flex size-4 items-center justify-center"
+        data-slot="context-menu-radio-item-indicator"
+      >
         <ContextMenuPrimitive.RadioItemIndicator>
           <CheckIcon />
         </ContextMenuPrimitive.RadioItemIndicator>
