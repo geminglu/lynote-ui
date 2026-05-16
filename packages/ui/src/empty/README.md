@@ -5,7 +5,7 @@ subtitle: Empty 空状态
 demo:
   cols: 1
 group:
-  title: 数据展示
+  title: 反馈
   order: 6
 nav: 组件
 toc: content
@@ -13,100 +13,61 @@ background: #111
 compact: true
 ---
 
-## 安装
+Empty 用于在列表、卡片、视图无数据时呈现一个"空状态"。它包含 `EmptyMedia`(图标/插画)、`EmptyTitle`、`EmptyDescription`、`EmptyContent`(操作按钮区) 等结构化子组件。
 
-:::code-group
+## 特性
 
-```bash [npm]
-npm install lynote-ui
-```
+- **结构化子组件**:`EmptyHeader` / `EmptyMedia` / `EmptyTitle` / `EmptyDescription` / `EmptyContent`。
+- **2 种 Media 变体**:`default` / `icon`(带 muted 背景的小图标块)。
+- **零数据兜底**:虚线边框 + 居中布局,与正常内容区做出视觉区分。
 
-```bash [yarn]
-yarn add lynote-ui
-```
+## 何时使用
 
-```bash [pnpm]
-pnpm add lynote-ui
-```
+- 列表 / 表格 / 卡片视图无数据。
+- 搜索结果为空。
+- 用户首次访问某个空白区域。
 
-:::
+## 何时不使用
+
+- 数据正在加载中——使用 `Skeleton` 或 `Spinner`。
+- 错误状态——使用 `Alert` 或专门的错误页。
+- 暂时性的无操作——使用 toast 或就近的提示。
 
 ## 导入
 
-:::code-group
-
-```ts [单个] | pure
+```ts | pure
 import {
   Empty,
+  EmptyContent,
+  EmptyDescription,
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-  EmptyDescription,
-  EmptyContent,
-} from "lynote-ui";
+} from "lynote-ui/empty";
 ```
-
-:::
-
-空状态组件，用于在无数据时显示提示信息。
 
 ## 代码演示
 
 <code src="./demos/base.tsx">基本用法</code>
 
+<code src="./demos/with-action.tsx" description="带主操作按钮,引导用户从空白开始创建。">引导创建</code>
+
+## 最佳实践
+
+- **标题简短**:"还没有任何项目" 比 "没有数据" 更有上下文。
+- **描述告诉用户怎么办**:解释该状态的原因 + 下一步操作。
+- **提供一个明确的 CTA**:让用户看到空状态后知道做什么。
+- **不要堆砌插画**:简约 icon 比花哨插画更适合 dashboard 场景。
+
 ## API
 
-### Empty
+### Empty / EmptyHeader / EmptyTitle / EmptyDescription / EmptyContent
 
-空状态的根容器组件。
-
-| 参数      | 说明              | 类型                          | 默认值 |
-| --------- | ----------------- | ----------------------------- | ------ |
-| className | 自定义类名        | `string`                      | -      |
-| ...props  | 其他原生 div 属性 | `React.ComponentProps<"div">` | -      |
-
-### EmptyHeader
-
-空状态的头部区域。
-
-| 参数      | 说明              | 类型                          | 默认值 |
-| --------- | ----------------- | ----------------------------- | ------ |
-| className | 自定义类名        | `string`                      | -      |
-| ...props  | 其他原生 div 属性 | `React.ComponentProps<"div">` | -      |
+均为容器组件,支持原生 `<div>` 属性。
 
 ### EmptyMedia
 
-空状态的媒体区域（图标或图片）。
-
-| 参数      | 说明              | 类型                          | 默认值      |
-| --------- | ----------------- | ----------------------------- | ----------- |
-| variant   | 媒体变体          | `"default" \| "icon"`         | `"default"` |
-| className | 自定义类名        | `string`                      | -           |
-| ...props  | 其他原生 div 属性 | `React.ComponentProps<"div">` | -           |
-
-### EmptyTitle
-
-空状态的标题。
-
-| 参数      | 说明              | 类型                          | 默认值 |
-| --------- | ----------------- | ----------------------------- | ------ |
-| className | 自定义类名        | `string`                      | -      |
-| ...props  | 其他原生 div 属性 | `React.ComponentProps<"div">` | -      |
-
-### EmptyDescription
-
-空状态的描述内容。
-
-| 参数      | 说明            | 类型                        | 默认值 |
-| --------- | --------------- | --------------------------- | ------ |
-| className | 自定义类名      | `string`                    | -      |
-| ...props  | 其他原生 p 属性 | `React.ComponentProps<"p">` | -      |
-
-### EmptyContent
-
-空状态的内容区域。
-
-| 参数      | 说明              | 类型                          | 默认值 |
-| --------- | ----------------- | ----------------------------- | ------ |
-| className | 自定义类名        | `string`                      | -      |
-| ...props  | 其他原生 div 属性 | `React.ComponentProps<"div">` | -      |
+| 参数      | 说明       | 类型                  | 默认值      |
+| --------- | ---------- | --------------------- | ----------- |
+| variant   | 视觉变体   | `"default" \| "icon"` | `"default"` |
+| className | 自定义类名 | `string`              | -           |

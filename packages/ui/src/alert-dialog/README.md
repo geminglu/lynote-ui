@@ -13,63 +13,57 @@ background: #111
 compact: true
 ---
 
-## 安装
+AlertDialog 用于在用户执行不可逆 / 高风险操作之前进行二次确认。与 `Dialog` 不同,它不能通过点击遮罩关闭——必须显式选择"取消"或"确认",避免误触。
 
-:::code-group
+## 特性
 
-```bash [npm]
-npm install lynote-ui
-```
+- **强制选择**:无法通过 Esc 之外的方式关闭(不能点击外部)。
+- **`AlertDialogCancel` / `AlertDialogAction`**:语义化的取消 / 确认按钮。
+- **可访问语义**:`role="alertdialog"` + `aria-labelledby` / `aria-describedby`。
+- **2 种尺寸**:`default` / `sm`(`sm` 紧凑且按钮自动 grid 排布)。
 
-```bash [yarn]
-yarn add lynote-ui
-```
+## 何时使用
 
-```bash [pnpm]
-pnpm add lynote-ui
-```
+- 删除资源 / 退订 / 退出登录等不可逆操作前的二次确认。
+- 任何"操作后无法撤销"的关键时刻。
 
-:::
+## 何时不使用
+
+- 一般信息收集 / 表单——用 `Dialog`(允许点击外部关闭)。
+- 仅展示通知——用 `Alert` 或 `Sonner`。
+- 可恢复的操作(支持撤销)——直接执行 + 给出"撤销"按钮。
 
 ## 导入
 
-:::code-group
-
-```ts [单个] | pure
+```ts | pure
 import {
   AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogPortal,
-  AlertDialogOverlay,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogFooter,
-  AlertDialogMedia,
-  AlertDialogTitle,
-  AlertDialogDescription,
   AlertDialogAction,
   AlertDialogCancel,
-} from "lynote-ui";
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "lynote-ui/alert-dialog";
 ```
-
-:::
-
-用于需要用户确认的重要操作，例如删除、退出或不可逆操作。
-
-## 使用建议
-
-- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
-- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
-- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
 
 ## 组件结构
 
 ```tsx | pure
 <AlertDialog>
   <AlertDialogTrigger />
-  <AlertDialogPortal />
-  <AlertDialogOverlay />
-  <AlertDialogContent />
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle />
+      <AlertDialogDescription />
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel />
+      <AlertDialogAction />
+    </AlertDialogFooter>
+  </AlertDialogContent>
 </AlertDialog>
 ```
 
@@ -77,138 +71,37 @@ import {
 
 <code src="./demos/base.tsx">基本用法</code>
 
-<code src="./demos/destructive.tsx">危险操作</code>
+<code src="./demos/destructive.tsx" description="确认按钮使用 destructive 变体,语义上更直观。">危险操作确认</code>
+
+## 最佳实践
+
+- **标题用问句**:"确认删除?" 而非"删除"——明确这是一个需要决策的问题。
+- **描述写后果**:描述具体会发生什么、是否可恢复。
+- **危险确认按钮用 `destructive`**:让用户看到红色后再点击,有最后一次反应机会。
+- **不要默认聚焦在确认按钮**:base-ui 默认会聚焦到第一个可聚焦按钮(通常是取消),保留这个行为更安全。
 
 ## API
 
 ### AlertDialog
 
-AlertDialog 组件。
-
-| 参数          | 说明                   | 类型                                  | 默认值 |
-| ------------- | ---------------------- | ------------------------------------- | ------ |
-| value         | 当前值，受控模式使用   | `string \| string[]`                  | -      |
-| defaultValue  | 默认值，非受控模式使用 | `string \| string[]`                  | -      |
-| open          | 是否打开，受控模式使用 | `boolean`                             | -      |
-| defaultOpen   | 默认是否打开           | `boolean`                             | false  |
-| onOpenChange  | 打开状态变化回调       | `(open: boolean) => void`             | -      |
-| onValueChange | 值变化回调             | `(value: string \| string[]) => void` | -      |
-| disabled      | 是否禁用               | `boolean`                             | false  |
-| className     | 自定义类名             | `string`                              | -      |
-| children      | 子组件                 | `React.ReactNode`                     | -      |
-
-### AlertDialogTrigger
-
-AlertDialogTrigger 组件。
-
-| 参数      | 说明       | 类型                      | 默认值 |
-| --------- | ---------- | ------------------------- | ------ |
-| value     | 组件值     | `string`                  | -      |
-| disabled  | 是否禁用   | `boolean`                 | false  |
-| className | 自定义类名 | `string`                  | -      |
-| children  | 内容       | `React.ReactNode`         | -      |
-| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
-
-### AlertDialogPortal
-
-AlertDialogPortal 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
-
-### AlertDialogOverlay
-
-AlertDialogOverlay 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
+| 参数         | 说明             | 类型                      | 默认值  |
+| ------------ | ---------------- | ------------------------- | ------- |
+| open         | 是否打开(受控)   | `boolean`                 | -       |
+| defaultOpen  | 默认打开(非受控) | `boolean`                 | `false` |
+| onOpenChange | 打开状态变化回调 | `(open: boolean) => void` | -       |
 
 ### AlertDialogContent
 
-AlertDialogContent 组件。
+| 参数      | 说明       | 类型                | 默认值      |
+| --------- | ---------- | ------------------- | ----------- |
+| size      | 弹窗尺寸   | `"default" \| "sm"` | `"default"` |
+| className | 自定义类名 | `string`            | -           |
+| children  | 内容       | `React.ReactNode`   | -           |
 
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
+### AlertDialogTrigger / AlertDialogCancel / AlertDialogAction
 
-### AlertDialogHeader
+`render` 可把 trigger / cancel / action 渲染为 Button 等组件,统一外观。`AlertDialogAction` 接受 `variant` 透传到内置的 Button(支持 `destructive`)。
 
-AlertDialogHeader 组件。
+### AlertDialogHeader / AlertDialogFooter / AlertDialogTitle / AlertDialogDescription / AlertDialogMedia
 
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
-
-### AlertDialogFooter
-
-AlertDialogFooter 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
-
-### AlertDialogMedia
-
-AlertDialogMedia 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
-
-### AlertDialogTitle
-
-AlertDialogTitle 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
-
-### AlertDialogDescription
-
-AlertDialogDescription 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
-
-### AlertDialogAction
-
-AlertDialogAction 组件。
-
-| 参数      | 说明       | 类型                      | 默认值 |
-| --------- | ---------- | ------------------------- | ------ |
-| value     | 组件值     | `string`                  | -      |
-| disabled  | 是否禁用   | `boolean`                 | false  |
-| className | 自定义类名 | `string`                  | -      |
-| children  | 内容       | `React.ReactNode`         | -      |
-| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
-
-### AlertDialogCancel
-
-AlertDialogCancel 组件。
-
-| 参数      | 说明       | 类型                      | 默认值 |
-| --------- | ---------- | ------------------------- | ------ |
-| value     | 组件值     | `string`                  | -      |
-| disabled  | 是否禁用   | `boolean`                 | false  |
-| className | 自定义类名 | `string`                  | -      |
-| children  | 内容       | `React.ReactNode`         | -      |
-| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+均为结构化容器,标题与描述会自动注册到 ARIA。`AlertDialogMedia` 放在 header 内可展示图标或图片。

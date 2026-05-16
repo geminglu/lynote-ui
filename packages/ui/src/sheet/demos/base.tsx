@@ -1,7 +1,7 @@
+import { Button } from "lynote-ui/button";
+import { Field, FieldGroup, FieldLabel } from "lynote-ui/field";
+import { Input } from "lynote-ui/input";
 import {
-  Button,
-  Input,
-  Label,
   Sheet,
   SheetClose,
   SheetContent,
@@ -10,36 +10,30 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "lynote-ui";
+} from "lynote-ui/sheet";
 
 const App: React.FC = () => {
   return (
     <Sheet>
-      <SheetTrigger asChild>
-        <Button variant="outline">Open</Button>
-      </SheetTrigger>
+      <SheetTrigger render={<Button variant="outline">编辑资料</Button>} />
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Edit profile</SheetTitle>
-          <SheetDescription>
-            Make changes to your profile here. Click save when you&apos;re done.
-          </SheetDescription>
+          <SheetTitle>编辑个人资料</SheetTitle>
+          <SheetDescription>修改你的信息,保存后立即生效。</SheetDescription>
         </SheetHeader>
-        <div className="grid flex-1 auto-rows-min gap-6 px-4">
-          <div className="grid gap-3">
-            <Label htmlFor="sheet-demo-name">Name</Label>
-            <Input id="sheet-demo-name" defaultValue="Pedro Duarte" />
-          </div>
-          <div className="grid gap-3">
-            <Label htmlFor="sheet-demo-username">Username</Label>
-            <Input id="sheet-demo-username" defaultValue="@peduarte" />
-          </div>
-        </div>
+        <FieldGroup className="px-4">
+          <Field>
+            <FieldLabel htmlFor="sheet-name">昵称</FieldLabel>
+            <Input id="sheet-name" defaultValue="LyNote" />
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="sheet-username">用户名</FieldLabel>
+            <Input id="sheet-username" defaultValue="@lynote" />
+          </Field>
+        </FieldGroup>
         <SheetFooter>
-          <Button type="submit">Save changes</Button>
-          <SheetClose asChild>
-            <Button variant="outline">Close</Button>
-          </SheetClose>
+          <Button type="submit">保存</Button>
+          <SheetClose render={<Button variant="outline">取消</Button>} />
         </SheetFooter>
       </SheetContent>
     </Sheet>

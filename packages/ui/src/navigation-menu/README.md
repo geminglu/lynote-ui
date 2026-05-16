@@ -6,166 +6,67 @@ demo:
   cols: 1
 group:
   title: 导航
-  order: 3
+  order: 2
 nav: 组件
 toc: content
 background: #111
 compact: true
 ---
 
-## 安装
+NavigationMenu 用于构建顶部导航,支持嵌套子菜单(类似 Stripe / Vercel 等站点的顶部导航条)。基于 Base UI NavigationMenu 原语,自带触发延迟、自动定位、键盘可达。
 
-:::code-group
+## 特性
 
-```bash [npm]
-npm install lynote-ui
-```
+- **二级菜单**:`NavigationMenuTrigger` 弹出 `NavigationMenuContent`。
+- **链接 / 触发器混用**:既可以是直接的链接,也可以是带下拉的 trigger。
+- **键盘可达**:方向键 / `Tab` / `Enter` 均可触发。
+- **自动定位**:`NavigationMenuPositioner` 计算位置并提供动画。
 
-```bash [yarn]
-yarn add lynote-ui
-```
+## 何时使用
 
-```bash [pnpm]
-pnpm add lynote-ui
-```
+- 顶部站点导航(产品 / 解决方案 / 资源 / 定价)。
+- 后台导航条(项目 / 团队 / 设置)。
 
-:::
+## 何时不使用
+
+- 简单的菜单或操作——使用 `DropdownMenu`。
+- 移动端导航——使用 `Sheet` 抽屉式导航。
+- 上下文相关的右键菜单——使用 `ContextMenu`。
 
 ## 导入
 
-:::code-group
-
-```ts [单个] | pure
+```ts | pure
 import {
   NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
-  NavigationMenuTrigger,
   NavigationMenuContent,
-  NavigationMenuPositioner,
+  NavigationMenuItem,
   NavigationMenuLink,
-  NavigationMenuIndicator,
-} from "lynote-ui";
-```
-
-:::
-
-用于站点导航，支持触发器、内容面板、视口和指示器。
-
-## 使用建议
-
-- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
-- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
-- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
-
-## 组件结构
-
-```tsx | pure
-<NavigationMenu>
-  <NavigationMenuList />
-  <NavigationMenuItem />
-  <NavigationMenuTrigger />
-  <NavigationMenuContent />
-</NavigationMenu>
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "lynote-ui/navigation-menu";
 ```
 
 ## 代码演示
 
 <code src="./demos/base.tsx">基本用法</code>
 
+## 最佳实践
+
+- **每个 trigger 包含 2-6 项**:超过会显得拥挤,可考虑拆成多个 trigger。
+- **链接使用 `render={<a/>}`**:`NavigationMenuLink` 可以通过 render 渲染为路由组件。
+- **响应式**:窄屏建议换成 `Sheet` 侧边抽屉。
+- **不要嵌套 NavigationMenu**:嵌套会破坏键盘焦点环。
+
 ## API
 
 ### NavigationMenu
 
-NavigationMenu 组件。
+| 参数      | 说明       | 类型                           | 默认值    |
+| --------- | ---------- | ------------------------------ | --------- |
+| align     | 对齐方式   | `"start" \| "center" \| "end"` | `"start"` |
+| className | 自定义类名 | `string`                       | -         |
+| children  | 子组件     | `React.ReactNode`              | -         |
 
-| 参数          | 说明                   | 类型                                  | 默认值 |
-| ------------- | ---------------------- | ------------------------------------- | ------ |
-| value         | 当前值，受控模式使用   | `string \| string[]`                  | -      |
-| defaultValue  | 默认值，非受控模式使用 | `string \| string[]`                  | -      |
-| open          | 是否打开，受控模式使用 | `boolean`                             | -      |
-| defaultOpen   | 默认是否打开           | `boolean`                             | false  |
-| onOpenChange  | 打开状态变化回调       | `(open: boolean) => void`             | -      |
-| onValueChange | 值变化回调             | `(value: string \| string[]) => void` | -      |
-| disabled      | 是否禁用               | `boolean`                             | false  |
-| className     | 自定义类名             | `string`                              | -      |
-| children      | 子组件                 | `React.ReactNode`                     | -      |
+### NavigationMenuList / NavigationMenuItem / NavigationMenuTrigger / NavigationMenuContent / NavigationMenuLink
 
-### NavigationMenuList
-
-NavigationMenuList 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
-
-### NavigationMenuItem
-
-NavigationMenuItem 组件。
-
-| 参数      | 说明       | 类型                      | 默认值 |
-| --------- | ---------- | ------------------------- | ------ |
-| value     | 组件值     | `string`                  | -      |
-| disabled  | 是否禁用   | `boolean`                 | false  |
-| className | 自定义类名 | `string`                  | -      |
-| children  | 内容       | `React.ReactNode`         | -      |
-| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
-
-### NavigationMenuTrigger
-
-NavigationMenuTrigger 组件。
-
-| 参数      | 说明       | 类型                      | 默认值 |
-| --------- | ---------- | ------------------------- | ------ |
-| value     | 组件值     | `string`                  | -      |
-| disabled  | 是否禁用   | `boolean`                 | false  |
-| className | 自定义类名 | `string`                  | -      |
-| children  | 内容       | `React.ReactNode`         | -      |
-| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
-
-### NavigationMenuContent
-
-NavigationMenuContent 组件。
-
-| 参数        | 说明           | 类型                                                                       | 默认值 |
-| ----------- | -------------- | -------------------------------------------------------------------------- | ------ |
-| side        | 弹层出现方向   | `"top" \| "bottom" \| "left" \| "right" \| "inline-start" \| "inline-end"` | -      |
-| align       | 弹层对齐方式   | `"start" \| "center" \| "end"`                                             | -      |
-| sideOffset  | 与锚点的间距   | `number`                                                                   | -      |
-| alignOffset | 对齐方向偏移量 | `number`                                                                   | -      |
-| className   | 自定义类名     | `string`                                                                   | -      |
-| children    | 内容           | `React.ReactNode`                                                          | -      |
-
-### NavigationMenuPositioner
-
-NavigationMenuPositioner 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
-
-### NavigationMenuLink
-
-NavigationMenuLink 组件。
-
-| 参数      | 说明       | 类型                      | 默认值 |
-| --------- | ---------- | ------------------------- | ------ |
-| value     | 组件值     | `string`                  | -      |
-| disabled  | 是否禁用   | `boolean`                 | false  |
-| className | 自定义类名 | `string`                  | -      |
-| children  | 内容       | `React.ReactNode`         | -      |
-| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
-
-### NavigationMenuIndicator
-
-NavigationMenuIndicator 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
+结构化的子组件,详见 Base UI 官方文档。

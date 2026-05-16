@@ -6,135 +6,77 @@ demo:
   cols: 1
 group:
   title: 导航
-  order: 3
+  order: 2
 nav: 组件
 toc: content
 background: #111
 compact: true
 ---
 
-## 安装
+Command 是一个内置搜索过滤的命令面板,基于 [cmdk](https://cmdk.paco.me/) 实现。常以 `⌘K` 触发,呈现可搜索、可分组、可键盘导航的命令列表。
 
-:::code-group
+## 特性
 
-```bash [npm]
-npm install lynote-ui
-```
+- **内置过滤**:输入即按 fuzzy 算法过滤候选项。
+- **分组**:`CommandGroup heading="..."` 把候选项分组展示。
+- **键盘可达**:`↑` `↓` 移动、`Enter` 选中、`Esc` 关闭。
+- **`CommandDialog`**:已经封装好的弹层版本,直接当 `Dialog` 用即可。
+- **`CommandEmpty`**:无匹配时的兜底视图。
 
-```bash [yarn]
-yarn add lynote-ui
-```
+## 何时使用
 
-```bash [pnpm]
-pnpm add lynote-ui
-```
+- 全局命令面板(`⌘K`)。
+- 搜索 + 跳转的统一入口。
+- 富文本编辑器的"插入"面板。
 
-:::
+## 何时不使用
+
+- 普通选择器——使用 `Select`。
+- 实际表单字段——使用 `Combobox`。
+- 主导航——使用 `NavigationMenu`。
 
 ## 导入
 
-:::code-group
-
-```ts [单个] | pure
+```ts | pure
 import {
   Command,
-  CommandInput,
-  CommandList,
+  CommandDialog,
   CommandEmpty,
   CommandGroup,
+  CommandInput,
   CommandItem,
+  CommandList,
   CommandSeparator,
   CommandShortcut,
-  CommandDialog,
-} from "lynote-ui";
+} from "lynote-ui/command";
 ```
-
-:::
-
-命令面板组件，用于快速搜索和执行命令。
 
 ## 代码演示
 
-<code src="./demos/base.tsx">基本用法</code>
+<code src="./demos/base.tsx" description="完整的全局命令面板,带 `⌘K` 快捷键监听与分组建议。">基本用法</code>
+
+## 最佳实践
+
+- **全局快捷键**:绑定 `⌘K` / `Ctrl+K` 唤起,这是用户的肌肉记忆。
+- **分组合理**:按"建议 / 设置 / 文档 / 帮助"等大类分组。
+- **`CommandEmpty` 不要省**:用户输入无匹配时必须给出反馈。
+- **`onSelect` 处理跳转**:命中后跳转或执行命令,然后 `setOpen(false)` 关闭。
 
 ## API
 
-### Command
+### Command / CommandDialog
 
-命令面板的根容器组件。
-
-| 参数      | 说明         | 类型                                            | 默认值 |
-| --------- | ------------ | ----------------------------------------------- | ------ |
-| className | 自定义类名   | `string`                                        | -      |
-| ...props  | 其他原生属性 | `React.ComponentProps<typeof CommandPrimitive>` | -      |
+| 参数          | 说明             | 类型                        | 默认值 |
+| ------------- | ---------------- | --------------------------- | ------ |
+| value         | 当前选中值(受控) | `string`                    | -      |
+| onValueChange | 值变化回调       | `(value: string) => void`   | -      |
+| filter        | 自定义过滤函数   | `(value, search) => number` | -      |
+| children      | 子组件           | `React.ReactNode`           | -      |
 
 ### CommandInput
 
-命令面板输入框。
+搜索框,自带搜索图标。
 
-| 参数        | 说明         | 类型                                                  | 默认值 |
-| ----------- | ------------ | ----------------------------------------------------- | ------ |
-| placeholder | 占位符       | `string`                                              | -      |
-| ...props    | 其他原生属性 | `React.ComponentProps<typeof CommandPrimitive.Input>` | -      |
+### CommandList / CommandEmpty / CommandGroup / CommandItem / CommandSeparator / CommandShortcut
 
-### CommandList
-
-命令面板列表容器。
-
-| 参数     | 说明         | 类型                                                 | 默认值 |
-| -------- | ------------ | ---------------------------------------------------- | ------ |
-| ...props | 其他原生属性 | `React.ComponentProps<typeof CommandPrimitive.List>` | -      |
-
-### CommandEmpty
-
-命令面板空状态。
-
-| 参数     | 说明         | 类型                                                  | 默认值 |
-| -------- | ------------ | ----------------------------------------------------- | ------ |
-| ...props | 其他原生属性 | `React.ComponentProps<typeof CommandPrimitive.Empty>` | -      |
-
-### CommandGroup
-
-命令面板分组。
-
-| 参数     | 说明         | 类型                                                  | 默认值 |
-| -------- | ------------ | ----------------------------------------------------- | ------ |
-| heading  | 分组标题     | `string`                                              | -      |
-| ...props | 其他原生属性 | `React.ComponentProps<typeof CommandPrimitive.Group>` | -      |
-
-### CommandItem
-
-命令面板项。
-
-| 参数     | 说明         | 类型                                                 | 默认值 |
-| -------- | ------------ | ---------------------------------------------------- | ------ |
-| value    | 项的值       | `string`                                             | -      |
-| ...props | 其他原生属性 | `React.ComponentProps<typeof CommandPrimitive.Item>` | -      |
-
-### CommandSeparator
-
-命令面板分隔符。
-
-| 参数     | 说明         | 类型                                                      | 默认值 |
-| -------- | ------------ | --------------------------------------------------------- | ------ |
-| ...props | 其他原生属性 | `React.ComponentProps<typeof CommandPrimitive.Separator>` | -      |
-
-### CommandShortcut
-
-命令面板快捷键提示。
-
-| 参数     | 说明         | 类型                          | 默认值 |
-| -------- | ------------ | ----------------------------- | ------ |
-| ...props | 其他原生属性 | `React.ComponentProps<"kbd">` | -      |
-
-### CommandDialog
-
-命令面板对话框。
-
-| 参数            | 说明             | 类型                                  | 默认值                             |
-| --------------- | ---------------- | ------------------------------------- | ---------------------------------- |
-| title           | 对话框标题       | `string`                              | `"Command Palette"`                |
-| description     | 对话框描述       | `string`                              | `"Search for a command to run..."` |
-| showCloseButton | 是否显示关闭按钮 | `boolean`                             | `true`                             |
-| className       | 自定义类名       | `string`                              | -                                  |
-| ...props        | 其他 Dialog 属性 | `React.ComponentProps<typeof Dialog>` | -                                  |
+结构化子组件,详见 cmdk 官方文档。

@@ -13,60 +13,53 @@ background: #111
 compact: true
 ---
 
-## 安装
+呈现键盘按键的视觉样式，常用于快捷键提示、命令面板 trigger、Tooltip 内的快捷键说明。基于原生 `<kbd>` 元素，保留语义。
 
-:::code-group
+## 特性
 
-```bash [npm]
-npm install lynote-ui
-```
+- **语义化**：渲染为 `<kbd>`，对读屏与搜索引擎友好。
+- **`KbdGroup` 组合**：多个按键拼成一个组合键（如 `⌘ + ⇧ + P`）。
+- **自动适配上下文**：在 `Tooltip` 内会自动反色以保持对比度。
 
-```bash [yarn]
-yarn add lynote-ui
-```
+## 何时使用
 
-```bash [pnpm]
-pnpm add lynote-ui
-```
+- 文档中描述快捷键。
+- 命令面板 / 搜索 trigger 的右侧提示（如 `⌘K`）。
+- 设置面板里展示当前已绑定的快捷键。
 
-:::
+## 何时不使用
+
+- 真实可点击的按钮——使用 `Button`。
+- 表单输入框——使用 `Input`。
 
 ## 导入
 
-:::code-group
-
-```ts [单个] | pure
-import { Kbd, KbdGroup } from "lynote-ui";
+```ts | pure
+import { Kbd, KbdGroup } from "lynote-ui/kbd";
 ```
-
-```ts [全局] | pure
-import { Kbd, KbdGroup } from "gml-ui";
-```
-
-:::
-
-键盘按键组件，用于显示键盘快捷键。
 
 ## 代码演示
 
 <code src="./demos/base.tsx">基本用法</code>
 
+<code src="./demos/group.tsx" description="`KbdGroup` 把多个 `Kbd` 拼接成一个组合键。">组合键</code>
+
+<code src="./demos/in-button.tsx" description="常见于全局搜索 / 命令面板 trigger 的右侧。">嵌入按钮</code>
+
 ## API
 
 ### Kbd
 
-单个键盘按键组件。
-
-| 参数      | 说明              | 类型                          | 默认值 |
-| --------- | ----------------- | ----------------------------- | ------ |
-| className | 自定义类名        | `string`                      | -      |
-| ...props  | 其他原生 kbd 属性 | `React.ComponentProps<"kbd">` | -      |
+| 参数      | 说明       | 类型                          | 默认值 |
+| --------- | ---------- | ----------------------------- | ------ |
+| className | 自定义类名 | `string`                      | -      |
+| children  | 按键文字   | `React.ReactNode`             | -      |
+| ...props  | 原生 kbd   | `React.ComponentProps<"kbd">` | -      |
 
 ### KbdGroup
 
-键盘按键组合组件。
-
-| 参数      | 说明              | 类型                          | 默认值 |
-| --------- | ----------------- | ----------------------------- | ------ |
-| className | 自定义类名        | `string`                      | -      |
-| ...props  | 其他原生 div 属性 | `React.ComponentProps<"div">` | -      |
+| 参数      | 说明       | 类型                          | 默认值 |
+| --------- | ---------- | ----------------------------- | ------ |
+| className | 自定义类名 | `string`                      | -      |
+| children  | 一组 `Kbd` | `React.ReactNode`             | -      |
+| ...props  | 原生 div   | `React.ComponentProps<"div">` | -      |

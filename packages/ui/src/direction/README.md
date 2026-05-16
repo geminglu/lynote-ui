@@ -13,67 +13,48 @@ background: #111
 compact: true
 ---
 
-## 安装
+`DirectionProvider` 用于声明子树的文字阅读方向（LTR / RTL）。基于 Base UI 的 `DirectionProvider` 透传，所有依赖方向感知的组件（如菜单、滑块、面包屑）会自动响应。
 
-:::code-group
+## 特性
 
-```bash [npm]
-npm install lynote-ui
-```
+- **零运行时开销**：仅在 React Context 中传递 `dir` 值。
+- **`useDirection` 钩子**：可以在自定义组件内读取当前方向，按方向条件渲染。
+- **可嵌套**：内层 Provider 可覆盖外层方向。
 
-```bash [yarn]
-yarn add lynote-ui
-```
+## 何时使用
 
-```bash [pnpm]
-pnpm add lynote-ui
-```
+- 需要支持阿拉伯语 / 希伯来语等 RTL 语言。
+- 单页面内有局部需要切换方向的区域（如富文本预览）。
 
-:::
+## 何时不使用
+
+- 项目无国际化需求且只使用 LTR——不需要包 Provider。
 
 ## 导入
 
-:::code-group
-
-```ts [单个] | pure
-import { DirectionProvider, useDirection } from "lynote-ui";
-```
-
-:::
-
-为组件树提供 LTR/RTL 方向上下文，并读取当前方向。
-
-## 使用建议
-
-- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
-- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
-- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
-
-## 组件结构
-
-```tsx | pure
-<DirectionProvider dir="rtl">
-  <Component />
-</DirectionProvider>
+```ts | pure
+import { DirectionProvider, useDirection } from "lynote-ui/direction";
 ```
 
 ## 代码演示
 
-<code src="./demos/base.tsx">基本用法</code>
+<code src="./demos/base.tsx" description="包一层 `DirectionProvider`，子组件即可读取方向。">基本用法</code>
+
+## 最佳实践
+
+- **放在应用根部**：通常在 `<html dir="rtl">` 之外，再在 React 根上包一层 `DirectionProvider`，让两边一致。
+- **配合 Tailwind 的 logical 工具类**：使用 `ms-2`（margin-inline-start）替代 `ml-2`，配合 RTL 自动镜像。
+- **测试镜像布局**：复杂界面切到 RTL 后建议手动走查，确认所有图标方向、滚动条都正确。
 
 ## API
 
 ### DirectionProvider
 
-DirectionProvider 组件。
+| 参数     | 说明         | 类型              | 默认值  |
+| -------- | ------------ | ----------------- | ------- |
+| dir      | 方向         | `"ltr" \| "rtl"`  | `"ltr"` |
+| children | 受影响的子树 | `React.ReactNode` | -       |
 
-| 参数     | 说明   | 类型              | 默认值 |
-| -------- | ------ | ----------------- | ------ |
-| dir      | 方向值 | `"ltr" \| "rtl"`  | -      |
-| children | 子内容 | `React.ReactNode` | -      |
+### useDirection()
 
-### useDirection
-
-| 参数   | 说明     | 类型             | 默认值 |
-| ------ | -------- | ---------------- | ------ |
-| 返回值 | 当前方向 | `"ltr" \| "rtl"` | -      |
+返回当前 `dir` 字符串。在 `DirectionProvider` 外调用会返回默认 `"ltr"`。

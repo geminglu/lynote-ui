@@ -6,126 +6,92 @@ demo:
   cols: 1
 group:
   title: 数据展示
-  order: 7
+  order: 1
 nav: 组件
 toc: content
 background: #111
 compact: true
 ---
 
-## 安装
+Table 提供基础的表格样式封装,采用原生 `<table>` 元素以保留语义、可访问性与浏览器原生表格行为。组件不提供排序 / 筛选 / 分页等行为,需要时配合 `@tanstack/react-table` 等表格状态库使用。
 
-:::code-group
+## 特性
 
-```bash [npm]
-npm install lynote-ui
-```
+- **语义化原生表格**:`<table>` + `<thead>` + `<tbody>`,读屏器友好。
+- **结构化子组件**:`TableHeader` / `TableBody` / `TableFooter` / `TableRow` / `TableHead` / `TableCell` / `TableCaption`。
+- **自动横向滚动**:外层 `table-container` 在窄屏自动出现水平滚动条。
+- **轻样式**:仅提供分隔线 + 字号,业务定制空间大。
 
-```bash [yarn]
-yarn add lynote-ui
-```
+## 何时使用
 
-```bash [pnpm]
-pnpm add lynote-ui
-```
+- 数据密集的列表(订单、用户列表、日志)。
+- 需要对比的结构化数据(财报、对照表)。
+- 需要复制行 / 列内容的场景(浏览器原生支持复制 `<table>`)。
 
-:::
+## 何时不使用
+
+- 卡片型数据展示——使用 `Card`。
+- 简单列表——使用 `Item` + `ItemGroup`。
+- 大数据量(> 100 行)——配合虚拟滚动库。
 
 ## 导入
 
-:::code-group
-
-```ts [单个] | pure
+```ts | pure
 import {
   Table,
-  TableHeader,
   TableBody,
+  TableCaption,
+  TableCell,
   TableFooter,
   TableHead,
+  TableHeader,
   TableRow,
-  TableCell,
-  TableCaption,
-} from "lynote-ui";
+} from "lynote-ui/table";
 ```
 
-:::
+## 组件结构
 
-表格组件，用于展示结构化数据。
+```tsx | pure
+<Table>
+  <TableCaption />
+  <TableHeader>
+    <TableRow>
+      <TableHead />
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell />
+    </TableRow>
+  </TableBody>
+  <TableFooter />
+</Table>
+```
 
 ## 代码演示
 
 <code src="./demos/base.tsx">基本用法</code>
 
+<code src="./demos/with-actions.tsx" description="带状态徽标 + 行操作菜单 + 标题区的完整业务表格。">业务示例</code>
+
+## 最佳实践
+
+- **`TableCaption` 提供标题**:有助于读屏器与 SEO。
+- **行操作放在最后一列**:列宽用 `w-12` 限制,避免操作列被撑开。
+- **数字列右对齐**:`className="text-right"`,便于数据对齐扫读。
+- **大数据用 React Table**:`@tanstack/react-table` 提供排序、分页、虚拟滚动等能力,Table 组件只负责 UI。
+
 ## API
 
-### Table
+所有组件都是对原生 `<table>` / `<thead>` / `<tbody>` / `<tr>` / `<th>` / `<td>` 元素的样式封装,完整支持原生属性。
 
-表格的根容器组件。
-
-| 参数      | 说明                | 类型                            | 默认值 |
-| --------- | ------------------- | ------------------------------- | ------ |
-| className | 自定义类名          | `string`                        | -      |
-| ...props  | 其他原生 table 属性 | `React.ComponentProps<"table">` | -      |
-
-### TableHeader
-
-表格头部区域。
-
-| 参数      | 说明                | 类型                            | 默认值 |
-| --------- | ------------------- | ------------------------------- | ------ |
-| className | 自定义类名          | `string`                        | -      |
-| ...props  | 其他原生 thead 属性 | `React.ComponentProps<"thead">` | -      |
-
-### TableBody
-
-表格主体区域。
-
-| 参数      | 说明                | 类型                            | 默认值 |
-| --------- | ------------------- | ------------------------------- | ------ |
-| className | 自定义类名          | `string`                        | -      |
-| ...props  | 其他原生 tbody 属性 | `React.ComponentProps<"tbody">` | -      |
-
-### TableFooter
-
-表格底部区域。
-
-| 参数      | 说明                | 类型                            | 默认值 |
-| --------- | ------------------- | ------------------------------- | ------ |
-| className | 自定义类名          | `string`                        | -      |
-| ...props  | 其他原生 tfoot 属性 | `React.ComponentProps<"tfoot">` | -      |
-
-### TableRow
-
-表格行。
-
-| 参数      | 说明             | 类型                         | 默认值 |
-| --------- | ---------------- | ---------------------------- | ------ |
-| className | 自定义类名       | `string`                     | -      |
-| ...props  | 其他原生 tr 属性 | `React.ComponentProps<"tr">` | -      |
-
-### TableHead
-
-表格头部单元格。
-
-| 参数      | 说明             | 类型                         | 默认值 |
-| --------- | ---------------- | ---------------------------- | ------ |
-| className | 自定义类名       | `string`                     | -      |
-| ...props  | 其他原生 th 属性 | `React.ComponentProps<"th">` | -      |
-
-### TableCell
-
-表格数据单元格。
-
-| 参数      | 说明             | 类型                         | 默认值 |
-| --------- | ---------------- | ---------------------------- | ------ |
-| className | 自定义类名       | `string`                     | -      |
-| ...props  | 其他原生 td 属性 | `React.ComponentProps<"td">` | -      |
-
-### TableCaption
-
-表格标题。
-
-| 参数      | 说明                  | 类型                              | 默认值 |
-| --------- | --------------------- | --------------------------------- | ------ |
-| className | 自定义类名            | `string`                          | -      |
-| ...props  | 其他原生 caption 属性 | `React.ComponentProps<"caption">` | -      |
+| 组件         | 包装的元素  |
+| ------------ | ----------- |
+| Table        | `<table>`   |
+| TableHeader  | `<thead>`   |
+| TableBody    | `<tbody>`   |
+| TableFooter  | `<tfoot>`   |
+| TableRow     | `<tr>`      |
+| TableHead    | `<th>`      |
+| TableCell    | `<td>`      |
+| TableCaption | `<caption>` |

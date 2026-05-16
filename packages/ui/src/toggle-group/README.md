@@ -6,54 +6,47 @@ demo:
   cols: 1
 group:
   title: 表单
-  order: 4
+  order: 6
 nav: 组件
 toc: content
 background: #111
 compact: true
 ---
 
-## 安装
+把多个 `Toggle` 组合成一个分段控件,支持单选(`single`) 或多选(`multiple`)。常见于工具栏对齐方式、视图模式切换、富文本格式按钮组。
 
-:::code-group
+## 特性
 
-```bash [npm]
-npm install lynote-ui
-```
+- **两种模式**：`type="single"` 互斥单选；`type="multiple"` 自由组合多选。
+- **两种变体**：`default`(连体分段控件) / `outline`(带边框分体)。
+- **3 种尺寸**：从 `toggleVariants` 继承的 `sm` / `default` / `lg`。
+- **支持垂直布局**：通过 `orientation="vertical"`。
+- **`spacing` 控制间隔**：默认 0(连体),传入数字会按 `--spacing` 加间隙。
 
-```bash [yarn]
-yarn add lynote-ui
-```
+## 何时使用
 
-```bash [pnpm]
-pnpm add lynote-ui
-```
+- 富文本工具栏中的格式按钮组(加粗 / 斜体 / 下划线)。
+- 视图切换(列表 / 网格 / 看板)。
+- 对齐方式切换(左 / 中 / 右)。
+- 短期过滤器开关组。
 
-:::
+## 何时不使用
+
+- 表单中的单选/多选——使用 `RadioGroup` / `Checkbox`(更明确的语义)。
+- 视图分页切换需要触发路由——使用 `Tabs`。
+- 一个独立的布尔状态——使用 `Toggle` 或 `Switch`。
 
 ## 导入
 
-:::code-group
-
-```ts [单个] | pure
-import { ToggleGroup, ToggleGroupItem } from "lynote-ui";
+```ts | pure
+import { ToggleGroup, ToggleGroupItem } from "lynote-ui/toggle-group";
 ```
-
-:::
-
-用于单选或多选的一组切换按钮。
-
-## 使用建议
-
-- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
-- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
-- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
 
 ## 组件结构
 
 ```tsx | pure
-<ToggleGroup>
-  <ToggleGroupItem />
+<ToggleGroup type="single">
+  <ToggleGroupItem value="..." />
 </ToggleGroup>
 ```
 
@@ -61,37 +54,41 @@ import { ToggleGroup, ToggleGroupItem } from "lynote-ui";
 
 <code src="./demos/base.tsx">基本用法</code>
 
-<code src="./demos/multiple.tsx">多值选择</code>
+<code src="./demos/multiple.tsx">多选模式</code>
+
+<code src="./demos/with-icon.tsx" description="对齐方式 / 视图切换的典型组合。">带图标</code>
+
+<code src="./demos/outline.tsx" description="`variant=\"outline\"` 适合带间隙的分体按钮组。">边框变体</code>
+
+## 最佳实践
+
+- **明确选择 `type`**：单选用 `single`,多选用 `multiple`,不要省略。
+- **每个 item 都要 `aria-label`**：尤其是仅图标的按钮。
+- **同组按钮数量 2-7**：超过 7 个考虑改用 `Select` 或下拉菜单。
+- **不要混用 size**：组内 item 共享尺寸；如果某项需要更大/更小,请用单独的 Toggle。
 
 ## API
 
 ### ToggleGroup
 
-ToggleGroup 组件。
-
-| 参数          | 说明                   | 类型                                  | 默认值 |
-| ------------- | ---------------------- | ------------------------------------- | ------ |
-| value         | 当前值，受控模式使用   | `string \| string[]`                  | -      |
-| defaultValue  | 默认值，非受控模式使用 | `string \| string[]`                  | -      |
-| open          | 是否打开，受控模式使用 | `boolean`                             | -      |
-| defaultOpen   | 默认是否打开           | `boolean`                             | false  |
-| onOpenChange  | 打开状态变化回调       | `(open: boolean) => void`             | -      |
-| onValueChange | 值变化回调             | `(value: string \| string[]) => void` | -      |
-| disabled      | 是否禁用               | `boolean`                             | false  |
-| className     | 自定义类名             | `string`                              | -      |
-| children      | 子组件                 | `React.ReactNode`                     | -      |
+| 参数          | 说明               | 类型                         | 默认值         |
+| ------------- | ------------------ | ---------------------------- | -------------- |
+| type          | 单选或多选         | `"single" \| "multiple"`     | -              |
+| value         | 当前值(受控)       | `string \| string[]`         | -              |
+| defaultValue  | 默认值(非受控)     | `string \| string[]`         | -              |
+| onValueChange | 值变化回调         | `(value: any) => void`       | -              |
+| variant       | 视觉变体           | `"default" \| "outline"`     | `"default"`    |
+| size          | 尺寸               | `"default" \| "sm" \| "lg"`  | `"default"`    |
+| orientation   | 排列方向           | `"horizontal" \| "vertical"` | `"horizontal"` |
+| spacing       | 项间间隔(0 = 连体) | `number`                     | `0`            |
+| disabled      | 整组禁用           | `boolean`                    | `false`        |
+| className     | 自定义类名         | `string`                     | -              |
 
 ### ToggleGroupItem
 
-ToggleGroupItem 组件。
-
-| 参数            | 说明                   | 类型                         | 默认值    |
-| --------------- | ---------------------- | ---------------------------- | --------- |
-| pressed         | 按下状态，受控模式使用 | `boolean`                    | -         |
-| defaultPressed  | 默认按下状态           | `boolean`                    | -         |
-| onPressedChange | 按下状态变化回调       | `(pressed: boolean) => void` | -         |
-| variant         | 视觉样式               | `"default" \| "outline"`     | "default" |
-| size            | 尺寸                   | `"default" \| "sm" \| "lg"`  | "default" |
-| disabled        | 是否禁用               | `boolean`                    | false     |
-| className       | 自定义类名             | `string`                     | -         |
-| children        | 内容                   | `React.ReactNode`            | -         |
+| 参数      | 说明       | 类型              | 默认值  |
+| --------- | ---------- | ----------------- | ------- |
+| value     | 项的值     | `string`          | -       |
+| disabled  | 是否禁用   | `boolean`         | `false` |
+| className | 自定义类名 | `string`          | -       |
+| children  | 项的内容   | `React.ReactNode` | -       |

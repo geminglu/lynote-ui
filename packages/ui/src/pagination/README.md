@@ -5,115 +5,114 @@ subtitle: Pagination 分页
 demo:
   cols: 1
 group:
-  title: 数据展示
-  order: 9
+  title: 导航
+  order: 4
 nav: 组件
 toc: content
 background: #111
 compact: true
 ---
 
-## 安装
+Pagination 用于在长列表 / 表格底部呈现分页导航。基于 `<nav>` + `<ol>` 语义结构,每一项渲染为可被键盘 Tab 到的 `<a>` 链接。
 
-:::code-group
+## 特性
 
-```bash [npm]
-npm install lynote-ui
-```
+- **语义化**:`role="navigation"` + `aria-label="pagination"`。
+- **`PaginationLink isActive`**:当前页带 `aria-current="page"`,样式自动反白。
+- **`PaginationPrevious` / `PaginationNext`**:上一页 / 下一页链接,自动带方向图标。
+- **`PaginationEllipsis`**:省略号,适合超过 7 页时折叠中间。
+- **响应式**:Prev / Next 的文字在窄屏自动隐藏,只保留箭头。
 
-```bash [yarn]
-yarn add lynote-ui
-```
+## 何时使用
 
-```bash [pnpm]
-pnpm add lynote-ui
-```
+- 分页表格 / 列表底部。
+- 文档站、博客的章节翻页。
+- 搜索结果分页。
 
-:::
+## 何时不使用
+
+- 无限滚动场景——使用滚动加载更多。
+- 列表少于 10 项——直接全部展示。
+- 复杂虚拟列表——使用虚拟滚动库。
 
 ## 导入
 
-:::code-group
-
-```ts [单个] | pure
+```ts | pure
 import {
   Pagination,
   PaginationContent,
+  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
-  PaginationEllipsis,
   PaginationNext,
   PaginationPrevious,
-} from "lynote-ui";
+} from "lynote-ui/pagination";
 ```
 
-:::
+## 组件结构
 
-分页组件，用于在大量数据中导航。
+```tsx | pure
+<Pagination>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink isActive />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationEllipsis />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationNext />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>
+```
 
 ## 代码演示
 
 <code src="./demos/base.tsx">基本用法</code>
 
+<code src="./demos/controlled.tsx" description="受控分页 + 自动折叠中间页码。">受控分页</code>
+
+## 最佳实践
+
+- **超过 7 页用省略号**:保留首页、当前页 ±1、末页,其余折叠。
+- **`PaginationLink` 接管路由**:通过 `<PaginationLink href="?page=2" />` 拼接路由,而不是手动 setState。
+- **始终显示 Prev / Next**:即使首页禁用 Prev,也保留位置以避免布局抖动。
+- **`isActive` 必须配合 `aria-current`**:组件自动处理,不要手动设置。
+
 ## API
 
 ### Pagination
 
-分页的根容器组件。
-
-| 参数      | 说明              | 类型                          | 默认值 |
-| --------- | ----------------- | ----------------------------- | ------ |
-| className | 自定义类名        | `string`                      | -      |
-| ...props  | 其他原生 nav 属性 | `React.ComponentProps<"nav">` | -      |
+`<nav>` 容器,自动带 `aria-label="pagination"`。
 
 ### PaginationContent
 
-分页内容容器。
-
-| 参数      | 说明             | 类型                         | 默认值 |
-| --------- | ---------------- | ---------------------------- | ------ |
-| className | 自定义类名       | `string`                     | -      |
-| ...props  | 其他原生 ul 属性 | `React.ComponentProps<"ul">` | -      |
+`<ol>` 列表容器,管理项之间的间距。
 
 ### PaginationItem
 
-分页单个项目。
-
-| 参数     | 说明             | 类型                         | 默认值 |
-| -------- | ---------------- | ---------------------------- | ------ |
-| ...props | 其他原生 li 属性 | `React.ComponentProps<"li">` | -      |
+`<li>` 单项容器。
 
 ### PaginationLink
 
-分页链接。
+| 参数     | 说明         | 类型                                         | 默认值   |
+| -------- | ------------ | -------------------------------------------- | -------- |
+| href     | 链接地址     | `string`                                     | -        |
+| isActive | 是否为当前页 | `boolean`                                    | `false`  |
+| size     | 按钮尺寸     | `Button["size"]`                             | `"icon"` |
+| onClick  | 点击回调     | `React.MouseEventHandler<HTMLAnchorElement>` | -        |
 
-| 参数      | 说明            | 类型                                  | 默认值   |
-| --------- | --------------- | ------------------------------------- | -------- |
-| isActive  | 是否激活        | `boolean`                             | -        |
-| size      | 按钮尺寸        | `"default" \| "sm" \| "lg" \| "icon"` | `"icon"` |
-| className | 自定义类名      | `string`                              | -        |
-| ...props  | 其他原生 a 属性 | `React.ComponentProps<"a">`           | -        |
+### PaginationPrevious / PaginationNext
+
+| 参数 | 说明       | 类型     | 默认值                  |
+| ---- | ---------- | -------- | ----------------------- |
+| text | 显示的文字 | `string` | `"Previous"` / `"Next"` |
+| href | 链接地址   | `string` | -                       |
 
 ### PaginationEllipsis
 
-分页省略号。
-
-| 参数     | 说明               | 类型                           | 默认值 |
-| -------- | ------------------ | ------------------------------ | ------ |
-| ...props | 其他原生 span 属性 | `React.ComponentProps<"span">` | -      |
-
-### PaginationPrevious
-
-上一页按钮。
-
-| 参数     | 说明                     | 类型 | 默认值 |
-| -------- | ------------------------ | ---- | ------ |
-| ...props | 其他 PaginationLink 属性 | -    | -      |
-
-### PaginationNext
-
-下一页按钮。
-
-| 参数     | 说明                     | 类型 | 默认值 |
-| -------- | ------------------------ | ---- | ------ |
-| ...props | 其他 PaginationLink 属性 | -    | -      |
+省略号占位,带 `aria-hidden`。

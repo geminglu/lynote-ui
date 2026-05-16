@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "lynote-ui";
 const App: React.FC = () => {
   return (
     <Tabs defaultValue="overview" orientation="vertical" className="flex gap-4">
-      <TabsList orientation="vertical">
+      <TabsList>
         <TabsTrigger value="overview">概览</TabsTrigger>
         <TabsTrigger value="members">成员</TabsTrigger>
         <TabsTrigger value="settings">设置</TabsTrigger>

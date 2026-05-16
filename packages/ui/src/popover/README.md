@@ -13,139 +13,105 @@ background: #111
 compact: true
 ---
 
-## 安装
+Popover 在 trigger 元素旁边弹出一个可交互的浮层,与 Tooltip 不同的是它可以承载复杂的可交互内容(按钮、表单、列表)。基于 Base UI Popover 原语,自动处理定位、键盘焦点、点击外部关闭。
 
-:::code-group
+## 特性
 
-```bash [npm]
-npm install lynote-ui
-```
+- **可交互内容**:可包含按钮、链接、输入框,焦点不会自动关闭。
+- **自动 Portal**:避免被父级 `overflow:hidden` 截断。
+- **完整键盘可达**:`Tab` 可进入内容,`Esc` 关闭。
+- **支持锚点偏移**:`side` / `align` / `sideOffset` / `alignOffset`。
+- **`PopoverHeader` / `PopoverTitle` / `PopoverDescription`**:用于结构化的弹出内容。
 
-```bash [yarn]
-yarn add lynote-ui
-```
+## 何时使用
 
-```bash [pnpm]
-pnpm add lynote-ui
-```
+- 提供一组临时操作或快捷设置(色板、过滤器、用户菜单)。
+- 表单字段旁的辅助选项(日期选择、颜色选择)。
+- 帮助 / 提示卡片(包含链接、按钮)。
 
-:::
+## 何时不使用
+
+- 仅展示静态说明文字——用 `Tooltip`。
+- 模态对话框——用 `Dialog`。
+- 鼠标悬停的预览卡片——用 `HoverCard`。
+- 命令搜索 / 列表——用 `Command`。
 
 ## 导入
 
-:::code-group
-
-```ts [单个] | pure
+```ts | pure
 import {
   Popover,
-  PopoverTrigger,
   PopoverContent,
+  PopoverDescription,
   PopoverHeader,
   PopoverTitle,
-  PopoverDescription,
-} from "lynote-ui";
+  PopoverTrigger,
+} from "lynote-ui/popover";
 ```
-
-:::
-
-从触发器展开非模态浮层，适合轻量表单、说明和快捷操作。
-
-## 使用建议
-
-- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
-- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
-- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
 
 ## 组件结构
 
 ```tsx | pure
 <Popover>
   <PopoverTrigger />
-  <PopoverContent />
-  <PopoverHeader />
-  <PopoverTitle />
+  <PopoverContent>
+    <PopoverHeader>
+      <PopoverTitle />
+      <PopoverDescription />
+    </PopoverHeader>
+    {/* 内容 */}
+  </PopoverContent>
 </Popover>
 ```
 
 ## 代码演示
 
-<code src="./demos/align.tsx">对齐</code>
-
 <code src="./demos/base.tsx">基本用法</code>
 
 <code src="./demos/controlled.tsx">受控用法</code>
 
-<code src="./demos/withForm.tsx">表单用法</code>
+<code src="./demos/align.tsx" description="通过 `side` / `align` 调整弹层方向与对齐。">弹层位置</code>
+
+<code src="./demos/withForm.tsx" description="承载一段表单,适合快速调整字段、过滤参数。">表单弹层</code>
+
+## 最佳实践
+
+- **使用 `render={<Button />}`**:把 trigger 渲染成 Button,而不是用 div + 手动样式。
+- **设置合理宽度**:`PopoverContent` 默认 `w-72`,内容多时通过 `className` 调整。
+- **键盘焦点要返回**:base-ui 已经处理好关闭时焦点回到 trigger,无需自定义。
+- **避免嵌套 Popover**:嵌套会破坏点击外部关闭语义。
 
 ## API
 
 ### Popover
 
-Popover 组件。
-
-| 参数          | 说明                   | 类型                                  | 默认值 |
-| ------------- | ---------------------- | ------------------------------------- | ------ |
-| value         | 当前值，受控模式使用   | `string \| string[]`                  | -      |
-| defaultValue  | 默认值，非受控模式使用 | `string \| string[]`                  | -      |
-| open          | 是否打开，受控模式使用 | `boolean`                             | -      |
-| defaultOpen   | 默认是否打开           | `boolean`                             | false  |
-| onOpenChange  | 打开状态变化回调       | `(open: boolean) => void`             | -      |
-| onValueChange | 值变化回调             | `(value: string \| string[]) => void` | -      |
-| disabled      | 是否禁用               | `boolean`                             | false  |
-| className     | 自定义类名             | `string`                              | -      |
-| children      | 子组件                 | `React.ReactNode`                     | -      |
+| 参数         | 说明             | 类型                      | 默认值  |
+| ------------ | ---------------- | ------------------------- | ------- |
+| open         | 是否打开(受控)   | `boolean`                 | -       |
+| defaultOpen  | 默认打开(非受控) | `boolean`                 | `false` |
+| onOpenChange | 打开状态变化回调 | `(open: boolean) => void` | -       |
+| modal        | 是否锁定背景滚动 | `boolean`                 | `false` |
 
 ### PopoverTrigger
 
-PopoverTrigger 组件。
-
-| 参数      | 说明       | 类型                      | 默认值 |
-| --------- | ---------- | ------------------------- | ------ |
-| value     | 组件值     | `string`                  | -      |
-| disabled  | 是否禁用   | `boolean`                 | false  |
-| className | 自定义类名 | `string`                  | -      |
-| children  | 内容       | `React.ReactNode`         | -      |
-| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+| 参数      | 说明                          | 类型                      | 默认值 |
+| --------- | ----------------------------- | ------------------------- | ------ |
+| render    | 多态渲染(常用于渲染成 Button) | `React.ReactElement`      | -      |
+| className | 自定义类名                    | `string`                  | -      |
+| children  | trigger 内容                  | `React.ReactNode`         | -      |
+| onClick   | 点击回调                      | `React.MouseEventHandler` | -      |
 
 ### PopoverContent
 
-PopoverContent 组件。
+| 参数        | 说明         | 类型                                                                       | 默认值     |
+| ----------- | ------------ | -------------------------------------------------------------------------- | ---------- |
+| side        | 弹层方向     | `"top" \| "bottom" \| "left" \| "right" \| "inline-start" \| "inline-end"` | `"bottom"` |
+| align       | 对齐方式     | `"start" \| "center" \| "end"`                                             | `"center"` |
+| sideOffset  | 与锚点的间距 | `number`                                                                   | `4`        |
+| alignOffset | 对齐偏移量   | `number`                                                                   | `0`        |
+| className   | 自定义类名   | `string`                                                                   | -          |
+| children    | 弹层内容     | `React.ReactNode`                                                          | -          |
 
-| 参数        | 说明           | 类型                                                                       | 默认值 |
-| ----------- | -------------- | -------------------------------------------------------------------------- | ------ |
-| side        | 弹层出现方向   | `"top" \| "bottom" \| "left" \| "right" \| "inline-start" \| "inline-end"` | -      |
-| align       | 弹层对齐方式   | `"start" \| "center" \| "end"`                                             | -      |
-| sideOffset  | 与锚点的间距   | `number`                                                                   | -      |
-| alignOffset | 对齐方向偏移量 | `number`                                                                   | -      |
-| className   | 自定义类名     | `string`                                                                   | -      |
-| children    | 内容           | `React.ReactNode`                                                          | -      |
+### PopoverHeader / PopoverTitle / PopoverDescription
 
-### PopoverHeader
-
-PopoverHeader 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
-
-### PopoverTitle
-
-PopoverTitle 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
-
-### PopoverDescription
-
-PopoverDescription 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
+结构化的标题区,自动绑定 `aria-labelledby` / `aria-describedby`。

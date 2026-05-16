@@ -13,59 +13,44 @@ background: #111
 compact: true
 ---
 
-## 安装
+在内容之间提供水平或垂直方向的视觉分隔。基于 Base UI Separator 原语，自动处理语义角色（`role="separator"`）。
 
-:::code-group
+## 特性
 
-```bash [npm]
-npm install lynote-ui
-```
+- **两种方向**：`horizontal`（默认）/ `vertical`。垂直方向需要在父级提供高度。
+- **可访问语义**：自动加上 `role="separator"` 与 `aria-orientation`。
+- **零样式束缚**：默认是 1px 浅色线，通过 `className` 完全可覆盖。
 
-```bash [yarn]
-yarn add lynote-ui
-```
+## 何时使用
 
-```bash [pnpm]
-pnpm add lynote-ui
-```
+- 列表项 / 卡片块 / 表单分组之间的视觉分隔。
+- 工具栏中按钮组之间的分隔。
+- 把内容分块（如登录页"或"分隔登录方式）。
 
-:::
+## 何时不使用
+
+- 已经用 `border-t` / `border-b` 处理边线时不需要额外 separator。
+- 表格行之间——使用 `Table` 自带的边线。
 
 ## 导入
 
-:::code-group
-
-```ts [单个] | pure
-import { Separator } from "lynote-ui";
-```
-
-:::
-
-用于在视觉和语义上分隔内容。
-
-## 使用建议
-
-- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
-- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
-- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
-
-## 组件结构
-
-```tsx | pure
-<Separator />
+```ts | pure
+import { Separator } from "lynote-ui/separator";
 ```
 
 ## 代码演示
 
 <code src="./demos/base.tsx">基本用法</code>
 
+<code src="./demos/vertical.tsx" description="垂直分隔符需要在父容器上设置高度。">垂直方向</code>
+
+<code src="./demos/with-text.tsx" description="夹文字的分隔符，常见于登录页的'或'分隔。也可以直接使用 `FieldSeparator`。">带文字</code>
+
 ## API
 
 ### Separator
 
-Separator 组件。
-
-| 参数        | 说明       | 类型                         | 默认值       |
-| ----------- | ---------- | ---------------------------- | ------------ |
-| orientation | 方向       | `"horizontal" \| "vertical"` | "horizontal" |
-| className   | 自定义类名 | `string`                     | -            |
+| 参数        | 说明       | 类型                         | 默认值         |
+| ----------- | ---------- | ---------------------------- | -------------- |
+| orientation | 方向       | `"horizontal" \| "vertical"` | `"horizontal"` |
+| className   | 自定义类名 | `string`                     | -              |

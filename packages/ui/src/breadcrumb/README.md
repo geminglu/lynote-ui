@@ -13,58 +13,53 @@ background: #111
 compact: true
 ---
 
-## 安装
+呈现当前位置在站点层级中的路径。当用户深入到三级及以上页面时，面包屑可以帮助快速回溯。
 
-:::code-group
+## 特性
 
-```bash [npm]
-npm install lynote-ui
-```
+- **语义化**：`<nav aria-label="breadcrumb">` 包裹 `<ol>` 列表，自动符合 ARIA 推荐结构。
+- **当前页用 `BreadcrumbPage`**：自动带 `aria-current="page"` 与不可点击语义。
+- **可自定义分隔符**：默认 `›`，可替换为 `/` 或任意图标。
+- **超长省略**：通过 `BreadcrumbEllipsis` + DropdownMenu 折叠中间层级。
 
-```bash [yarn]
-yarn add lynote-ui
-```
+## 何时使用
 
-```bash [pnpm]
-pnpm add lynote-ui
-```
+- 站点层级深（≥ 3 级）且用户可能从外部直接进入深页面。
+- 后台管理 / 文档站 / 电商类目页。
 
-:::
+## 何时不使用
+
+- 单层级页面——不必使用面包屑。
+- 移动端有限空间——使用返回按钮或顶部抽屉导航。
+- 流程引导（注册 → 验证 → 完成）——使用 `Stepper`（自建）或顶部进度条。
 
 ## 导入
 
-:::code-group
-
-```ts [单个] | pure
+```ts | pure
 import {
   Breadcrumb,
-  BreadcrumbList,
+  BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,
+  BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-  BreadcrumbEllipsis,
-} from "lynote-ui";
+} from "lynote-ui/breadcrumb";
 ```
-
-:::
-
-用于展示页面层级路径，帮助用户理解当前位置并快速返回上级。
-
-## 使用建议
-
-- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
-- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
-- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
 
 ## 组件结构
 
 ```tsx | pure
 <Breadcrumb>
-  <BreadcrumbList />
-  <BreadcrumbItem />
-  <BreadcrumbLink />
-  <BreadcrumbPage />
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink />
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage />
+    </BreadcrumbItem>
+  </BreadcrumbList>
 </Breadcrumb>
 ```
 
@@ -72,77 +67,50 @@ import {
 
 <code src="./demos/base.tsx">基本用法</code>
 
+<code src="./demos/custom-separator.tsx" description="把 `BreadcrumbSeparator` 的 children 替换为自定义图标。">自定义分隔符</code>
+
+<code src="./demos/with-dropdown.tsx" description="层级过深时折叠中间项，点击省略号弹出下拉菜单。">折叠中间层级</code>
+
+## 最佳实践
+
+- **当前页用 `BreadcrumbPage`**：让读屏器和 SEO 都明白这是当前位置，而不是普通链接。
+- **使用 `render={<a/>}` 注入路由组件**：`<BreadcrumbLink render={<Link to="/" />}>` 可对接 React Router / Next Link。
+- **超过 5 级折叠中间**：保留首页、上一级、当前页，其余用省略号折叠。
+- **不要把面包屑做成 tabs**：面包屑表达"层级位置"，不是平级切换。
+
 ## API
 
 ### Breadcrumb
 
-Breadcrumb 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
+| 参数      | 说明       | 类型                          | 默认值 |
+| --------- | ---------- | ----------------------------- | ------ |
+| className | 自定义类名 | `string`                      | -      |
+| ...props  | 原生 nav   | `React.ComponentProps<"nav">` | -      |
 
 ### BreadcrumbList
 
-BreadcrumbList 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
+`<ol>` 列表容器。
 
 ### BreadcrumbItem
 
-BreadcrumbItem 组件。
-
-| 参数      | 说明       | 类型                      | 默认值 |
-| --------- | ---------- | ------------------------- | ------ |
-| value     | 组件值     | `string`                  | -      |
-| disabled  | 是否禁用   | `boolean`                 | false  |
-| className | 自定义类名 | `string`                  | -      |
-| children  | 内容       | `React.ReactNode`         | -      |
-| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+`<li>` 单项容器。
 
 ### BreadcrumbLink
 
-BreadcrumbLink 组件。
-
-| 参数      | 说明       | 类型                      | 默认值 |
-| --------- | ---------- | ------------------------- | ------ |
-| value     | 组件值     | `string`                  | -      |
-| disabled  | 是否禁用   | `boolean`                 | false  |
-| className | 自定义类名 | `string`                  | -      |
-| children  | 内容       | `React.ReactNode`         | -      |
-| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+| 参数      | 说明                           | 类型                 | 默认值 |
+| --------- | ------------------------------ | -------------------- | ------ |
+| render    | 多态渲染（接入路由 Link 组件） | `React.ReactElement` | -      |
+| className | 自定义类名                     | `string`             | -      |
+| children  | 链接文字                       | `React.ReactNode`    | -      |
 
 ### BreadcrumbPage
 
-BreadcrumbPage 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
+当前页文本，不可点击，自动加 `aria-current="page"`。
 
 ### BreadcrumbSeparator
 
-BreadcrumbSeparator 组件。
-
-| 参数        | 说明       | 类型                         | 默认值       |
-| ----------- | ---------- | ---------------------------- | ------------ |
-| orientation | 方向       | `"horizontal" \| "vertical"` | "horizontal" |
-| className   | 自定义类名 | `string`                     | -            |
+分隔符，默认渲染 `›` 图标，可通过 `children` 覆盖。
 
 ### BreadcrumbEllipsis
 
-BreadcrumbEllipsis 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
+省略号，常配合 `DropdownMenu` 折叠中间层级。

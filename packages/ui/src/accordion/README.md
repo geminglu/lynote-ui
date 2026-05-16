@@ -13,6 +13,27 @@ background: #111
 compact: true
 ---
 
+Accordion 把一组内容折叠成可展开/收起的列表，适合 FAQ、设置面板分组、长说明分段。基于 Base UI Accordion 原语，原生支持键盘导航与 ARIA 语义。
+
+## 特性
+
+- **单 / 多展开**：通过 value 传单字符串或字符串数组控制。
+- **受控 / 非受控**：`value` + `onValueChange` 或 `defaultValue`。
+- **键盘可达**：方向键移动、`Home/End` 跳首尾、`Enter/Space` 切换。
+- **平滑动画**：展开/收起带有 `--accordion-panel-height` 驱动的高度动画。
+
+## 何时使用
+
+- 常见问题 (FAQ) 列表。
+- 设置 / 个人中心的分组项（账户安全、付款方式等）。
+- 一段冗长的内容希望默认折叠。
+
+## 何时不使用
+
+- 仅 2-3 个互斥视图——用 `Tabs` 更清晰。
+- 需要选择 / 输入——用 `Select`、`RadioGroup` 等表单控件。
+- 简单的"显示更多 / 收起"按钮——使用 `Collapsible`。
+
 ## 安装
 
 :::code-group
@@ -33,34 +54,23 @@ pnpm add lynote-ui
 
 ## 导入
 
-:::code-group
-
-```ts [单个] | pure
+```ts | pure
 import {
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent,
-} from "lynote-ui";
+} from "lynote-ui/accordion";
 ```
-
-:::
-
-展示一组可展开/收起的内容面板，适合 FAQ、设置项和分组信息。
-
-## 使用建议
-
-- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
-- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
-- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
 
 ## 组件结构
 
 ```tsx | pure
 <Accordion>
-  <AccordionItem />
-  <AccordionTrigger />
-  <AccordionContent />
+  <AccordionItem value="...">
+    <AccordionTrigger />
+    <AccordionContent />
+  </AccordionItem>
 </Accordion>
 ```
 
@@ -68,56 +78,57 @@ import {
 
 <code src="./demos/base.tsx">基本用法</code>
 
-<code src="./demos/multiple.tsx">多值选择</code>
+<code src="./demos/multiple.tsx" description="数组形式 value 可同时展开多项。">多值展开</code>
+
+<code src="./demos/controlled.tsx" description="`value` + `onValueChange` 进行受控。">受控用法</code>
+
+<code src="./demos/with-icon.tsx" description="trigger 内部可放图标 + 文本，组件会保留默认的箭头指示器。">带图标</code>
+
+## 最佳实践
+
+- **标题简短**：trigger 一句话能说明白，复杂内容放到 content。
+- **默认展开关键项**：在重要的 FAQ 或必读条款上使用 `defaultValue`。
+- **多展开慎用**：默认单展开能保持视觉聚焦；多展开适合内容彼此独立的场景。
+- **不要嵌套 Accordion**：嵌套会让用户难以辨认层级，请改用 Tabs + Accordion 组合。
+
+## 无障碍与键盘交互
+
+- `AccordionTrigger` 渲染为 `<button>` 并自动维护 `aria-expanded` / `aria-controls`。
+- `AccordionContent` 渲染为 `role="region"`，关闭时设置 `hidden`。
+
+| 按键              | 行为              |
+| ----------------- | ----------------- |
+| `Enter` / `Space` | 切换当前项展开    |
+| `↑` / `↓`         | 上一项 / 下一项   |
+| `Home` / `End`    | 跳到第一/最后一项 |
 
 ## API
 
 ### Accordion
 
-Accordion 组件。
-
-| 参数          | 说明                   | 类型                                  | 默认值 |
-| ------------- | ---------------------- | ------------------------------------- | ------ |
-| value         | 当前值，受控模式使用   | `string \| string[]`                  | -      |
-| defaultValue  | 默认值，非受控模式使用 | `string \| string[]`                  | -      |
-| open          | 是否打开，受控模式使用 | `boolean`                             | -      |
-| defaultOpen   | 默认是否打开           | `boolean`                             | false  |
-| onOpenChange  | 打开状态变化回调       | `(open: boolean) => void`             | -      |
-| onValueChange | 值变化回调             | `(value: string \| string[]) => void` | -      |
-| disabled      | 是否禁用               | `boolean`                             | false  |
-| className     | 自定义类名             | `string`                              | -      |
-| children      | 子组件                 | `React.ReactNode`                     | -      |
+| 参数          | 说明                 | 类型                                  | 默认值  |
+| ------------- | -------------------- | ------------------------------------- | ------- |
+| value         | 当前展开项（受控）   | `string \| string[]`                  | -       |
+| defaultValue  | 默认展开项（非受控） | `string \| string[]`                  | -       |
+| onValueChange | 展开变化回调         | `(value: string \| string[]) => void` | -       |
+| openMultiple  | 是否允许多个同时展开 | `boolean`                             | `true`  |
+| disabled      | 整组禁用             | `boolean`                             | `false` |
+| className     | 自定义类名           | `string`                              | -       |
+| children      | `AccordionItem` 列表 | `React.ReactNode`                     | -       |
 
 ### AccordionItem
 
-AccordionItem 组件。
-
-| 参数      | 说明       | 类型                      | 默认值 |
-| --------- | ---------- | ------------------------- | ------ |
-| value     | 组件值     | `string`                  | -      |
-| disabled  | 是否禁用   | `boolean`                 | false  |
-| className | 自定义类名 | `string`                  | -      |
-| children  | 内容       | `React.ReactNode`         | -      |
-| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+| 参数      | 说明       | 类型              | 默认值  |
+| --------- | ---------- | ----------------- | ------- |
+| value     | 项标识     | `string`          | -       |
+| disabled  | 是否禁用   | `boolean`         | `false` |
+| className | 自定义类名 | `string`          | -       |
+| children  | 子节点     | `React.ReactNode` | -       |
 
 ### AccordionTrigger
 
-AccordionTrigger 组件。
-
-| 参数      | 说明       | 类型                      | 默认值 |
-| --------- | ---------- | ------------------------- | ------ |
-| value     | 组件值     | `string`                  | -      |
-| disabled  | 是否禁用   | `boolean`                 | false  |
-| className | 自定义类名 | `string`                  | -      |
-| children  | 内容       | `React.ReactNode`         | -      |
-| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+可点击的标题区，内置一组上下箭头图标随展开状态切换。
 
 ### AccordionContent
 
-AccordionContent 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
+折叠 / 展开的内容区域，自动应用高度动画。

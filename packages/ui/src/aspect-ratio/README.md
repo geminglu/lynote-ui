@@ -13,51 +13,45 @@ background: #111
 compact: true
 ---
 
-## 安装
+按指定宽高比固定元素的高度，常用于图片、视频、嵌入式内容的占位与防抖。
 
-:::code-group
+## 特性
 
-```bash [npm]
-npm install lynote-ui
-```
+- **基于原生 `aspect-ratio` CSS**：无 JS 计算开销。
+- **任意比例**：传入小数即可，如 `16 / 9`、`4 / 3`、`1`。
+- **完全透明**：内部内容铺满容器，可以是 img、video、iframe、div。
 
-```bash [yarn]
-yarn add lynote-ui
-```
+## 何时使用
 
-```bash [pnpm]
-pnpm add lynote-ui
-```
+- 图片 / 视频网格，避免加载时高度跳动。
+- 卡片封面、视频嵌入、地图 iframe 等需要固定比例的场景。
+- 加载占位（结合 `Skeleton`）。
 
-:::
+## 何时不使用
+
+- 内容高度由文本决定——不要强行用 AspectRatio 包住会被裁切。
+- 比例随窗口变化——直接用 Tailwind 的 `aspect-*` 工具类即可。
 
 ## 导入
 
-:::code-group
-
-```ts [单个] | pure
-import { AspectRatio } from "lynote-ui";
+```ts | pure
+import { AspectRatio } from "lynote-ui/aspect-ratio";
 ```
-
-```ts [全局] | pure
-import { AspectRatio } from "gml-ui";
-```
-
-:::
-
-宽高比组件，用于保持内容的固定宽高比。
 
 ## 代码演示
 
 <code src="./demos/base.tsx">基本用法</code>
 
+<code src="./demos/image.tsx" description="包裹一张图片，使用 `object-cover` 让图片铺满容器。">图片占位</code>
+
+<code src="./demos/ratios.tsx" description="常用比例对比。">常用比例</code>
+
 ## API
 
 ### AspectRatio
 
-宽高比容器组件。
-
-| 参数     | 说明         | 类型                                                     | 默认值 |
-| -------- | ------------ | -------------------------------------------------------- | ------ |
-| ratio    | 宽高比       | `number`                                                 | -      |
-| ...props | 其他原生属性 | `React.ComponentProps<typeof AspectRatioPrimitive.Root>` | -      |
+| 参数      | 说明                        | 类型                          | 默认值 |
+| --------- | --------------------------- | ----------------------------- | ------ |
+| ratio     | 宽高比（必填），如 `16 / 9` | `number`                      | -      |
+| className | 自定义类名                  | `string`                      | -      |
+| ...props  | 透传原生 `<div>` 属性       | `React.ComponentProps<"div">` | -      |

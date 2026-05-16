@@ -13,181 +13,79 @@ background: #111
 compact: true
 ---
 
-## 安装
+Sheet 从屏幕边缘滑出的覆盖式面板,用于承载临时表单、详情、过滤器等内容。基于 Base UI Dialog 原语,提供 4 个方向的滑入(top / right / bottom / left)。
 
-:::code-group
+## 特性
 
-```bash [npm]
-npm install lynote-ui
-```
+- **4 方向滑入**:`side="top" | "right" | "bottom" | "left"`,默认 `right`。
+- **焦点管理**:打开自动捕获焦点,关闭后回到 trigger。
+- **响应式宽度**:左右 sheet 默认 75% 宽,`sm:max-w-sm`。
+- **支持滚动**:超出视口时内部可滚动。
 
-```bash [yarn]
-yarn add lynote-ui
-```
+## 何时使用
 
-```bash [pnpm]
-pnpm add lynote-ui
-```
+- 详情面板(从右侧滑入查看一条记录的完整信息)。
+- 移动端的全屏表单 / 筛选器(从底部滑入)。
+- 导航菜单(从左侧滑入)。
 
-:::
+## 何时不使用
+
+- 简短确认——使用 `Dialog` / `AlertDialog`。
+- 鼠标悬停信息——使用 `Tooltip` / `HoverCard`。
+- 内嵌的折叠区——使用 `Collapsible` / `Accordion`。
 
 ## 导入
 
-:::code-group
-
-```ts [单个] | pure
+```ts | pure
 import {
   Sheet,
-  SheetTrigger,
   SheetClose,
-  SheetPortal,
-  SheetOverlay,
   SheetContent,
-  SheetHeader,
-  SheetFooter,
-  SheetTitle,
   SheetDescription,
-} from "lynote-ui";
-```
-
-:::
-
-从屏幕边缘滑出的对话框，用于表单、导航或详情面板。
-
-## 使用建议
-
-- 该组件基于 Base UI 封装，行为、键盘交互和无障碍语义继承自 Base UI。
-- 文档中的 API 以当前 `lynote-ui` 封装导出的属性为准，优先列出业务中最常用且稳定的属性。
-- `className` 用于覆盖或扩展样式；复杂组合场景建议优先使用已导出的子组件组合。
-
-## 组件结构
-
-```tsx | pure
-<Sheet>
-  <SheetTrigger />
-  <SheetClose />
-  <SheetPortal />
-  <SheetOverlay />
-</Sheet>
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "lynote-ui/sheet";
 ```
 
 ## 代码演示
 
 <code src="./demos/base.tsx">基本用法</code>
 
-<code src="./demos/side.tsx">方向</code>
+<code src="./demos/side.tsx" description="4 个方向的滑入对比。">方向</code>
+
+## 最佳实践
+
+- **使用 `render` 渲染 trigger**:`<SheetTrigger render={<Button />} />`,统一外观。
+- **关闭按钮放在右上角**:`SheetContent` 默认右上角带关闭按钮(`showCloseButton={false}` 可关闭)。
+- **底部 sheet 限制最大高度**:`className="max-h-[80vh]"` 避免超出视口。
+- **不要嵌套 Sheet**:嵌套会破坏焦点环,如必要请关闭后再打开。
 
 ## API
 
 ### Sheet
 
-Sheet 组件。
-
-| 参数          | 说明                   | 类型                                  | 默认值 |
-| ------------- | ---------------------- | ------------------------------------- | ------ |
-| value         | 当前值，受控模式使用   | `string \| string[]`                  | -      |
-| defaultValue  | 默认值，非受控模式使用 | `string \| string[]`                  | -      |
-| open          | 是否打开，受控模式使用 | `boolean`                             | -      |
-| defaultOpen   | 默认是否打开           | `boolean`                             | false  |
-| onOpenChange  | 打开状态变化回调       | `(open: boolean) => void`             | -      |
-| onValueChange | 值变化回调             | `(value: string \| string[]) => void` | -      |
-| disabled      | 是否禁用               | `boolean`                             | false  |
-| className     | 自定义类名             | `string`                              | -      |
-| children      | 子组件                 | `React.ReactNode`                     | -      |
-
-### SheetTrigger
-
-SheetTrigger 组件。
-
-| 参数      | 说明       | 类型                      | 默认值 |
-| --------- | ---------- | ------------------------- | ------ |
-| value     | 组件值     | `string`                  | -      |
-| disabled  | 是否禁用   | `boolean`                 | false  |
-| className | 自定义类名 | `string`                  | -      |
-| children  | 内容       | `React.ReactNode`         | -      |
-| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
-
-### SheetClose
-
-SheetClose 组件。
-
-| 参数      | 说明       | 类型                      | 默认值 |
-| --------- | ---------- | ------------------------- | ------ |
-| value     | 组件值     | `string`                  | -      |
-| disabled  | 是否禁用   | `boolean`                 | false  |
-| className | 自定义类名 | `string`                  | -      |
-| children  | 内容       | `React.ReactNode`         | -      |
-| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
-
-### SheetPortal
-
-SheetPortal 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
-
-### SheetOverlay
-
-SheetOverlay 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
+| 参数         | 说明             | 类型                      | 默认值  |
+| ------------ | ---------------- | ------------------------- | ------- |
+| open         | 是否打开(受控)   | `boolean`                 | -       |
+| defaultOpen  | 默认打开(非受控) | `boolean`                 | `false` |
+| onOpenChange | 打开状态变化回调 | `(open: boolean) => void` | -       |
+| modal        | 是否锁定背景滚动 | `boolean`                 | `true`  |
 
 ### SheetContent
 
-SheetContent 组件。
+| 参数            | 说明                           | 类型                                     | 默认值    |
+| --------------- | ------------------------------ | ---------------------------------------- | --------- |
+| side            | 滑入方向                       | `"top" \| "right" \| "bottom" \| "left"` | `"right"` |
+| showCloseButton | 是否显示右上角关闭按钮         | `boolean`                                | `true`    |
+| className       | 自定义类名(控制宽 / 高 / 边距) | `string`                                 | -         |
+| children        | 内容                           | `React.ReactNode`                        | -         |
 
-| 参数        | 说明           | 类型                                                                       | 默认值 |
-| ----------- | -------------- | -------------------------------------------------------------------------- | ------ |
-| side        | 弹层出现方向   | `"top" \| "bottom" \| "left" \| "right" \| "inline-start" \| "inline-end"` | -      |
-| align       | 弹层对齐方式   | `"start" \| "center" \| "end"`                                             | -      |
-| sideOffset  | 与锚点的间距   | `number`                                                                   | -      |
-| alignOffset | 对齐方向偏移量 | `number`                                                                   | -      |
-| className   | 自定义类名     | `string`                                                                   | -      |
-| children    | 内容           | `React.ReactNode`                                                          | -      |
+### SheetTrigger / SheetClose
 
-### SheetHeader
+可通过 `render` 渲染为任意元素(常用 Button)。
 
-SheetHeader 组件。
+### SheetHeader / SheetFooter / SheetTitle / SheetDescription
 
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
-
-### SheetFooter
-
-SheetFooter 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
-
-### SheetTitle
-
-SheetTitle 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
-
-### SheetDescription
-
-SheetDescription 组件。
-
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 子内容     | `React.ReactNode` | -      |
-| id        | 元素 id    | `string`          | -      |
+结构化的标题区与底部操作区,标题与描述会自动注册到 ARIA。

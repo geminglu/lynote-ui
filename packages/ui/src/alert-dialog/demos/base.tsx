@@ -8,25 +8,25 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-  Button,
-} from "lynote-ui";
+} from "lynote-ui/alert-dialog";
+import { Button } from "lynote-ui/button";
 
 const App: React.FC = () => {
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="destructive">删除账户</Button>
-      </AlertDialogTrigger>
+      <AlertDialogTrigger
+        render={<Button variant="outline">显示对话框</Button>}
+      />
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>你确定要删除账户吗？</AlertDialogTitle>
+          <AlertDialogTitle>你确定要继续吗?</AlertDialogTitle>
           <AlertDialogDescription>
-            这个操作无法撤销。这将永久删除你的账户并移除所有相关数据。
+            该操作不可撤销,请确认你已理解后果。
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>取消</AlertDialogCancel>
-          <AlertDialogAction>确认删除</AlertDialogAction>
+          <AlertDialogAction>继续</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

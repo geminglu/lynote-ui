@@ -12,9 +12,7 @@ import {
 const App: React.FC = () => {
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">打开对话框</Button>
-      </DialogTrigger>
+      <DialogTrigger render={<Button variant="outline">打开对话框</Button>} />
       <DialogContent>
         <DialogHeader>
           <DialogTitle>这是一个对话框</DialogTitle>
