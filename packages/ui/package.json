@@ -301,6 +301,11 @@
       "require": "./dist/tooltip/index.js",
       "import": "./dist/tooltip/index.mjs"
     },
+    "./typography": {
+      "types": "./dist/typography/index.d.ts",
+      "require": "./dist/typography/index.js",
+      "import": "./dist/typography/index.mjs"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
