@@ -203,6 +203,7 @@ function ContextMenuRadioItem({
   className,
   children,
   inset,
+  closeOnClick = true,
   ...props
 }: ContextMenuPrimitive.RadioItem.Props & {
   inset?: boolean;
@@ -211,6 +212,7 @@ function ContextMenuRadioItem({
     <ContextMenuPrimitive.RadioItem
       data-slot="context-menu-radio-item"
       data-inset={inset}
+      closeOnClick={closeOnClick}
       className={cn(
         "outline-hidden focus:bg-accent focus:text-accent-foreground data-inset:pl-7 data-disabled:pointer-events-none data-disabled:opacity-50 relative flex cursor-default select-none items-center gap-1.5 rounded-md py-1 pl-7 pr-1.5 text-sm [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         className,
