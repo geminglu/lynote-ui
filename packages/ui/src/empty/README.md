@@ -61,13 +61,63 @@ import {
 
 ## API
 
-### Empty / EmptyHeader / EmptyTitle / EmptyDescription / EmptyContent
+### Empty
 
-均为容器组件,支持原生 `<div>` 属性。
+外层容器，包含整个空状态布局。
+
+| 参数      | 说明                       | 类型                          | 默认值 |
+| --------- | -------------------------- | ----------------------------- | ------ |
+| className | 自定义类名                 | `string`                      | -      |
+| children  | 子节点（Header / Content） | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性          | `React.ComponentProps<"div">` | -      |
+
+### EmptyHeader
+
+头部区域，居中布局 `EmptyMedia` / `EmptyTitle` / `EmptyDescription`。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 子节点            | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
 
 ### EmptyMedia
 
-| 参数      | 说明       | 类型                  | 默认值      |
-| --------- | ---------- | --------------------- | ----------- |
-| variant   | 视觉变体   | `"default" \| "icon"` | `"default"` |
-| className | 自定义类名 | `string`              | -           |
+承载图标 / 插画的容器。
+
+| 参数      | 说明                            | 类型                          | 默认值      |
+| --------- | ------------------------------- | ----------------------------- | ----------- |
+| variant   | 视觉变体（`icon` 会带圆角灰底） | `"default" \| "icon"`         | `"default"` |
+| className | 自定义类名                      | `string`                      | -           |
+| children  | 图标 / 图片                     | `React.ReactNode`             | -           |
+| ...props  | 原生 `<div>` 属性               | `React.ComponentProps<"div">` | -           |
+
+### EmptyTitle
+
+空状态标题。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 标题文案          | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
+
+### EmptyDescription
+
+空状态描述，自动美化内部 `<a>` 链接的下划线样式。
+
+| 参数      | 说明            | 类型                        | 默认值 |
+| --------- | --------------- | --------------------------- | ------ |
+| className | 自定义类名      | `string`                    | -      |
+| children  | 描述文案        | `React.ReactNode`           | -      |
+| ...props  | 原生 `<p>` 属性 | `React.ComponentProps<"p">` | -      |
+
+### EmptyContent
+
+CTA 区域，例如放置操作按钮、链接。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | CTA 元素          | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |

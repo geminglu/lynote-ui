@@ -63,12 +63,97 @@ import {
 
 ### NavigationMenu
 
-| 参数      | 说明       | 类型                           | 默认值    |
-| --------- | ---------- | ------------------------------ | --------- |
-| align     | 对齐方式   | `"start" \| "center" \| "end"` | `"start"` |
-| className | 自定义类名 | `string`                       | -         |
-| children  | 子组件     | `React.ReactNode`              | -         |
+继承 Base UI `NavigationMenu.Root` 的 props。
 
-### NavigationMenuList / NavigationMenuItem / NavigationMenuTrigger / NavigationMenuContent / NavigationMenuLink
+| 参数          | 说明                                      | 类型                                                                    | 默认值         |
+| ------------- | ----------------------------------------- | ----------------------------------------------------------------------- | -------------- |
+| value         | 当前激活的菜单值（受控）                  | `any`                                                                   | -              |
+| defaultValue  | 默认激活值（非受控）                      | `any`                                                                   | -              |
+| onValueChange | 激活变化回调                              | `(value: any, eventDetails: NavigationMenu.ChangeEventDetails) => void` | -              |
+| orientation   | 排列方向                                  | `"horizontal" \| "vertical"`                                            | `"horizontal"` |
+| openOnHover   | 是否在悬停时展开                          | `boolean`                                                               | `true`         |
+| delay         | 悬停展开/关闭延时（毫秒）                 | `number`                                                                | `50`           |
+| closeDelay    | 鼠标移开关闭延时（毫秒）                  | `number`                                                                | `50`           |
+| actionsRef    | 用于命令式控制的 ref                      | `RefObject<{ unmount: () => void } \| null>`                            | -              |
+| align         | 弹层对齐方式（透传给内置的 `Positioner`） | `"start" \| "center" \| "end"`                                          | `"start"`      |
+| render        | 自定义渲染元素                            | `React.ReactElement \| ((props, state) => React.ReactNode)`             | -              |
+| className     | 自定义类名                                | `string`                                                                | -              |
+| children      | 子组件                                    | `React.ReactNode`                                                       | -              |
 
-结构化的子组件,详见 Base UI 官方文档。
+### NavigationMenuList
+
+`<ul>` 容器。
+
+| 参数      | 说明                      | 类型                                                        | 默认值 |
+| --------- | ------------------------- | ----------------------------------------------------------- | ------ |
+| render    | 自定义渲染元素            | `React.ReactElement \| ((props, state) => React.ReactNode)` | -      |
+| className | 自定义类名                | `string`                                                    | -      |
+| children  | `NavigationMenuItem` 列表 | `React.ReactNode`                                           | -      |
+
+### NavigationMenuItem
+
+单个菜单项。
+
+| 参数      | 说明           | 类型                                                        | 默认值 |
+| --------- | -------------- | ----------------------------------------------------------- | ------ |
+| value     | 项标识         | `any`                                                       | -      |
+| render    | 自定义渲染元素 | `React.ReactElement \| ((props, state) => React.ReactNode)` | -      |
+| className | 自定义类名     | `string`                                                    | -      |
+| children  | 子节点         | `React.ReactNode`                                           | -      |
+
+### NavigationMenuTrigger
+
+菜单触发按钮，自带右侧 `ChevronDown` 旋转动画。
+
+| 参数         | 说明                           | 类型                                                        | 默认值  |
+| ------------ | ------------------------------ | ----------------------------------------------------------- | ------- |
+| nativeButton | 是否强制以原生 `<button>` 挂载 | `boolean`                                                   | `true`  |
+| disabled     | 是否禁用                       | `boolean`                                                   | `false` |
+| render       | 自定义渲染元素                 | `React.ReactElement \| ((props, state) => React.ReactNode)` | -       |
+| className    | 自定义类名                     | `string`                                                    | -       |
+| children     | 触发元素文本                   | `React.ReactNode`                                           | -       |
+
+### NavigationMenuContent
+
+弹层内容区。
+
+| 参数      | 说明           | 类型                                                        | 默认值 |
+| --------- | -------------- | ----------------------------------------------------------- | ------ |
+| render    | 自定义渲染元素 | `React.ReactElement \| ((props, state) => React.ReactNode)` | -      |
+| className | 自定义类名     | `string`                                                    | -      |
+| children  | 弹层内容       | `React.ReactNode`                                           | -      |
+
+### NavigationMenuLink
+
+可点击的菜单链接，自动维护 `data-active`。
+
+| 参数      | 说明                          | 类型                                                        | 默认值 |
+| --------- | ----------------------------- | ----------------------------------------------------------- | ------ |
+| active    | 当前是否激活                  | `boolean`                                                   | -      |
+| render    | 自定义渲染元素（如路由 Link） | `React.ReactElement \| ((props, state) => React.ReactNode)` | -      |
+| className | 自定义类名                    | `string`                                                    | -      |
+| children  | 链接内容                      | `React.ReactNode`                                           | -      |
+
+### NavigationMenuIndicator
+
+激活项下方的小箭头指示器，可放在 `NavigationMenuList` 旁。
+
+| 参数      | 说明       | 类型     | 默认值 |
+| --------- | ---------- | -------- | ------ |
+| className | 自定义类名 | `string` | -      |
+
+### NavigationMenuPositioner
+
+内部已由 `NavigationMenu` 自动挂载，通常无需手动使用；如需自定义弹层位置可单独引入。
+
+| 参数        | 说明           | 类型                                                                       | 默认值     |
+| ----------- | -------------- | -------------------------------------------------------------------------- | ---------- |
+| side        | 弹层方向       | `"top" \| "bottom" \| "left" \| "right" \| "inline-start" \| "inline-end"` | `"bottom"` |
+| sideOffset  | 距离锚点的间距 | `number`                                                                   | `8`        |
+| align       | 对齐方式       | `"start" \| "center" \| "end"`                                             | `"start"`  |
+| alignOffset | 对齐偏移       | `number`                                                                   | `0`        |
+| className   | 自定义类名     | `string`                                                                   | -          |
+
+### navigationMenuTriggerStyle
+
+可单独导出的 `cva` 样式，便于在不直接使用 `<NavigationMenuTrigger>` 时复用相同视觉。

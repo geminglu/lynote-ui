@@ -70,18 +70,37 @@ import {
 
 ### Collapsible
 
-| 参数         | 说明                   | 类型                      | 默认值  |
-| ------------ | ---------------------- | ------------------------- | ------- |
-| open         | 是否展开（受控）       | `boolean`                 | -       |
-| defaultOpen  | 默认是否展开（非受控） | `boolean`                 | `false` |
-| onOpenChange | 展开状态变化回调       | `(open: boolean) => void` | -       |
-| disabled     | 是否禁用               | `boolean`                 | `false` |
-| children     | trigger + content      | `React.ReactNode`         | -       |
+| 参数                 | 说明                   | 类型                                                                    | 默认值  |
+| -------------------- | ---------------------- | ----------------------------------------------------------------------- | ------- |
+| open                 | 是否展开（受控）       | `boolean`                                                               | -       |
+| defaultOpen          | 默认是否展开（非受控） | `boolean`                                                               | `false` |
+| onOpenChange         | 展开状态变化回调       | `(open: boolean, eventDetails: Collapsible.ChangeEventDetails) => void` | -       |
+| onOpenChangeComplete | 展开/收起动画完成回调  | `(open: boolean) => void`                                               | -       |
+| disabled             | 是否禁用               | `boolean`                                                               | `false` |
+| render               | 自定义渲染元素         | `React.ReactElement \| ((props, state) => React.ReactNode)`             | -       |
+| className            | 自定义类名             | `string`                                                                | -       |
+| children             | trigger + content      | `React.ReactNode`                                                       | -       |
 
 ### CollapsibleTrigger
 
-可点击的展开按钮，通常通过 `render` 渲染为 `<Button>`。
+可点击的展开按钮，通常通过 `render` 渲染为 `<Button>`，自动维护 `aria-expanded`。
+
+| 参数         | 说明                               | 类型                                                        | 默认值  |
+| ------------ | ---------------------------------- | ----------------------------------------------------------- | ------- |
+| nativeButton | 是否强制以原生 `<button>` 挂载     | `boolean`                                                   | `true`  |
+| disabled     | 是否禁用，继承自所在 `Collapsible` | `boolean`                                                   | `false` |
+| render       | 自定义渲染元素（如 `<Button />`）  | `React.ReactElement \| ((props, state) => React.ReactNode)` | -       |
+| className    | 自定义类名                         | `string`                                                    | -       |
+| children     | 触发元素内容                       | `React.ReactNode`                                           | -       |
 
 ### CollapsibleContent
 
 折叠内容区域，展开/收起时自动应用过渡动画。
+
+| 参数             | 说明                                                            | 类型                                                        | 默认值  |
+| ---------------- | --------------------------------------------------------------- | ----------------------------------------------------------- | ------- |
+| hiddenUntilFound | 允许浏览器内置查找展开折叠的内容（使用 `hidden="until-found"`） | `boolean`                                                   | `false` |
+| keepMounted      | 关闭时是否保留在 DOM                                            | `boolean`                                                   | `false` |
+| render           | 自定义渲染元素                                                  | `React.ReactElement \| ((props, state) => React.ReactNode)` | -       |
+| className        | 自定义类名                                                      | `string`                                                    | -       |
+| children         | 折叠内容                                                        | `React.ReactNode`                                           | -       |

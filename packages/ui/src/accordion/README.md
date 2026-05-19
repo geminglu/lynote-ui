@@ -106,29 +106,52 @@ import {
 
 ### Accordion
 
-| 参数          | 说明                 | 类型                                  | 默认值  |
-| ------------- | -------------------- | ------------------------------------- | ------- |
-| value         | 当前展开项（受控）   | `string \| string[]`                  | -       |
-| defaultValue  | 默认展开项（非受控） | `string \| string[]`                  | -       |
-| onValueChange | 展开变化回调         | `(value: string \| string[]) => void` | -       |
-| openMultiple  | 是否允许多个同时展开 | `boolean`                             | `true`  |
-| disabled      | 整组禁用             | `boolean`                             | `false` |
-| className     | 自定义类名           | `string`                              | -       |
-| children      | `AccordionItem` 列表 | `React.ReactNode`                     | -       |
+| 参数             | 说明                                                          | 类型                                                                 | 默认值       |
+| ---------------- | ------------------------------------------------------------- | -------------------------------------------------------------------- | ------------ |
+| value            | 当前展开项（受控），值为 `AccordionItem` 的 `value` 数组      | `any[]`                                                              | -            |
+| defaultValue     | 默认展开项（非受控）                                          | `any[]`                                                              | -            |
+| onValueChange    | 展开变化回调                                                  | `(value: any[], eventDetails: Accordion.ChangeEventDetails) => void` | -            |
+| openMultiple     | 是否允许多个同时展开                                          | `boolean`                                                            | `true`       |
+| disabled         | 整组禁用                                                      | `boolean`                                                            | `false`      |
+| orientation      | 排列方向，会影响键盘导航                                      | `"horizontal" \| "vertical"`                                         | `"vertical"` |
+| loop             | 键盘导航是否在首尾循环                                        | `boolean`                                                            | `true`       |
+| hiddenUntilFound | 允许浏览器内置查找展开匹配面板（使用 `hidden="until-found"`） | `boolean`                                                            | `false`      |
+| keepMounted      | 面板关闭时是否保留在 DOM                                      | `boolean`                                                            | `false`      |
+| render           | 自定义渲染元素（Base UI 多态机制）                            | `React.ReactElement \| ((props, state) => React.ReactNode)`          | -            |
+| className        | 自定义类名                                                    | `string`                                                             | -            |
+| children         | `AccordionItem` 列表                                          | `React.ReactNode`                                                    | -            |
 
 ### AccordionItem
 
-| 参数      | 说明       | 类型              | 默认值  |
-| --------- | ---------- | ----------------- | ------- |
-| value     | 项标识     | `string`          | -       |
-| disabled  | 是否禁用   | `boolean`         | `false` |
-| className | 自定义类名 | `string`          | -       |
-| children  | 子节点     | `React.ReactNode` | -       |
+| 参数         | 说明                       | 类型                                                                      | 默认值  |
+| ------------ | -------------------------- | ------------------------------------------------------------------------- | ------- |
+| value        | 项标识，未提供时会自动生成 | `any`                                                                     | -       |
+| disabled     | 是否禁用                   | `boolean`                                                                 | `false` |
+| onOpenChange | 当前项展开/收起回调        | `(open: boolean, eventDetails: AccordionItem.ChangeEventDetails) => void` | -       |
+| render       | 自定义渲染元素             | `React.ReactElement \| ((props, state) => React.ReactNode)`               | -       |
+| className    | 自定义类名                 | `string`                                                                  | -       |
+| children     | 子节点                     | `React.ReactNode`                                                         | -       |
 
 ### AccordionTrigger
 
 可点击的标题区，内置一组上下箭头图标随展开状态切换。
 
+| 参数         | 说明                                                           | 类型                                                        | 默认值  |
+| ------------ | -------------------------------------------------------------- | ----------------------------------------------------------- | ------- |
+| nativeButton | 是否强制以原生 `<button>` 挂载（与非按钮 `render` 配合时使用） | `boolean`                                                   | `true`  |
+| disabled     | 是否禁用，会继承自所在的 `AccordionItem` / `Accordion`         | `boolean`                                                   | `false` |
+| render       | 自定义渲染元素                                                 | `React.ReactElement \| ((props, state) => React.ReactNode)` | -       |
+| className    | 自定义类名                                                     | `string`                                                    | -       |
+| children     | 标题内容                                                       | `React.ReactNode`                                           | -       |
+
 ### AccordionContent
 
 折叠 / 展开的内容区域，自动应用高度动画。
+
+| 参数             | 说明                                              | 类型                                                        | 默认值  |
+| ---------------- | ------------------------------------------------- | ----------------------------------------------------------- | ------- |
+| hiddenUntilFound | 同 `Accordion.hiddenUntilFound`，单独控制当前面板 | `boolean`                                                   | `false` |
+| keepMounted      | 关闭时是否保留在 DOM                              | `boolean`                                                   | `false` |
+| render           | 自定义渲染元素                                    | `React.ReactElement \| ((props, state) => React.ReactNode)` | -       |
+| className        | 自定义类名                                        | `string`                                                    | -       |
+| children         | 面板内容                                          | `React.ReactNode`                                           | -       |

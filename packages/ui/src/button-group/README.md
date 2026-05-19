@@ -63,20 +63,34 @@ import {
 
 ### ButtonGroup
 
-| 参数        | 说明       | 类型                         | 默认值         |
-| ----------- | ---------- | ---------------------------- | -------------- |
-| orientation | 排列方向   | `"horizontal" \| "vertical"` | `"horizontal"` |
-| className   | 自定义类名 | `string`                     | -              |
-| children    | 子组件     | `React.ReactNode`            | -              |
+| 参数        | 说明              | 类型                          | 默认值         |
+| ----------- | ----------------- | ----------------------------- | -------------- |
+| orientation | 排列方向          | `"horizontal" \| "vertical"`  | `"horizontal"` |
+| className   | 自定义类名        | `string`                      | -              |
+| children    | 子组件            | `React.ReactNode`             | -              |
+| ...props    | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -              |
 
 ### ButtonGroupSeparator
 
-按钮之间的分隔线,自动适配方向。
+按钮之间的分隔线，自动适配方向。
 
-| 参数        | 说明 | 类型                         | 默认值       |
-| ----------- | ---- | ---------------------------- | ------------ |
-| orientation | 方向 | `"horizontal" \| "vertical"` | `"vertical"` |
+| 参数        | 说明                         | 类型                         | 默认值       |
+| ----------- | ---------------------------- | ---------------------------- | ------------ |
+| orientation | 方向                         | `"horizontal" \| "vertical"` | `"vertical"` |
+| decorative  | 是否仅装饰（影响 ARIA 语义） | `boolean`                    | `true`       |
+| className   | 自定义类名                   | `string`                     | -            |
 
 ### ButtonGroupText
 
-按钮组内的固定文本(如"已选择 3 项"),自动应用 muted 背景。
+按钮组内的固定文本（如"已选择 3 项"），自动应用 muted 背景。
+
+| 参数      | 说明                             | 类型                                                        | 默认值 |
+| --------- | -------------------------------- | ----------------------------------------------------------- | ------ |
+| render    | 多态渲染（如渲染为 `<label />`） | `React.ReactElement \| ((props, state) => React.ReactNode)` | -      |
+| className | 自定义类名                       | `string`                                                    | -      |
+| children  | 文本内容                         | `React.ReactNode`                                           | -      |
+| ...props  | 原生 `<div>` 属性                | `React.ComponentProps<"div">`                               | -      |
+
+### buttonGroupVariants
+
+可单独导出的 `cva` 样式，便于在不直接使用 `<ButtonGroup>` 时复用相同视觉。

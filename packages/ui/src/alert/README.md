@@ -73,6 +73,32 @@ import {
 | className | 自定义类名        | `string`                      | -           |
 | ...props  | 透传原生 div 属性 | `React.ComponentProps<"div">` | -           |
 
-### AlertTitle / AlertDescription / AlertAction
+### AlertTitle
 
-均为容器组件,支持 `className` 与原生 `<div>` 属性。
+标题文本，自动给内部 `<a>` 链接添加下划线样式。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 标题内容          | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
+
+### AlertDescription
+
+描述文本，自动应用 muted 颜色与 balanced 文本布局。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 描述内容          | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
+
+### AlertAction
+
+绝对定位在右上角的操作区域，常用于放置关闭按钮或跳转链接。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 操作元素          | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |

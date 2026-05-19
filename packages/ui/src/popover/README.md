@@ -85,33 +85,70 @@ import {
 
 ### Popover
 
-| 参数         | 说明             | 类型                      | 默认值  |
-| ------------ | ---------------- | ------------------------- | ------- |
-| open         | 是否打开(受控)   | `boolean`                 | -       |
-| defaultOpen  | 默认打开(非受控) | `boolean`                 | `false` |
-| onOpenChange | 打开状态变化回调 | `(open: boolean) => void` | -       |
-| modal        | 是否锁定背景滚动 | `boolean`                 | `false` |
+| 参数                 | 说明                       | 类型                                                                | 默认值  |
+| -------------------- | -------------------------- | ------------------------------------------------------------------- | ------- |
+| open                 | 是否打开（受控）           | `boolean`                                                           | -       |
+| defaultOpen          | 默认打开（非受控）         | `boolean`                                                           | `false` |
+| onOpenChange         | 打开状态变化回调           | `(open: boolean, eventDetails: Popover.ChangeEventDetails) => void` | -       |
+| onOpenChangeComplete | 打开/关闭动画完成回调      | `(open: boolean) => void`                                           | -       |
+| modal                | 是否拦截焦点与背景滚动     | `boolean`                                                           | `false` |
+| openOnHover          | 悬停打开                   | `boolean`                                                           | `false` |
+| delay                | 悬停打开的延时（毫秒）     | `number`                                                            | `300`   |
+| closeDelay           | 鼠标移开的关闭延时（毫秒） | `number`                                                            | `0`     |
+| actionsRef           | 用于命令式控制打开/关闭    | `RefObject<{ unmount: () => void } \| null>`                        | -       |
+| children             | trigger + content          | `React.ReactNode`                                                   | -       |
 
 ### PopoverTrigger
 
-| 参数      | 说明                          | 类型                      | 默认值 |
-| --------- | ----------------------------- | ------------------------- | ------ |
-| render    | 多态渲染(常用于渲染成 Button) | `React.ReactElement`      | -      |
-| className | 自定义类名                    | `string`                  | -      |
-| children  | trigger 内容                  | `React.ReactNode`         | -      |
-| onClick   | 点击回调                      | `React.MouseEventHandler` | -      |
+| 参数         | 说明                            | 类型                                                        | 默认值  |
+| ------------ | ------------------------------- | ----------------------------------------------------------- | ------- |
+| nativeButton | 是否强制以原生 `<button>` 挂载  | `boolean`                                                   | `true`  |
+| disabled     | 是否禁用                        | `boolean`                                                   | `false` |
+| render       | 多态渲染（常用于渲染成 Button） | `React.ReactElement \| ((props, state) => React.ReactNode)` | -       |
+| className    | 自定义类名                      | `string`                                                    | -       |
+| children     | trigger 内容                    | `React.ReactNode`                                           | -       |
+| onClick      | 点击回调                        | `React.MouseEventHandler`                                   | -       |
 
 ### PopoverContent
 
-| 参数        | 说明         | 类型                                                                       | 默认值     |
-| ----------- | ------------ | -------------------------------------------------------------------------- | ---------- |
-| side        | 弹层方向     | `"top" \| "bottom" \| "left" \| "right" \| "inline-start" \| "inline-end"` | `"bottom"` |
-| align       | 对齐方式     | `"start" \| "center" \| "end"`                                             | `"center"` |
-| sideOffset  | 与锚点的间距 | `number`                                                                   | `4`        |
-| alignOffset | 对齐偏移量   | `number`                                                                   | `0`        |
-| className   | 自定义类名   | `string`                                                                   | -          |
-| children    | 弹层内容     | `React.ReactNode`                                                          | -          |
+| 参数         | 说明                 | 类型                                                                               | 默认值     |
+| ------------ | -------------------- | ---------------------------------------------------------------------------------- | ---------- |
+| side         | 弹层方向             | `"top" \| "bottom" \| "left" \| "right" \| "inline-start" \| "inline-end"`         | `"bottom"` |
+| align        | 对齐方式             | `"start" \| "center" \| "end"`                                                     | `"center"` |
+| sideOffset   | 与锚点的间距         | `number`                                                                           | `4`        |
+| alignOffset  | 对齐偏移量           | `number`                                                                           | `0`        |
+| initialFocus | 打开时初始聚焦的元素 | `RefObject<HTMLElement \| null> \| ((reason) => HTMLElement \| null \| undefined)` | -          |
+| finalFocus   | 关闭后聚焦回的元素   | `RefObject<HTMLElement \| null> \| ((reason) => HTMLElement \| null \| undefined)` | -          |
+| render       | 自定义渲染元素       | `React.ReactElement \| ((props, state) => React.ReactNode)`                        | -          |
+| className    | 自定义类名           | `string`                                                                           | -          |
+| children     | 弹层内容             | `React.ReactNode`                                                                  | -          |
 
-### PopoverHeader / PopoverTitle / PopoverDescription
+### PopoverHeader
 
-结构化的标题区,自动绑定 `aria-labelledby` / `aria-describedby`。
+容器组件，分行布局标题与描述。
+
+| 参数      | 说明                                  | 类型                          | 默认值 |
+| --------- | ------------------------------------- | ----------------------------- | ------ |
+| className | 自定义类名                            | `string`                      | -      |
+| children  | `PopoverTitle` / `PopoverDescription` | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性                     | `React.ComponentProps<"div">` | -      |
+
+### PopoverTitle
+
+自动绑定 `aria-labelledby`。
+
+| 参数      | 说明           | 类型                                                        | 默认值 |
+| --------- | -------------- | ----------------------------------------------------------- | ------ |
+| render    | 自定义渲染元素 | `React.ReactElement \| ((props, state) => React.ReactNode)` | -      |
+| className | 自定义类名     | `string`                                                    | -      |
+| children  | 标题内容       | `React.ReactNode`                                           | -      |
+
+### PopoverDescription
+
+自动绑定 `aria-describedby`。
+
+| 参数      | 说明           | 类型                                                        | 默认值 |
+| --------- | -------------- | ----------------------------------------------------------- | ------ |
+| render    | 自定义渲染元素 | `React.ReactElement \| ((props, state) => React.ReactNode)` | -      |
+| className | 自定义类名     | `string`                                                    | -      |
+| children  | 描述内容       | `React.ReactNode`                                           | -      |

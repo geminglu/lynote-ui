@@ -67,20 +67,76 @@ import {
 
 ### Carousel
 
-| 参数        | 说明                | 类型                         | 默认值         |
-| ----------- | ------------------- | ---------------------------- | -------------- |
-| orientation | 方向                | `"horizontal" \| "vertical"` | `"horizontal"` |
-| opts        | Embla 配置          | `EmblaOptionsType`           | -              |
-| plugins     | Embla 插件          | `EmblaPluginType[]`          | -              |
-| setApi      | 接收 Embla API 实例 | `(api: CarouselApi) => void` | -              |
+| 参数        | 说明                                         | 类型                          | 默认值         |
+| ----------- | -------------------------------------------- | ----------------------------- | -------------- |
+| orientation | 方向                                         | `"horizontal" \| "vertical"`  | `"horizontal"` |
+| opts        | Embla 配置（如 `loop`、`align`、`dragFree`） | `EmblaOptionsType`            | -              |
+| plugins     | Embla 插件（autoplay / wheel / fade 等）     | `EmblaPluginType[]`           | -              |
+| setApi      | 接收 Embla API 实例                          | `(api: CarouselApi) => void`  | -              |
+| className   | 自定义类名                                   | `string`                      | -              |
+| children    | `CarouselContent` + 控制按钮                 | `React.ReactNode`             | -              |
+| ...props    | 原生 `<div>` 属性                            | `React.ComponentProps<"div">` | -              |
 
-### CarouselContent / CarouselItem
+### CarouselContent
 
-布局容器,`CarouselItem` 支持响应式 basis。
+横向 / 纵向布局轨道，内部已自动应用 Embla 的 ref。
 
-### CarouselPrevious / CarouselNext
+| 参数      | 说明                | 类型                          | 默认值 |
+| --------- | ------------------- | ----------------------------- | ------ |
+| className | 自定义类名          | `string`                      | -      |
+| children  | `CarouselItem` 列表 | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性   | `React.ComponentProps<"div">` | -      |
 
-上下页按钮,绝对定位在 Carousel 边缘。
+### CarouselItem
+
+单张幻灯片，默认 `basis-full`，可通过响应式 `md:basis-1/2` 等覆盖。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 幻灯片内容        | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
+
+### CarouselPrevious
+
+上一张按钮，已绝对定位在 Carousel 边缘，并根据 `canScrollPrev` 自动禁用。
+
+| 参数      | 说明                               | 类型                                                                          | 默认值      |
+| --------- | ---------------------------------- | ----------------------------------------------------------------------------- | ----------- |
+| variant   | Button 视觉变体                    | `"default" \| "outline" \| "secondary" \| "ghost" \| "destructive" \| "link"` | `"outline"` |
+| size      | Button 尺寸                        | `Button["size"]`                                                              | `"icon-sm"` |
+| onClick   | 点击回调（会覆盖默认行为）         | `React.MouseEventHandler<HTMLButtonElement>`                                  | -           |
+| className | 自定义类名                         | `string`                                                                      | -           |
+| children  | 自定义内容（缺省为 `ChevronLeft`） | `React.ReactNode`                                                             | -           |
+
+### CarouselNext
+
+下一张按钮，行为与 `CarouselPrevious` 相同。
+
+| 参数      | 说明                                | 类型                                                                          | 默认值      |
+| --------- | ----------------------------------- | ----------------------------------------------------------------------------- | ----------- |
+| variant   | Button 视觉变体                     | `"default" \| "outline" \| "secondary" \| "ghost" \| "destructive" \| "link"` | `"outline"` |
+| size      | Button 尺寸                         | `Button["size"]`                                                              | `"icon-sm"` |
+| onClick   | 点击回调（会覆盖默认行为）          | `React.MouseEventHandler<HTMLButtonElement>`                                  | -           |
+| className | 自定义类名                          | `string`                                                                      | -           |
+| children  | 自定义内容（缺省为 `ChevronRight`） | `React.ReactNode`                                                             | -           |
+
+### useCarousel
+
+读取当前 Carousel 上下文的 hook，返回：
+
+```ts
+{
+  carouselRef: React.RefCallback<HTMLElement>;
+  api: CarouselApi | undefined;
+  scrollPrev: () => void;
+  scrollNext: () => void;
+  canScrollPrev: boolean;
+  canScrollNext: boolean;
+  orientation: "horizontal" | "vertical";
+  opts?: CarouselOptions;
+}
+```
 
 ### CarouselApi
 

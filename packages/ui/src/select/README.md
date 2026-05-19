@@ -211,6 +211,11 @@ import {
 
 逻辑分组容器，可嵌套 `SelectLabel`。
 
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子项       | `React.ReactNode` | -      |
+
 ### SelectLabel
 
 | 参数      | 说明       | 类型              | 默认值 |
@@ -239,3 +244,9 @@ import {
 ### SelectScrollUpButton / SelectScrollDownButton
 
 超长滚动时显示的箭头按钮，需放在 `SelectContent` 内部上下两端。
+
+| 参数      | 说明           | 类型                                                        | 默认值 |
+| --------- | -------------- | ----------------------------------------------------------- | ------ |
+| render    | 自定义渲染元素 | `React.ReactElement \| ((props, state) => React.ReactNode)` | -      |
+| className | 自定义类名     | `string`                                                    | -      |
+| children  | 自定义箭头图标 | `React.ReactNode`                                           | -      |

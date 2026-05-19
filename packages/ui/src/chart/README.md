@@ -62,11 +62,14 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 
 ### ChartContainer
 
-| 参数      | 说明               | 类型              | 默认值 |
-| --------- | ------------------ | ----------------- | ------ |
-| config    | 数据系列的元信息   | `ChartConfig`     | -      |
-| className | 自定义类名         | `string`          | -      |
-| children  | 一个 Recharts 图表 | `React.ReactNode` | -      |
+| 参数             | 说明                                                      | 类型                                | 默认值                    |
+| ---------------- | --------------------------------------------------------- | ----------------------------------- | ------------------------- |
+| config           | 数据系列的元信息（必填）                                  | `ChartConfig`                       | -                         |
+| id               | 自定义图表 id（用于注入 CSS 变量；缺省时自动生成）        | `string`                            | -                         |
+| initialDimension | `ResponsiveContainer` 初始尺寸                            | `{ width: number; height: number }` | `{ width: 0, height: 0 }` |
+| className        | 自定义类名                                                | `string`                            | -                         |
+| children         | 一个 Recharts 图表（作为 `ResponsiveContainer` 的子节点） | `React.ReactNode`                   | -                         |
+| ...props         | 原生 `<div>` 属性                                         | `React.ComponentProps<"div">`       | -                         |
 
 ### ChartConfig
 
@@ -84,6 +87,46 @@ type ChartConfig = Record<
 
 每个 key 会变成 CSS 变量 `--color-<key>`,可在子组件中以 `fill="var(--color-foo)"` 使用。
 
-### ChartTooltip / ChartTooltipContent
+### ChartTooltip
 
-`ChartTooltip` 是 Recharts Tooltip 的别名,通过 `content` 注入自定义内容。`ChartTooltipContent` 是开箱即用的精致 tooltip。
+直接复用 Recharts 的 `Tooltip` 组件，参考 [Recharts Tooltip 文档](https://recharts.org/en-US/api/Tooltip)。通过 `content` 注入自定义内容（如 `ChartTooltipContent`）。
+
+### ChartTooltipContent
+
+开箱即用的精致 tooltip，与 `ChartConfig` 联动渲染图例与颜色。
+
+| 参数           | 说明                                                     | 类型                                                     | 默认值  |
+| -------------- | -------------------------------------------------------- | -------------------------------------------------------- | ------- |
+| indicator      | 颜色指示器样式                                           | `"line" \| "dot" \| "dashed"`                            | `"dot"` |
+| hideLabel      | 是否隐藏顶部 label                                       | `boolean`                                                | `false` |
+| hideIndicator  | 是否隐藏颜色指示器                                       | `boolean`                                                | `false` |
+| nameKey        | 从 payload 中读取 name 字段的 key                        | `string`                                                 | -       |
+| labelKey       | 从 payload 中读取 label 字段的 key                       | `string`                                                 | -       |
+| labelFormatter | 自定义 label 渲染                                        | `(value: any, payload: Payload[]) => React.ReactNode`    | -       |
+| labelClassName | label 的 className                                       | `string`                                                 | -       |
+| formatter      | 自定义每一行的渲染                                       | `(value, name, item, index, payload) => React.ReactNode` | -       |
+| color          | 强制使用的颜色（缺省取 `ChartConfig` 中对应 key 的颜色） | `string`                                                 | -       |
+| className      | 自定义类名                                               | `string`                                                 | -       |
+| ...props       | 透传 Recharts `DefaultTooltipContentProps`               | -                                                        | -       |
+
+### ChartLegend
+
+直接复用 Recharts 的 `Legend` 组件，通过 `content` 注入 `ChartLegendContent`。
+
+### ChartLegendContent
+
+| 参数          | 说明                                      | 类型                            | 默认值     |
+| ------------- | ----------------------------------------- | ------------------------------- | ---------- |
+| hideIcon      | 是否隐藏前面的颜色 / icon                 | `boolean`                       | `false`    |
+| nameKey       | 从 payload 中读取 name 字段的 key         | `string`                        | -          |
+| verticalAlign | 图例位置（影响上下 padding）              | `"top" \| "middle" \| "bottom"` | `"bottom"` |
+| className     | 自定义类名                                | `string`                        | -          |
+| ...props      | 透传 Recharts `DefaultLegendContentProps` | -                               | -          |
+
+### ChartStyle
+
+内部使用：注入 `--color-<key>` CSS 变量供 Recharts 子组件读取。一般无需直接使用。
+
+### useChart
+
+读取当前 Chart 上下文的 hook，返回 `{ config: ChartConfig }`，仅可在 `<ChartContainer>` 内部使用。

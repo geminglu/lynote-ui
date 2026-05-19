@@ -91,32 +91,77 @@ import {
 
 ### Pagination
 
-`<nav>` 容器,自动带 `aria-label="pagination"`。
+`<nav>` 容器，自动带 `aria-label="pagination"` 与 `role="navigation"`。
+
+| 参数      | 说明                | 类型                          | 默认值 |
+| --------- | ------------------- | ----------------------------- | ------ |
+| className | 自定义类名          | `string`                      | -      |
+| children  | `PaginationContent` | `React.ReactNode`             | -      |
+| ...props  | 原生 `<nav>` 属性   | `React.ComponentProps<"nav">` | -      |
 
 ### PaginationContent
 
-`<ol>` 列表容器,管理项之间的间距。
+`<ul>` 列表容器，管理项之间的间距。
+
+| 参数      | 说明                  | 类型                         | 默认值 |
+| --------- | --------------------- | ---------------------------- | ------ |
+| className | 自定义类名            | `string`                     | -      |
+| children  | `PaginationItem` 列表 | `React.ReactNode`            | -      |
+| ...props  | 原生 `<ul>` 属性      | `React.ComponentProps<"ul">` | -      |
 
 ### PaginationItem
 
 `<li>` 单项容器。
 
+| 参数      | 说明             | 类型                         | 默认值 |
+| --------- | ---------------- | ---------------------------- | ------ |
+| className | 自定义类名       | `string`                     | -      |
+| children  | 单项内容         | `React.ReactNode`            | -      |
+| ...props  | 原生 `<li>` 属性 | `React.ComponentProps<"li">` | -      |
+
 ### PaginationLink
 
-| 参数     | 说明         | 类型                                         | 默认值   |
-| -------- | ------------ | -------------------------------------------- | -------- |
-| href     | 链接地址     | `string`                                     | -        |
-| isActive | 是否为当前页 | `boolean`                                    | `false`  |
-| size     | 按钮尺寸     | `Button["size"]`                             | `"icon"` |
-| onClick  | 点击回调     | `React.MouseEventHandler<HTMLAnchorElement>` | -        |
+实际渲染为 `<a>`，内部用 `Button` 提供视觉，激活时切换 `variant`。
 
-### PaginationPrevious / PaginationNext
+| 参数      | 说明            | 类型                                                                                 | 默认值   |
+| --------- | --------------- | ------------------------------------------------------------------------------------ | -------- |
+| href      | 链接地址        | `string`                                                                             | -        |
+| isActive  | 是否为当前页    | `boolean`                                                                            | `false`  |
+| size      | 按钮尺寸        | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"icon"` |
+| onClick   | 点击回调        | `React.MouseEventHandler<HTMLAnchorElement>`                                         | -        |
+| className | 自定义类名      | `string`                                                                             | -        |
+| children  | 链接内容        | `React.ReactNode`                                                                    | -        |
+| ...props  | 原生 `<a>` 属性 | `React.ComponentProps<"a">`                                                          | -        |
 
-| 参数 | 说明       | 类型     | 默认值                  |
-| ---- | ---------- | -------- | ----------------------- |
-| text | 显示的文字 | `string` | `"Previous"` / `"Next"` |
-| href | 链接地址   | `string` | -                       |
+### PaginationPrevious
+
+继承 `PaginationLink` 的属性，文字在窄屏下自动隐藏。
+
+| 参数      | 说明                  | 类型                  | 默认值       |
+| --------- | --------------------- | --------------------- | ------------ |
+| text      | 显示的文字            | `string`              | `"Previous"` |
+| href      | 链接地址              | `string`              | -            |
+| isActive  | 是否激活              | `boolean`             | `false`      |
+| className | 自定义类名            | `string`              | -            |
+| ...props  | 透传 `PaginationLink` | `PaginationLinkProps` | -            |
+
+### PaginationNext
+
+继承 `PaginationLink` 的属性。
+
+| 参数      | 说明                  | 类型                  | 默认值   |
+| --------- | --------------------- | --------------------- | -------- |
+| text      | 显示的文字            | `string`              | `"Next"` |
+| href      | 链接地址              | `string`              | -        |
+| isActive  | 是否激活              | `boolean`             | `false`  |
+| className | 自定义类名            | `string`              | -        |
+| ...props  | 透传 `PaginationLink` | `PaginationLinkProps` | -        |
 
 ### PaginationEllipsis
 
-省略号占位,带 `aria-hidden`。
+省略号占位，自带 `aria-hidden` 与 sr-only "More pages" 文案。
+
+| 参数      | 说明               | 类型                           | 默认值 |
+| --------- | ------------------ | ------------------------------ | ------ |
+| className | 自定义类名         | `string`                       | -      |
+| ...props  | 原生 `<span>` 属性 | `React.ComponentProps<"span">` | -      |

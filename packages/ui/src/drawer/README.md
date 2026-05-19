@@ -72,25 +72,92 @@ import {
 
 继承 vaul 的所有 props。常用项:
 
-| 参数                  | 说明                                | 类型                                     | 默认值     |
-| --------------------- | ----------------------------------- | ---------------------------------------- | ---------- |
-| open                  | 是否打开(受控)                      | `boolean`                                | -          |
-| defaultOpen           | 默认打开                            | `boolean`                                | `false`    |
-| onOpenChange          | 打开状态变化回调                    | `(open: boolean) => void`                | -          |
-| direction             | 方向                                | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` |
-| dismissible           | 是否可手势关闭                      | `boolean`                                | `true`     |
-| shouldScaleBackground | 嵌套时是否缩放父容器(iOS-like 效果) | `boolean`                                | `false`    |
+| 参数                     | 说明                                  | 类型                                            | 默认值     |
+| ------------------------ | ------------------------------------- | ----------------------------------------------- | ---------- |
+| open                     | 是否打开（受控）                      | `boolean`                                       | -          |
+| defaultOpen              | 默认是否打开（非受控）                | `boolean`                                       | `false`    |
+| onOpenChange             | 打开状态变化回调                      | `(open: boolean) => void`                       | -          |
+| direction                | 方向                                  | `"top" \| "right" \| "bottom" \| "left"`        | `"bottom"` |
+| dismissible              | 是否可手势关闭                        | `boolean`                                       | `true`     |
+| modal                    | 是否拦截焦点与背景滚动                | `boolean`                                       | `true`     |
+| shouldScaleBackground    | 嵌套时是否缩放父容器（iOS-like 效果） | `boolean`                                       | `false`    |
+| snapPoints               | 抽屉的吸附点列表                      | `Array<number \| string>`                       | -          |
+| activeSnapPoint          | 当前激活的吸附点（受控）              | `number \| string \| null`                      | -          |
+| setActiveSnapPoint       | 设置激活吸附点                        | `(snapPoint: number \| string \| null) => void` | -          |
+| fadeFromIndex            | 从哪个 snapPoint 开始让 overlay 淡入  | `number`                                        | -          |
+| scrollLockTimeout        | 滚动锁定的延时（毫秒）                | `number`                                        | `100`      |
+| closeThreshold           | 关闭阈值（0~1）                       | `number`                                        | `0.25`     |
+| preventScrollRestoration | 关闭时是否阻止 scroll 还原            | `boolean`                                       | `false`    |
+| handleOnly               | 是否仅允许拖拽 handle                 | `boolean`                                       | `false`    |
+| nested                   | 是否为嵌套抽屉                        | `boolean`                                       | `false`    |
+| repositionInputs         | 输入框聚焦时是否自动重新定位          | `boolean`                                       | `true`     |
+| onAnimationEnd           | 动画完成回调                          | `(open: boolean) => void`                       | -          |
+| container                | 自定义 Portal 容器                    | `HTMLElement \| null`                           | -          |
+| children                 | 子组件                                | `React.ReactNode`                               | -          |
 
-### DrawerTrigger / DrawerClose
+### DrawerTrigger
 
-vaul 的 Slot 模式: `asChild` 把样式 / 行为合并到 children 上。
+vaul 的 Slot 模式，`asChild` 把样式 / 行为合并到 children 上。
 
-```tsx | pure
-<DrawerTrigger asChild>
-  <Button>打开</Button>
-</DrawerTrigger>
-```
+| 参数      | 说明                     | 类型                                            | 默认值  |
+| --------- | ------------------------ | ----------------------------------------------- | ------- |
+| asChild   | 是否将属性合并到子元素   | `boolean`                                       | `false` |
+| className | 自定义类名               | `string`                                        | -       |
+| children  | 触发元素内容             | `React.ReactNode`                               | -       |
+| ...props  | 透传原生 `<button>` 属性 | `React.ButtonHTMLAttributes<HTMLButtonElement>` | -       |
 
-### DrawerContent / DrawerHeader / DrawerFooter / DrawerTitle / DrawerDescription
+### DrawerClose
 
-结构化的容器组件,与 Sheet 用法一致。
+关闭按钮，同样支持 `asChild`。
+
+| 参数      | 说明                   | 类型              | 默认值  |
+| --------- | ---------------------- | ----------------- | ------- |
+| asChild   | 是否将属性合并到子元素 | `boolean`         | `false` |
+| className | 自定义类名             | `string`          | -       |
+| children  | 按钮内容               | `React.ReactNode` | -       |
+
+### DrawerContent
+
+抽屉主体。底部方向下会自动渲染 grabber（顶部的灰色横条）。
+
+| 参数                 | 说明                                                       | 类型                             | 默认值 |
+| -------------------- | ---------------------------------------------------------- | -------------------------------- | ------ |
+| className            | 自定义类名                                                 | `string`                         | -      |
+| children             | 抽屉内容                                                   | `React.ReactNode`                | -      |
+| onPointerDownOutside | 点击外部时回调（可在此 `event.preventDefault()` 取消关闭） | `(event: PointerEvent) => void`  | -      |
+| onEscapeKeyDown      | 按下 Esc 时回调                                            | `(event: KeyboardEvent) => void` | -      |
+| onInteractOutside    | 任何外部交互时回调                                         | `(event: Event) => void`         | -      |
+
+### DrawerHeader / DrawerFooter
+
+布局容器，`<div>` 的样式包装。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 子节点            | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
+
+### DrawerTitle
+
+抽屉标题，自动关联 `aria-labelledby`。
+
+| 参数      | 说明             | 类型              | 默认值  |
+| --------- | ---------------- | ----------------- | ------- |
+| asChild   | 是否合并到子元素 | `boolean`         | `false` |
+| className | 自定义类名       | `string`          | -       |
+| children  | 标题内容         | `React.ReactNode` | -       |
+
+### DrawerDescription
+
+抽屉描述，自动关联 `aria-describedby`。
+
+| 参数      | 说明             | 类型              | 默认值  |
+| --------- | ---------------- | ----------------- | ------- |
+| asChild   | 是否合并到子元素 | `boolean`         | `false` |
+| className | 自定义类名       | `string`          | -       |
+| children  | 描述内容         | `React.ReactNode` | -       |
+
+### DrawerOverlay / DrawerPortal
+
+`DrawerContent` 已内部组合，一般无需手动使用。`DrawerOverlay` 是遮罩层，`DrawerPortal` 用于将内容渲染到 body。

@@ -224,9 +224,21 @@ import {
 
 字段的"内容"区域，常用于横向布局时把 label/description 与控件分两列。
 
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 子节点            | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
+
 ### FieldTitle
 
 字段标题（无 label 语义，仅用作视觉标题，适合卡片式 Field）。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 标题内容          | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
 
 ### FieldSeparator
 

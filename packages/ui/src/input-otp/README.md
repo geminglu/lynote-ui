@@ -62,25 +62,52 @@ import {
 
 ### InputOTP
 
-| 参数      | 说明           | 类型                      | 默认值  |
-| --------- | -------------- | ------------------------- | ------- |
-| maxLength | 总长度(必填)   | `number`                  | -       |
-| value     | 当前值(受控)   | `string`                  | -       |
-| onChange  | 变化回调       | `(value: string) => void` | -       |
-| disabled  | 是否禁用       | `boolean`                 | `false` |
-| pattern   | 允许的字符正则 | `string`                  | -       |
-| className | 自定义类名     | `string`                  | -       |
+基于 [`input-otp`](https://input-otp.rodz.dev/) 的 `OTPInput`。
+
+| 参数                        | 说明                                    | 类型                                                                        | 默认值             |
+| --------------------------- | --------------------------------------- | --------------------------------------------------------------------------- | ------------------ |
+| maxLength                   | 总长度（必填）                          | `number`                                                                    | -                  |
+| value                       | 当前值（受控）                          | `string`                                                                    | -                  |
+| defaultValue                | 默认值（非受控）                        | `string`                                                                    | -                  |
+| onChange                    | 变化回调                                | `(value: string) => void`                                                   | -                  |
+| onComplete                  | 输入完所有位时触发                      | `(value: string) => void`                                                   | -                  |
+| disabled                    | 是否禁用                                | `boolean`                                                                   | `false`            |
+| readOnly                    | 是否只读                                | `boolean`                                                                   | `false`            |
+| autoFocus                   | 自动聚焦                                | `boolean`                                                                   | `false`            |
+| pattern                     | 允许的字符正则（如 `^[0-9]+$`）         | `string`                                                                    | -                  |
+| inputMode                   | 虚拟键盘类型                            | `"numeric" \| "text" \| "decimal" \| "tel" \| "search" \| "email" \| "url"` | `"numeric"`        |
+| pasteTransformer            | 粘贴时对文本的预处理函数                | `(pasted: string) => string`                                                | -                  |
+| textAlign                   | 输入文本对齐方式                        | `"left" \| "center" \| "right"`                                             | `"left"`           |
+| pushPasswordManagerStrategy | 与密码管理器协作策略                    | `"increase-width" \| "none"`                                                | `"increase-width"` |
+| containerClassName          | 容器类名                                | `string`                                                                    | -                  |
+| className                   | 内部 input 元素类名                     | `string`                                                                    | -                  |
+| name                        | 表单字段名                              | `string`                                                                    | -                  |
+| children                    | 通常是 `InputOTPGroup` + `InputOTPSlot` | `React.ReactNode`                                                           | -                  |
 
 ### InputOTPGroup
 
-逻辑分组容器,把 N 个 slot 视觉上合并。
+逻辑分组容器，把 N 个 slot 视觉上合并。
+
+| 参数      | 说明                | 类型                          | 默认值 |
+| --------- | ------------------- | ----------------------------- | ------ |
+| className | 自定义类名          | `string`                      | -      |
+| children  | `InputOTPSlot` 列表 | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性   | `React.ComponentProps<"div">` | -      |
 
 ### InputOTPSlot
 
-| 参数  | 说明      | 类型     | 默认值 |
-| ----- | --------- | -------- | ------ |
-| index | slot 序号 | `number` | -      |
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| index     | slot 序号（必填） | `number`                      | -      |
+| className | 自定义类名        | `string`                      | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
 
 ### InputOTPSeparator
 
-视觉分隔符(默认是一个连字符)。
+视觉分隔符，默认渲染 `MinusIcon`。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 自定义分隔符内容  | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |

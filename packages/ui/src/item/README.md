@@ -107,6 +107,12 @@ import {
 
 `role="list"` 容器，自动管理子项之间的间距。
 
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | `Item` 列表       | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
+
 ### ItemMedia
 
 | 参数      | 说明                             | 类型                             | 默认值      |
@@ -114,19 +120,74 @@ import {
 | variant   | 媒体类型                         | `"default" \| "icon" \| "image"` | `"default"` |
 | className | 自定义类名                       | `string`                         | -           |
 | children  | 媒体内容（图标 / 图片 / Avatar） | `React.ReactNode`                | -           |
+| ...props  | 原生 `<div>` 属性                | `React.ComponentProps<"div">`    | -           |
 
-### ItemContent / ItemTitle / ItemDescription
+### ItemContent
 
-垂直堆叠的内容区域；`ItemTitle` 是单行标题，`ItemDescription` 最多两行的副本。
+垂直堆叠的标题+描述容器。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 子节点            | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
+
+### ItemTitle
+
+单行标题，`line-clamp-1`。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 标题内容          | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
+
+### ItemDescription
+
+最多两行的副本，`line-clamp-2`。
+
+| 参数      | 说明            | 类型                        | 默认值 |
+| --------- | --------------- | --------------------------- | ------ |
+| className | 自定义类名      | `string`                    | -      |
+| children  | 描述内容        | `React.ReactNode`           | -      |
+| ...props  | 原生 `<p>` 属性 | `React.ComponentProps<"p">` | -      |
 
 ### ItemActions
 
 右侧操作区域，自动垂直居中。
 
-### ItemHeader / ItemFooter
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 操作按钮          | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
 
-跨整行的头部 / 底部区域，常用于在 Item 顶部或底部放置元数据 / 时间戳。
+### ItemHeader
+
+跨整行的头部区域，常用于元数据 / 时间戳。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 头部内容          | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
+
+### ItemFooter
+
+跨整行的底部区域。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 底部内容          | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
 
 ### ItemSeparator
 
-单项之间的横向分隔线。
+单项之间的横向分隔线，继承 `Separator` 的属性。
+
+| 参数        | 说明                    | 类型                         | 默认值         |
+| ----------- | ----------------------- | ---------------------------- | -------------- |
+| orientation | 分隔方向                | `"horizontal" \| "vertical"` | `"horizontal"` |
+| decorative  | 是否仅装饰（影响 ARIA） | `boolean`                    | `true`         |
+| className   | 自定义类名              | `string`                     | -              |

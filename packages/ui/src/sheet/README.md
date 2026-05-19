@@ -66,26 +66,81 @@ import {
 
 ### Sheet
 
-| 参数         | 说明             | 类型                      | 默认值  |
-| ------------ | ---------------- | ------------------------- | ------- |
-| open         | 是否打开(受控)   | `boolean`                 | -       |
-| defaultOpen  | 默认打开(非受控) | `boolean`                 | `false` |
-| onOpenChange | 打开状态变化回调 | `(open: boolean) => void` | -       |
-| modal        | 是否锁定背景滚动 | `boolean`                 | `true`  |
+继承 Base UI `Dialog.Root` 的 props。
+
+| 参数                 | 说明                        | 类型                                                               | 默认值  |
+| -------------------- | --------------------------- | ------------------------------------------------------------------ | ------- |
+| open                 | 是否打开（受控）            | `boolean`                                                          | -       |
+| defaultOpen          | 默认打开（非受控）          | `boolean`                                                          | `false` |
+| onOpenChange         | 打开状态变化回调            | `(open: boolean, eventDetails: Dialog.ChangeEventDetails) => void` | -       |
+| onOpenChangeComplete | 打开/关闭动画完成回调       | `(open: boolean) => void`                                          | -       |
+| modal                | 是否拦截焦点与背景滚动      | `boolean \| "trap-focus"`                                          | `true`  |
+| dismissible          | 是否允许点击外部 / Esc 关闭 | `boolean`                                                          | `true`  |
+| actionsRef           | 用于命令式控制              | `RefObject<{ unmount: () => void } \| null>`                       | -       |
+| children             | trigger + content           | `React.ReactNode`                                                  | -       |
 
 ### SheetContent
 
-| 参数            | 说明                           | 类型                                     | 默认值    |
-| --------------- | ------------------------------ | ---------------------------------------- | --------- |
-| side            | 滑入方向                       | `"top" \| "right" \| "bottom" \| "left"` | `"right"` |
-| showCloseButton | 是否显示右上角关闭按钮         | `boolean`                                | `true`    |
-| className       | 自定义类名(控制宽 / 高 / 边距) | `string`                                 | -         |
-| children        | 内容                           | `React.ReactNode`                        | -         |
+| 参数            | 说明                             | 类型                                                                               | 默认值    |
+| --------------- | -------------------------------- | ---------------------------------------------------------------------------------- | --------- |
+| side            | 滑入方向                         | `"top" \| "right" \| "bottom" \| "left"`                                           | `"right"` |
+| showCloseButton | 是否显示右上角关闭按钮           | `boolean`                                                                          | `true`    |
+| initialFocus    | 打开时初始聚焦的元素             | `RefObject<HTMLElement \| null> \| ((reason) => HTMLElement \| null \| undefined)` | -         |
+| finalFocus      | 关闭后聚焦回的元素               | `RefObject<HTMLElement \| null> \| ((reason) => HTMLElement \| null \| undefined)` | -         |
+| render          | 自定义渲染元素                   | `React.ReactElement \| ((props, state) => React.ReactNode)`                        | -         |
+| className       | 自定义类名（控制宽 / 高 / 边距） | `string`                                                                           | -         |
+| children        | 内容                             | `React.ReactNode`                                                                  | -         |
 
-### SheetTrigger / SheetClose
+### SheetTrigger
 
-可通过 `render` 渲染为任意元素(常用 Button)。
+可通过 `render` 渲染为任意元素（常用 Button）。
 
-### SheetHeader / SheetFooter / SheetTitle / SheetDescription
+| 参数         | 说明                           | 类型                                                        | 默认值  |
+| ------------ | ------------------------------ | ----------------------------------------------------------- | ------- |
+| nativeButton | 是否强制以原生 `<button>` 挂载 | `boolean`                                                   | `true`  |
+| disabled     | 是否禁用                       | `boolean`                                                   | `false` |
+| render       | 自定义渲染元素                 | `React.ReactElement \| ((props, state) => React.ReactNode)` | -       |
+| className    | 自定义类名                     | `string`                                                    | -       |
+| children     | trigger 内容                   | `React.ReactNode`                                           | -       |
 
-结构化的标题区与底部操作区,标题与描述会自动注册到 ARIA。
+### SheetClose
+
+关闭按钮，可单独使用（如自定义关闭按钮）。
+
+| 参数         | 说明                           | 类型                                                        | 默认值  |
+| ------------ | ------------------------------ | ----------------------------------------------------------- | ------- |
+| nativeButton | 是否强制以原生 `<button>` 挂载 | `boolean`                                                   | `true`  |
+| disabled     | 是否禁用                       | `boolean`                                                   | `false` |
+| render       | 自定义渲染元素                 | `React.ReactElement \| ((props, state) => React.ReactNode)` | -       |
+| className    | 自定义类名                     | `string`                                                    | -       |
+| children     | 按钮内容                       | `React.ReactNode`                                           | -       |
+
+### SheetHeader / SheetFooter
+
+布局容器。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 子节点            | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
+
+### SheetTitle
+
+标题，自动绑定 `aria-labelledby`。
+
+| 参数      | 说明           | 类型                                                        | 默认值 |
+| --------- | -------------- | ----------------------------------------------------------- | ------ |
+| render    | 自定义渲染元素 | `React.ReactElement \| ((props, state) => React.ReactNode)` | -      |
+| className | 自定义类名     | `string`                                                    | -      |
+| children  | 标题内容       | `React.ReactNode`                                           | -      |
+
+### SheetDescription
+
+描述，自动绑定 `aria-describedby`。
+
+| 参数      | 说明           | 类型                                                        | 默认值 |
+| --------- | -------------- | ----------------------------------------------------------- | ------ |
+| render    | 自定义渲染元素 | `React.ReactElement \| ((props, state) => React.ReactNode)` | -      |
+| className | 自定义类名     | `string`                                                    | -      |
+| children  | 描述内容       | `React.ReactNode`                                           | -      |

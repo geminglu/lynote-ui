@@ -107,27 +107,187 @@ import {
 
 ### SidebarProvider
 
-| 参数         | 说明            | 类型                      | 默认值 |
-| ------------ | --------------- | ------------------------- | ------ |
-| defaultOpen  | 默认展开 / 折叠 | `boolean`                 | `true` |
-| open         | 受控展开状态    | `boolean`                 | -      |
-| onOpenChange | 状态变化回调    | `(open: boolean) => void` | -      |
+侧边栏上下文 Provider，所有 Sidebar 相关组件都必须放在它内部。会自动监听 `Ctrl/Cmd + B` 切换折叠，并将状态写入 cookie。
+
+| 参数         | 说明                                   | 类型                          | 默认值 |
+| ------------ | -------------------------------------- | ----------------------------- | ------ |
+| defaultOpen  | 默认展开 / 折叠                        | `boolean`                     | `true` |
+| open         | 受控展开状态                           | `boolean`                     | -      |
+| onOpenChange | 状态变化回调                           | `(open: boolean) => void`     | -      |
+| className    | 包装容器类名                           | `string`                      | -      |
+| style        | 用于覆盖 `--sidebar-width` 等 CSS 变量 | `React.CSSProperties`         | -      |
+| children     | 子节点                                 | `React.ReactNode`             | -      |
+| ...props     | 原生 `<div>` 属性                      | `React.ComponentProps<"div">` | -      |
 
 ### Sidebar
 
-| 参数        | 说明          | 类型                                 | 默认值        |
-| ----------- | ------------- | ------------------------------------ | ------------- |
-| side        | 显示在左 / 右 | `"left" \| "right"`                  | `"left"`      |
-| variant     | 视觉变体      | `"sidebar" \| "floating" \| "inset"` | `"sidebar"`   |
-| collapsible | 折叠方式      | `"offcanvas" \| "icon" \| "none"`    | `"offcanvas"` |
+| 参数        | 说明              | 类型                                 | 默认值        |
+| ----------- | ----------------- | ------------------------------------ | ------------- |
+| side        | 显示在左 / 右     | `"left" \| "right"`                  | `"left"`      |
+| variant     | 视觉变体          | `"sidebar" \| "floating" \| "inset"` | `"sidebar"`   |
+| collapsible | 折叠方式          | `"offcanvas" \| "icon" \| "none"`    | `"offcanvas"` |
+| className   | 自定义类名        | `string`                             | -             |
+| children    | Sidebar 内容      | `React.ReactNode`                    | -             |
+| ...props    | 原生 `<div>` 属性 | `React.ComponentProps<"div">`        | -             |
 
-### 子组件
+### SidebarTrigger
 
-- `SidebarHeader` / `SidebarContent` / `SidebarFooter`:整体结构区域。
-- `SidebarGroup` / `SidebarGroupLabel` / `SidebarGroupContent`:分组容器。
-- `SidebarMenu` / `SidebarMenuItem` / `SidebarMenuButton`:菜单项核心。
-- `SidebarMenuSub` / `SidebarMenuSubItem` / `SidebarMenuSubButton`:二级子菜单。
-- `SidebarSeparator`:分隔线。
-- `SidebarRail`:折叠后的轨道区域。
-- `SidebarInset`:主内容区,自动让出侧栏宽度。
-- `SidebarTrigger`:折叠 / 展开按钮。
+折叠 / 展开按钮，渲染为 `<Button variant="ghost" />`，自带菜单图标。
+
+| 参数      | 说明                             | 类型                                         | 默认值 |
+| --------- | -------------------------------- | -------------------------------------------- | ------ |
+| onClick   | 点击回调（会先调用，再触发折叠） | `React.MouseEventHandler<HTMLButtonElement>` | -      |
+| className | 自定义类名                       | `string`                                     | -      |
+| ...props  | 透传 `Button` 属性               | `React.ComponentProps<typeof Button>`        | -      |
+
+### SidebarRail
+
+折叠后的轨道区域，悬停时可作为展开热区。
+
+| 参数      | 说明                 | 类型                             | 默认值 |
+| --------- | -------------------- | -------------------------------- | ------ |
+| className | 自定义类名           | `string`                         | -      |
+| ...props  | 原生 `<button>` 属性 | `React.ComponentProps<"button">` | -      |
+
+### SidebarInset
+
+主内容区域，自动让出侧栏宽度，并适配 `variant="inset"` 的圆角与阴影。
+
+| 参数      | 说明               | 类型                           | 默认值 |
+| --------- | ------------------ | ------------------------------ | ------ |
+| className | 自定义类名         | `string`                       | -      |
+| children  | 主内容             | `React.ReactNode`              | -      |
+| ...props  | 原生 `<main>` 属性 | `React.ComponentProps<"main">` | -      |
+
+### SidebarInput
+
+侧栏内的搜索输入框（基于 `Input` 包装，去除阴影）。
+
+| 参数      | 说明              | 类型                                 | 默认值 |
+| --------- | ----------------- | ------------------------------------ | ------ |
+| className | 自定义类名        | `string`                             | -      |
+| ...props  | 透传 `Input` 属性 | `React.ComponentProps<typeof Input>` | -      |
+
+### SidebarHeader / SidebarContent / SidebarFooter
+
+整体结构区域。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 子节点            | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
+
+### SidebarSeparator
+
+分隔线，继承 `Separator` 属性。
+
+### SidebarGroup / SidebarGroupContent
+
+分组容器。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 子节点            | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
+
+### SidebarGroupLabel
+
+分组标题，可通过 `render` 渲染为按钮等元素。
+
+| 参数      | 说明           | 类型                                                        | 默认值 |
+| --------- | -------------- | ----------------------------------------------------------- | ------ |
+| render    | 自定义渲染元素 | `React.ReactElement \| ((props, state) => React.ReactNode)` | -      |
+| className | 自定义类名     | `string`                                                    | -      |
+| children  | 标题内容       | `React.ReactNode`                                           | -      |
+
+### SidebarGroupAction
+
+分组右上角的操作按钮。
+
+| 参数      | 说明                 | 类型                                                        | 默认值 |
+| --------- | -------------------- | ----------------------------------------------------------- | ------ |
+| render    | 自定义渲染元素       | `React.ReactElement \| ((props, state) => React.ReactNode)` | -      |
+| className | 自定义类名           | `string`                                                    | -      |
+| ...props  | 原生 `<button>` 属性 | `React.ComponentProps<"button">`                            | -      |
+
+### SidebarMenu / SidebarMenuItem
+
+菜单列表与单项。
+
+| 参数      | 说明       | 类型              | 默认值 |
+| --------- | ---------- | ----------------- | ------ |
+| className | 自定义类名 | `string`          | -      |
+| children  | 子节点     | `React.ReactNode` | -      |
+
+### SidebarMenuButton
+
+菜单按钮，是侧栏的焦点单元。
+
+| 参数      | 说明                                                 | 类型                                                        | 默认值      |
+| --------- | ---------------------------------------------------- | ----------------------------------------------------------- | ----------- |
+| isActive  | 是否为当前激活项（自动设置 `data-active`）           | `boolean`                                                   | `false`     |
+| variant   | 视觉变体                                             | `"default" \| "outline"`                                    | `"default"` |
+| size      | 按钮尺寸                                             | `"default" \| "sm" \| "lg"`                                 | `"default"` |
+| tooltip   | 折叠态下显示的 tooltip 文本或 `TooltipContent` props | `string \| React.ComponentProps<typeof TooltipContent>`     | -           |
+| render    | 多态渲染（如渲染为路由 `<Link />`）                  | `React.ReactElement \| ((props, state) => React.ReactNode)` | -           |
+| className | 自定义类名                                           | `string`                                                    | -           |
+| ...props  | 原生 `<button>` 属性                                 | `React.ComponentProps<"button">`                            | -           |
+
+### SidebarMenuAction
+
+菜单项右侧的次级操作按钮。
+
+| 参数        | 说明                    | 类型                                                        | 默认值  |
+| ----------- | ----------------------- | ----------------------------------------------------------- | ------- |
+| showOnHover | 仅在 hover/focus 时显示 | `boolean`                                                   | `false` |
+| render      | 自定义渲染元素          | `React.ReactElement \| ((props, state) => React.ReactNode)` | -       |
+| className   | 自定义类名              | `string`                                                    | -       |
+| ...props    | 原生 `<button>` 属性    | `React.ComponentProps<"button">`                            | -       |
+
+### SidebarMenuBadge
+
+菜单项右侧的徽标（如未读数）。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 徽标内容          | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
+
+### SidebarMenuSkeleton
+
+加载占位行，自带随机宽度的 `<Skeleton />`。
+
+| 参数      | 说明                   | 类型      | 默认值  |
+| --------- | ---------------------- | --------- | ------- |
+| showIcon  | 是否在左侧渲染图标占位 | `boolean` | `false` |
+| className | 自定义类名             | `string`  | -       |
+
+### SidebarMenuSub / SidebarMenuSubItem / SidebarMenuSubButton
+
+二级子菜单：列表 / 单项 / 按钮。
+
+| 参数      | 说明                   | 类型                                                        | 默认值  |
+| --------- | ---------------------- | ----------------------------------------------------------- | ------- |
+| isActive  | 子按钮：是否激活       | `boolean`                                                   | `false` |
+| size      | 子按钮：尺寸           | `"sm" \| "md"`                                              | `"md"`  |
+| render    | 子按钮：自定义渲染元素 | `React.ReactElement \| ((props, state) => React.ReactNode)` | -       |
+| className | 自定义类名             | `string`                                                    | -       |
+
+### useSidebar
+
+获取当前 Sidebar 上下文，返回：
+
+```ts
+{
+  state: "expanded" | "collapsed";
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  openMobile: boolean;
+  setOpenMobile: (open: boolean) => void;
+  isMobile: boolean;
+  toggleSidebar: () => void;
+}
+```

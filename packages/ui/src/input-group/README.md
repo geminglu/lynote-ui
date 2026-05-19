@@ -98,27 +98,59 @@ import {
 
 容器,支持原生 `<div>` 属性。
 
-### InputGroupInput / InputGroupTextarea
+### InputGroupInput
 
-去除独立边框的 Input / Textarea,继承父级 InputGroup 的样式。
+去除独立边框的 Input，继承父级 InputGroup 的样式。完整支持原生 `<input>` 属性。
+
+| 参数         | 说明                | 类型                            | 默认值  |
+| ------------ | ------------------- | ------------------------------- | ------- |
+| className    | 自定义类名          | `string`                        | -       |
+| disabled     | 是否禁用            | `boolean`                       | `false` |
+| aria-invalid | 错误态              | `boolean`                       | -       |
+| ...props     | 原生 `<input>` 属性 | `React.ComponentProps<"input">` | -       |
+
+### InputGroupTextarea
+
+去除独立边框的 Textarea，自动 `resize-none`。完整支持原生 `<textarea>` 属性。
+
+| 参数         | 说明                   | 类型                               | 默认值  |
+| ------------ | ---------------------- | ---------------------------------- | ------- |
+| className    | 自定义类名             | `string`                           | -       |
+| disabled     | 是否禁用               | `boolean`                          | `false` |
+| aria-invalid | 错误态                 | `boolean`                          | -       |
+| ...props     | 原生 `<textarea>` 属性 | `React.ComponentProps<"textarea">` | -       |
 
 ### InputGroupAddon
 
-| 参数      | 说明         | 类型                                                             | 默认值           |
-| --------- | ------------ | ---------------------------------------------------------------- | ---------------- |
-| align     | 装饰元素位置 | `"inline-start" \| "inline-end" \| "block-start" \| "block-end"` | `"inline-start"` |
-| className | 自定义类名   | `string`                                                         | -                |
+| 参数      | 说明                                                   | 类型                                                             | 默认值           |
+| --------- | ------------------------------------------------------ | ---------------------------------------------------------------- | ---------------- |
+| align     | 装饰元素位置                                           | `"inline-start" \| "inline-end" \| "block-start" \| "block-end"` | `"inline-start"` |
+| className | 自定义类名                                             | `string`                                                         | -                |
+| onClick   | 点击回调（内部默认会聚焦到关联的 input，除非点击按钮） | `React.MouseEventHandler<HTMLDivElement>`                        | -                |
+| children  | 装饰内容（图标、按钮、文本等）                         | `React.ReactNode`                                                | -                |
+| ...props  | 原生 `<div>` 属性                                      | `React.ComponentProps<"div">`                                    | -                |
 
 ### InputGroupButton
 
-行内按钮,继承 `Button` 大部分属性,但提供专用 size。
+行内按钮，继承 `Button` 大部分属性，但提供专用 size。
 
-| 参数    | 说明     | 类型                                     | 默认值     |
-| ------- | -------- | ---------------------------------------- | ---------- |
-| size    | 按钮尺寸 | `"xs" \| "sm" \| "icon-xs" \| "icon-sm"` | `"xs"`     |
-| variant | 视觉变体 | `Button["variant"]`                      | `"ghost"`  |
-| type    | 表单类型 | `"button" \| "submit" \| "reset"`        | `"button"` |
+| 参数      | 说明       | 类型                                                                          | 默认值     |
+| --------- | ---------- | ----------------------------------------------------------------------------- | ---------- |
+| size      | 按钮尺寸   | `"xs" \| "sm" \| "icon-xs" \| "icon-sm"`                                      | `"xs"`     |
+| variant   | 视觉变体   | `"default" \| "outline" \| "secondary" \| "ghost" \| "destructive" \| "link"` | `"ghost"`  |
+| type      | 表单类型   | `"button" \| "submit" \| "reset"`                                             | `"button"` |
+| disabled  | 是否禁用   | `boolean`                                                                     | `false`    |
+| onClick   | 点击回调   | `React.MouseEventHandler<HTMLButtonElement>`                                  | -          |
+| render    | 多态渲染   | `React.ReactElement \| ((props, state) => React.ReactNode)`                   | -          |
+| className | 自定义类名 | `string`                                                                      | -          |
+| children  | 按钮内容   | `React.ReactNode`                                                             | -          |
 
 ### InputGroupText
 
-行内文字(前后缀),自动应用 muted 颜色与字号。
+行内文字（前后缀），自动应用 muted 颜色与字号。
+
+| 参数      | 说明               | 类型                           | 默认值 |
+| --------- | ------------------ | ------------------------------ | ------ |
+| className | 自定义类名         | `string`                       | -      |
+| children  | 文本内容           | `React.ReactNode`              | -      |
+| ...props  | 原生 `<span>` 属性 | `React.ComponentProps<"span">` | -      |

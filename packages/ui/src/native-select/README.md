@@ -68,8 +68,23 @@ import {
 
 ### NativeSelectOption
 
-`<option>` 包装。
+`<option>` 包装。完整支持原生 `<option>` 属性。
+
+| 参数     | 说明                 | 类型                                    | 默认值  |
+| -------- | -------------------- | --------------------------------------- | ------- |
+| value    | 选项值               | `string \| number \| readonly string[]` | -       |
+| disabled | 是否禁用             | `boolean`                               | `false` |
+| children | 选项文本             | `React.ReactNode`                       | -       |
+| ...props | 原生 `<option>` 属性 | `React.ComponentProps<"option">`        | -       |
 
 ### NativeSelectOptGroup
 
-`<optgroup>` 包装,需要 `label` 属性。
+`<optgroup>` 包装，需要 `label` 属性。
+
+| 参数      | 说明                      | 类型                               | 默认值  |
+| --------- | ------------------------- | ---------------------------------- | ------- |
+| label     | 分组标题（必填）          | `string`                           | -       |
+| disabled  | 是否整组禁用              | `boolean`                          | `false` |
+| className | 自定义类名                | `string`                           | -       |
+| children  | `NativeSelectOption` 列表 | `React.ReactNode`                  | -       |
+| ...props  | 原生 `<optgroup>` 属性    | `React.ComponentProps<"optgroup">` | -       |

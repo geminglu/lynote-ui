@@ -69,4 +69,36 @@ import {
 
 ## API
 
-API 与 `DropdownMenu` 几乎一致,所有 `Menubar*` 都对应 base-ui 的 `Menu*` 原语。详见 DropdownMenu 文档。
+API 与 `DropdownMenu` 几乎一致，所有 `Menubar*` 子组件都对应 base-ui 的 `Menu*` 原语。下面只列出 `Menubar` 与几个常用差异点，其他子组件参数请参考 [DropdownMenu](../dropdown-menu) 同名组件。
+
+### Menubar
+
+顶层 menubar 容器（基于 Base UI `Menubar.Root`）。
+
+| 参数          | 说明                       | 类型                                                                | 默认值         |
+| ------------- | -------------------------- | ------------------------------------------------------------------- | -------------- |
+| value         | 当前打开的菜单值（受控）   | `string`                                                            | -              |
+| defaultValue  | 默认打开的菜单值（非受控） | `string`                                                            | -              |
+| onValueChange | 打开的菜单变化回调         | `(value: string, eventDetails: Menubar.ChangeEventDetails) => void` | -              |
+| orientation   | 排列方向                   | `"horizontal" \| "vertical"`                                        | `"horizontal"` |
+| loop          | 键盘左右移动是否首尾循环   | `boolean`                                                           | `true`         |
+| modal         | 是否模态                   | `boolean`                                                           | `false`        |
+| render        | 自定义渲染元素             | `React.ReactElement \| ((props, state) => React.ReactNode)`         | -              |
+| className     | 自定义类名                 | `string`                                                            | -              |
+| children      | `MenubarMenu` 列表         | `React.ReactNode`                                                   | -              |
+
+### MenubarMenu
+
+单个菜单（继承自 `DropdownMenu`）。常用 props：`open` / `defaultOpen` / `onOpenChange` / `modal` 等，详见 DropdownMenu 文档。
+
+### MenubarTrigger
+
+顶级菜单的触发按钮，对应 `DropdownMenuTrigger`。
+
+### MenubarContent
+
+菜单内容弹层，对应 `DropdownMenuContent`，支持 `side` / `align` / `sideOffset` / `alignOffset` / `className`。
+
+### MenubarItem / MenubarCheckboxItem / MenubarRadioGroup / MenubarRadioItem / MenubarLabel / MenubarSeparator / MenubarShortcut / MenubarGroup / MenubarPortal / MenubarSub / MenubarSubTrigger / MenubarSubContent
+
+各项与 `DropdownMenu` 同名组件一致，参数完全相同，详见 [DropdownMenu](../dropdown-menu) 文档。

@@ -75,13 +75,25 @@ import { Toaster, toast } from "lynote-ui/sonner";
 
 继承 sonner 的所有 props。常用项:
 
-| 参数        | 说明                     | 类型                                                                                  | 默认值           |
-| ----------- | ------------------------ | ------------------------------------------------------------------------------------- | ---------------- |
-| position    | 提示出现的位置           | `"top-left" \| "top-right" \| "bottom-left" \| "bottom-right" \| "top-center" \| ...` | `"bottom-right"` |
-| richColors  | 启用类型化的颜色         | `boolean`                                                                             | `false`          |
-| expand      | 是否默认展开堆叠的 toast | `boolean`                                                                             | `false`          |
-| theme       | 主题(默认跟随系统)       | `"light" \| "dark" \| "system"`                                                       | `"system"`       |
-| closeButton | 显示关闭按钮             | `boolean`                                                                             | `false`          |
+| 参数                  | 说明                                                                | 类型                                                                                              | 默认值               |
+| --------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | -------------------- |
+| position              | 提示出现的位置                                                      | `"top-left" \| "top-right" \| "bottom-left" \| "bottom-right" \| "top-center" \| "bottom-center"` | `"bottom-right"`     |
+| richColors            | 启用类型化的颜色                                                    | `boolean`                                                                                         | `false`              |
+| expand                | 是否默认展开堆叠的 toast                                            | `boolean`                                                                                         | `false`              |
+| visibleToasts         | 同时可见的 toast 数                                                 | `number`                                                                                          | `3`                  |
+| theme                 | 主题（默认跟随 next-themes 系统）                                   | `"light" \| "dark" \| "system"`                                                                   | `"system"`           |
+| closeButton           | 显示关闭按钮                                                        | `boolean`                                                                                         | `false`              |
+| invert                | 反色显示                                                            | `boolean`                                                                                         | `false`              |
+| toastOptions          | 全局 toast 配置（duration / className / icons 等）                  | `ToastOptions`                                                                                    | -                    |
+| gap                   | toast 之间的间距（px）                                              | `number`                                                                                          | `14`                 |
+| offset                | 距离视口边缘的偏移                                                  | `string \| number`                                                                                | `32`                 |
+| dir                   | 文字方向                                                            | `"rtl" \| "ltr" \| "auto"`                                                                        | `"auto"`             |
+| hotkey                | 聚焦 toast 列表的快捷键                                             | `string[]`                                                                                        | `["altKey", "KeyT"]` |
+| duration              | 单个 toast 默认显示时间（毫秒）                                     | `number`                                                                                          | `4000`               |
+| icons                 | 自定义图标集合（已内置 success / info / warning / error / loading） | `ToastIcons`                                                                                      | -                    |
+| className             | Toaster 容器类名                                                    | `string`                                                                                          | -                    |
+| style                 | Toaster 容器内联样式                                                | `React.CSSProperties`                                                                             | -                    |
+| pauseWhenPageIsHidden | 页面隐藏时暂停计时                                                  | `boolean`                                                                                         | `false`              |
 
 ### toast(message, options)
 

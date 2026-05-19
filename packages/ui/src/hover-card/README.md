@@ -68,23 +68,37 @@ import {
 
 ### HoverCard
 
-| 参数         | 说明               | 类型                      | 默认值  |
-| ------------ | ------------------ | ------------------------- | ------- |
-| open         | 是否打开（受控）   | `boolean`                 | -       |
-| defaultOpen  | 默认打开（非受控） | `boolean`                 | `false` |
-| onOpenChange | 打开状态变化回调   | `(open: boolean) => void` | -       |
+继承 Base UI `PreviewCard.Root` 的 props。
+
+| 参数                 | 说明                        | 类型                                                                    | 默认值  |
+| -------------------- | --------------------------- | ----------------------------------------------------------------------- | ------- |
+| open                 | 是否打开（受控）            | `boolean`                                                               | -       |
+| defaultOpen          | 默认打开（非受控）          | `boolean`                                                               | `false` |
+| onOpenChange         | 打开状态变化回调            | `(open: boolean, eventDetails: PreviewCard.ChangeEventDetails) => void` | -       |
+| onOpenChangeComplete | 打开/关闭动画完成回调       | `(open: boolean) => void`                                               | -       |
+| openDelay            | 悬停打开的延时（毫秒）      | `number`                                                                | `600`   |
+| closeDelay           | 鼠标移出关闭的延时（毫秒）  | `number`                                                                | `300`   |
+| actionsRef           | 用于以命令式打开/关闭的 ref | `RefObject<{ unmount: () => void } \| null>`                            | -       |
+| children             | trigger + content           | `React.ReactNode`                                                       | -       |
 
 ### HoverCardTrigger
 
 通常是一段文本或 Avatar；可以通过 `render` 渲染为任意元素。
 
+| 参数      | 说明           | 类型                                                        | 默认值 |
+| --------- | -------------- | ----------------------------------------------------------- | ------ |
+| render    | 自定义渲染元素 | `React.ReactElement \| ((props, state) => React.ReactNode)` | -      |
+| className | 自定义类名     | `string`                                                    | -      |
+| children  | 触发元素       | `React.ReactNode`                                           | -      |
+
 ### HoverCardContent
 
-| 参数        | 说明         | 类型                                                                       | 默认值     |
-| ----------- | ------------ | -------------------------------------------------------------------------- | ---------- |
-| side        | 弹层方向     | `"top" \| "bottom" \| "left" \| "right" \| "inline-start" \| "inline-end"` | `"bottom"` |
-| align       | 对齐方式     | `"start" \| "center" \| "end"`                                             | `"center"` |
-| sideOffset  | 与锚点的间距 | `number`                                                                   | `4`        |
-| alignOffset | 对齐偏移量   | `number`                                                                   | `4`        |
-| className   | 自定义类名   | `string`                                                                   | -          |
-| children    | 卡片内容     | `React.ReactNode`                                                          | -          |
+| 参数        | 说明           | 类型                                                                       | 默认值     |
+| ----------- | -------------- | -------------------------------------------------------------------------- | ---------- |
+| side        | 弹层方向       | `"top" \| "bottom" \| "left" \| "right" \| "inline-start" \| "inline-end"` | `"bottom"` |
+| align       | 对齐方式       | `"start" \| "center" \| "end"`                                             | `"center"` |
+| sideOffset  | 与锚点的间距   | `number`                                                                   | `4`        |
+| alignOffset | 对齐偏移量     | `number`                                                                   | `4`        |
+| render      | 自定义渲染元素 | `React.ReactElement \| ((props, state) => React.ReactNode)`                | -          |
+| className   | 自定义类名     | `string`                                                                   | -          |
+| children    | 卡片内容       | `React.ReactNode`                                                          | -          |

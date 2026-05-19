@@ -148,59 +148,99 @@ import {
 
 ### Dialog
 
-| 参数         | 说明                     | 类型                      | 默认值  |
-| ------------ | ------------------------ | ------------------------- | ------- |
-| open         | 是否打开（受控）         | `boolean`                 | -       |
-| defaultOpen  | 是否默认打开（非受控）   | `boolean`                 | `false` |
-| onOpenChange | 打开状态变化回调         | `(open: boolean) => void` | -       |
-| modal        | 是否模态（锁定背景滚动） | `boolean`                 | `true`  |
-| children     | 子组件                   | `React.ReactNode`         | -       |
+继承 Base UI `Dialog.Root` 的 props。
+
+| 参数                 | 说明                                                            | 类型                                                               | 默认值  |
+| -------------------- | --------------------------------------------------------------- | ------------------------------------------------------------------ | ------- |
+| open                 | 是否打开（受控）                                                | `boolean`                                                          | -       |
+| defaultOpen          | 是否默认打开（非受控）                                          | `boolean`                                                          | `false` |
+| onOpenChange         | 打开状态变化回调                                                | `(open: boolean, eventDetails: Dialog.ChangeEventDetails) => void` | -       |
+| onOpenChangeComplete | 打开/关闭动画完成回调                                           | `(open: boolean) => void`                                          | -       |
+| modal                | 是否模态：`true` 拦截焦点 + 锁定滚动；`"trap-focus"` 仅拦截焦点 | `boolean \| "trap-focus"`                                          | `true`  |
+| dismissible          | 是否可通过点击外部 / 按 Esc 关闭                                | `boolean`                                                          | `true`  |
+| actionsRef           | 用于命令式控制打开/关闭                                         | `RefObject<{ unmount: () => void } \| null>`                       | -       |
+| children             | 子组件                                                          | `React.ReactNode`                                                  | -       |
 
 ### DialogTrigger
 
-| 参数      | 说明                                     | 类型                      | 默认值 |
-| --------- | ---------------------------------------- | ------------------------- | ------ |
-| render    | 多态渲染，常用于把 trigger 渲染为 Button | `React.ReactElement`      | -      |
-| className | 自定义类名                               | `string`                  | -      |
-| children  | 触发器内容                               | `React.ReactNode`         | -      |
-| onClick   | 点击回调                                 | `React.MouseEventHandler` | -      |
+| 参数         | 说明                                     | 类型                                                        | 默认值  |
+| ------------ | ---------------------------------------- | ----------------------------------------------------------- | ------- |
+| nativeButton | 是否强制以原生 `<button>` 挂载           | `boolean`                                                   | `true`  |
+| disabled     | 是否禁用                                 | `boolean`                                                   | `false` |
+| render       | 多态渲染，常用于把 trigger 渲染为 Button | `React.ReactElement \| ((props, state) => React.ReactNode)` | -       |
+| className    | 自定义类名                               | `string`                                                    | -       |
+| children     | 触发器内容                               | `React.ReactNode`                                           | -       |
+| onClick      | 点击回调                                 | `React.MouseEventHandler`                                   | -       |
 
 ### DialogContent
 
-| 参数            | 说明                                                                        | 类型              | 默认值 |
-| --------------- | --------------------------------------------------------------------------- | ----------------- | ------ |
-| showCloseButton | 是否显示右上角关闭按钮                                                      | `boolean`         | `true` |
-| className       | 自定义类名（控制最大宽度，如 `sm:max-w-md`、`sm:max-w-lg`、`sm:max-w-3xl`） | `string`          | -      |
-| children        | 弹窗内容                                                                    | `React.ReactNode` | -      |
+| 参数            | 说明                                                                        | 类型                                                                               | 默认值 |
+| --------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------ |
+| showCloseButton | 是否显示右上角关闭按钮                                                      | `boolean`                                                                          | `true` |
+| initialFocus    | 打开时初始聚焦的元素                                                        | `RefObject<HTMLElement \| null> \| ((reason) => HTMLElement \| null \| undefined)` | -      |
+| finalFocus      | 关闭后聚焦回的元素                                                          | `RefObject<HTMLElement \| null> \| ((reason) => HTMLElement \| null \| undefined)` | -      |
+| render          | 自定义渲染元素                                                              | `React.ReactElement \| ((props, state) => React.ReactNode)`                        | -      |
+| className       | 自定义类名（控制最大宽度，如 `sm:max-w-md`、`sm:max-w-lg`、`sm:max-w-3xl`） | `string`                                                                           | -      |
+| children        | 弹窗内容                                                                    | `React.ReactNode`                                                                  | -      |
 
-### DialogHeader / DialogFooter
+### DialogHeader
 
-布局容器，分别用于头部（标题区）和底部（按钮区）。`DialogFooter` 自带次级背景与上分隔线。
+头部布局容器。
 
-| 参数            | 说明                                     | 类型              | 默认值  |
-| --------------- | ---------------------------------------- | ----------------- | ------- |
-| showCloseButton | 仅 `DialogFooter` 支持，自动追加关闭按钮 | `boolean`         | `false` |
-| className       | 自定义类名                               | `string`          | -       |
-| children        | 内容                                     | `React.ReactNode` | -       |
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 标题与描述        | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
 
-### DialogTitle / DialogDescription
+### DialogFooter
 
-| 参数      | 说明       | 类型              | 默认值 |
-| --------- | ---------- | ----------------- | ------ |
-| className | 自定义类名 | `string`          | -      |
-| children  | 文本内容   | `React.ReactNode` | -      |
+底部按钮区，自带次级背景与上分隔线。
+
+| 参数            | 说明                      | 类型                          | 默认值  |
+| --------------- | ------------------------- | ----------------------------- | ------- |
+| showCloseButton | 是否自动追加 `Close` 按钮 | `boolean`                     | `false` |
+| className       | 自定义类名                | `string`                      | -       |
+| children        | 内容                      | `React.ReactNode`             | -       |
+| ...props        | 原生 `<div>` 属性         | `React.ComponentProps<"div">` | -       |
+
+### DialogTitle
+
+| 参数      | 说明           | 类型                                                        | 默认值 |
+| --------- | -------------- | ----------------------------------------------------------- | ------ |
+| render    | 自定义渲染元素 | `React.ReactElement \| ((props, state) => React.ReactNode)` | -      |
+| className | 自定义类名     | `string`                                                    | -      |
+| children  | 标题内容       | `React.ReactNode`                                           | -      |
+
+### DialogDescription
+
+| 参数      | 说明           | 类型                                                        | 默认值 |
+| --------- | -------------- | ----------------------------------------------------------- | ------ |
+| render    | 自定义渲染元素 | `React.ReactElement \| ((props, state) => React.ReactNode)` | -      |
+| className | 自定义类名     | `string`                                                    | -      |
+| children  | 描述内容       | `React.ReactNode`                                           | -      |
 
 ### DialogClose
 
 包裹任意元素作为关闭按钮。常配合 `render` 把它渲染成 Button。
 
-| 参数      | 说明         | 类型                      | 默认值 |
-| --------- | ------------ | ------------------------- | ------ |
-| render    | 多态渲染     | `React.ReactElement`      | -      |
-| className | 自定义类名   | `string`                  | -      |
-| children  | 关闭按钮内容 | `React.ReactNode`         | -      |
-| onClick   | 点击回调     | `React.MouseEventHandler` | -      |
+| 参数         | 说明                           | 类型                                                        | 默认值  |
+| ------------ | ------------------------------ | ----------------------------------------------------------- | ------- |
+| nativeButton | 是否强制以原生 `<button>` 挂载 | `boolean`                                                   | `true`  |
+| disabled     | 是否禁用                       | `boolean`                                                   | `false` |
+| render       | 多态渲染                       | `React.ReactElement \| ((props, state) => React.ReactNode)` | -       |
+| className    | 自定义类名                     | `string`                                                    | -       |
+| children     | 关闭按钮内容                   | `React.ReactNode`                                           | -       |
+| onClick      | 点击回调                       | `React.MouseEventHandler`                                   | -       |
 
 ### DialogPortal / DialogOverlay
 
 通常无需直接使用（`DialogContent` 内部已经使用）。需要自定义遮罩样式时可重新组合。
+
+`DialogPortal` 用于把 dialog 内容渲染到 body 末尾；`DialogOverlay` 是遮罩层（`DialogPrimitive.Backdrop`）。
+
+| 参数        | 说明                         | 类型                                              | 默认值          |
+| ----------- | ---------------------------- | ------------------------------------------------- | --------------- |
+| container   | Portal 挂载容器（仅 Portal） | `HTMLElement \| null \| Ref<HTMLElement \| null>` | `document.body` |
+| keepMounted | 是否在关闭时保留在 DOM       | `boolean`                                         | `false`         |
+| className   | 自定义类名（仅 Overlay）     | `string`                                          | -               |

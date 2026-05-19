@@ -88,24 +88,99 @@ import {
 
 ### AlertDialog
 
-| 参数         | 说明             | 类型                      | 默认值  |
-| ------------ | ---------------- | ------------------------- | ------- |
-| open         | 是否打开(受控)   | `boolean`                 | -       |
-| defaultOpen  | 默认打开(非受控) | `boolean`                 | `false` |
-| onOpenChange | 打开状态变化回调 | `(open: boolean) => void` | -       |
+| 参数                 | 说明                            | 类型                                                                    | 默认值  |
+| -------------------- | ------------------------------- | ----------------------------------------------------------------------- | ------- |
+| open                 | 是否打开（受控）                | `boolean`                                                               | -       |
+| defaultOpen          | 默认打开（非受控）              | `boolean`                                                               | `false` |
+| onOpenChange         | 打开状态变化回调                | `(open: boolean, eventDetails: AlertDialog.ChangeEventDetails) => void` | -       |
+| actionsRef           | 用于以命令式打开/关闭弹窗的 ref | `RefObject<{ unmount: () => void } \| null>`                            | -       |
+| onOpenChangeComplete | 打开/关闭动画完成回调           | `(open: boolean) => void`                                               | -       |
+| children             | 由 trigger 与 content 组合      | `React.ReactNode`                                                       | -       |
 
 ### AlertDialogContent
 
-| 参数      | 说明       | 类型                | 默认值      |
-| --------- | ---------- | ------------------- | ----------- |
-| size      | 弹窗尺寸   | `"default" \| "sm"` | `"default"` |
-| className | 自定义类名 | `string`            | -           |
-| children  | 内容       | `React.ReactNode`   | -           |
+| 参数         | 说明                 | 类型                                                                                                | 默认值      |
+| ------------ | -------------------- | --------------------------------------------------------------------------------------------------- | ----------- |
+| size         | 弹窗尺寸             | `"default" \| "sm"`                                                                                 | `"default"` |
+| initialFocus | 打开时初始聚焦的元素 | `RefObject<HTMLElement \| null> \| ((event: OpenChangeReason) => HTMLElement \| null \| undefined)` | -           |
+| finalFocus   | 关闭后聚焦回的元素   | `RefObject<HTMLElement \| null> \| ((event: OpenChangeReason) => HTMLElement \| null \| undefined)` | -           |
+| render       | 自定义渲染元素       | `React.ReactElement \| ((props, state) => React.ReactNode)`                                         | -           |
+| className    | 自定义类名           | `string`                                                                                            | -           |
+| children     | 内容                 | `React.ReactNode`                                                                                   | -           |
 
-### AlertDialogTrigger / AlertDialogCancel / AlertDialogAction
+### AlertDialogTrigger
 
-`render` 可把 trigger / cancel / action 渲染为 Button 等组件,统一外观。`AlertDialogAction` 接受 `variant` 透传到内置的 Button(支持 `destructive`)。
+包裹任意元素作为打开 trigger。`render` 可用来渲染为 `Button` 等组件。
 
-### AlertDialogHeader / AlertDialogFooter / AlertDialogTitle / AlertDialogDescription / AlertDialogMedia
+| 参数         | 说明                           | 类型                                                        | 默认值  |
+| ------------ | ------------------------------ | ----------------------------------------------------------- | ------- |
+| nativeButton | 是否强制以原生 `<button>` 挂载 | `boolean`                                                   | `true`  |
+| disabled     | 是否禁用                       | `boolean`                                                   | `false` |
+| render       | 自定义渲染元素                 | `React.ReactElement \| ((props, state) => React.ReactNode)` | -       |
+| className    | 自定义类名                     | `string`                                                    | -       |
+| children     | 触发元素内容                   | `React.ReactNode`                                           | -       |
 
-均为结构化容器,标题与描述会自动注册到 ARIA。`AlertDialogMedia` 放在 header 内可展示图标或图片。
+### AlertDialogCancel
+
+关闭弹窗的取消按钮，内部已默认 `render={<Button variant="outline" />}`。
+
+| 参数         | 说明                                 | 类型                                                                          | 默认值      |
+| ------------ | ------------------------------------ | ----------------------------------------------------------------------------- | ----------- |
+| variant      | Button 视觉变体（透传给内置 Button） | `"default" \| "outline" \| "secondary" \| "ghost" \| "destructive" \| "link"` | `"outline"` |
+| size         | Button 尺寸（透传给内置 Button）     | `Button["size"]`                                                              | `"default"` |
+| nativeButton | 是否强制以原生 `<button>` 挂载       | `boolean`                                                                     | `true`      |
+| disabled     | 是否禁用                             | `boolean`                                                                     | `false`     |
+| render       | 自定义渲染元素                       | `React.ReactElement \| ((props, state) => React.ReactNode)`                   | -           |
+| className    | 自定义类名                           | `string`                                                                      | -           |
+| children     | 按钮内容                             | `React.ReactNode`                                                             | -           |
+
+### AlertDialogAction
+
+确认按钮，直接渲染为 `<Button />`，接受 Button 的所有 props（如 `variant="destructive"`）。
+
+| 参数     | 说明                     | 类型                                         | 默认值      |
+| -------- | ------------------------ | -------------------------------------------- | ----------- |
+| variant  | Button 视觉变体          | `Button["variant"]`                          | `"default"` |
+| size     | Button 尺寸              | `Button["size"]`                             | `"default"` |
+| onClick  | 点击回调                 | `React.MouseEventHandler<HTMLButtonElement>` | -           |
+| ...props | 透传 `Button` 的剩余属性 | `ButtonProps`                                | -           |
+
+### AlertDialogHeader / AlertDialogFooter
+
+结构化容器，分别用于布局头部（标题、描述、媒体）和底部（操作按钮）。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 子节点            | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |
+
+### AlertDialogTitle
+
+标题，会自动注册到 ARIA `aria-labelledby`。
+
+| 参数      | 说明           | 类型                                                        | 默认值 |
+| --------- | -------------- | ----------------------------------------------------------- | ------ |
+| render    | 自定义渲染元素 | `React.ReactElement \| ((props, state) => React.ReactNode)` | -      |
+| className | 自定义类名     | `string`                                                    | -      |
+| children  | 标题内容       | `React.ReactNode`                                           | -      |
+
+### AlertDialogDescription
+
+描述，会自动注册到 ARIA `aria-describedby`。
+
+| 参数      | 说明           | 类型                                                        | 默认值 |
+| --------- | -------------- | ----------------------------------------------------------- | ------ |
+| render    | 自定义渲染元素 | `React.ReactElement \| ((props, state) => React.ReactNode)` | -      |
+| className | 自定义类名     | `string`                                                    | -      |
+| children  | 描述内容       | `React.ReactNode`                                           | -      |
+
+### AlertDialogMedia
+
+放在 header 内展示图标或图片的容器。
+
+| 参数      | 说明              | 类型                          | 默认值 |
+| --------- | ----------------- | ----------------------------- | ------ |
+| className | 自定义类名        | `string`                      | -      |
+| children  | 图标 / 图片       | `React.ReactNode`             | -      |
+| ...props  | 原生 `<div>` 属性 | `React.ComponentProps<"div">` | -      |

@@ -91,26 +91,57 @@ import {
 
 `<ol>` 列表容器。
 
+| 参数      | 说明                  | 类型                         | 默认值 |
+| --------- | --------------------- | ---------------------------- | ------ |
+| className | 自定义类名            | `string`                     | -      |
+| children  | `BreadcrumbItem` 列表 | `React.ReactNode`            | -      |
+| ...props  | 原生 `<ol>` 属性      | `React.ComponentProps<"ol">` | -      |
+
 ### BreadcrumbItem
 
 `<li>` 单项容器。
 
+| 参数      | 说明             | 类型                         | 默认值 |
+| --------- | ---------------- | ---------------------------- | ------ |
+| className | 自定义类名       | `string`                     | -      |
+| children  | 链接或当前页内容 | `React.ReactNode`            | -      |
+| ...props  | 原生 `<li>` 属性 | `React.ComponentProps<"li">` | -      |
+
 ### BreadcrumbLink
 
-| 参数      | 说明                           | 类型                 | 默认值 |
-| --------- | ------------------------------ | -------------------- | ------ |
-| render    | 多态渲染（接入路由 Link 组件） | `React.ReactElement` | -      |
-| className | 自定义类名                     | `string`             | -      |
-| children  | 链接文字                       | `React.ReactNode`    | -      |
+| 参数      | 说明                                                 | 类型                                                        | 默认值 |
+| --------- | ---------------------------------------------------- | ----------------------------------------------------------- | ------ |
+| render    | 多态渲染（接入路由 Link 组件，如 `<Link to="/" />`） | `React.ReactElement \| ((props, state) => React.ReactNode)` | -      |
+| href      | 链接地址                                             | `string`                                                    | -      |
+| className | 自定义类名                                           | `string`                                                    | -      |
+| children  | 链接文字                                             | `React.ReactNode`                                           | -      |
+| ...props  | 原生 `<a>` 属性                                      | `React.ComponentProps<"a">`                                 | -      |
 
 ### BreadcrumbPage
 
-当前页文本，不可点击，自动加 `aria-current="page"`。
+当前页文本，不可点击，自动加 `aria-current="page"`、`role="link"`、`aria-disabled="true"`。
+
+| 参数      | 说明               | 类型                           | 默认值 |
+| --------- | ------------------ | ------------------------------ | ------ |
+| className | 自定义类名         | `string`                       | -      |
+| children  | 当前页文本         | `React.ReactNode`              | -      |
+| ...props  | 原生 `<span>` 属性 | `React.ComponentProps<"span">` | -      |
 
 ### BreadcrumbSeparator
 
-分隔符，默认渲染 `›` 图标，可通过 `children` 覆盖。
+分隔符，默认渲染 `›` 图标，可通过 `children` 覆盖。自动加 `role="presentation"` 与 `aria-hidden`。
+
+| 参数      | 说明                           | 类型                         | 默认值 |
+| --------- | ------------------------------ | ---------------------------- | ------ |
+| className | 自定义类名                     | `string`                     | -      |
+| children  | 自定义分隔符内容（缺省为 `›`） | `React.ReactNode`            | -      |
+| ...props  | 原生 `<li>` 属性               | `React.ComponentProps<"li">` | -      |
 
 ### BreadcrumbEllipsis
 
-省略号，常配合 `DropdownMenu` 折叠中间层级。
+省略号，常配合 `DropdownMenu` 折叠中间层级，自动包含 `sr-only` 文案 "More"。
+
+| 参数      | 说明               | 类型                           | 默认值 |
+| --------- | ------------------ | ------------------------------ | ------ |
+| className | 自定义类名         | `string`                       | -      |
+| ...props  | 原生 `<span>` 属性 | `React.ComponentProps<"span">` | -      |
