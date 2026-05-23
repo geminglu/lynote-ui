@@ -1,116 +1,35 @@
-"use client";
-
-import * as React from "react";
-
-import { cn } from "../../lib";
-
-function Table({ className, ...props }: React.ComponentProps<"table">) {
-  return (
-    <div
-      data-slot="table-container"
-      className="relative w-full overflow-x-auto"
-    >
-      <table
-        data-slot="table"
-        className={cn("w-full caption-bottom text-sm", className)}
-        {...props}
-      />
-    </div>
-  );
-}
-
-function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
-  return (
-    <thead
-      data-slot="table-header"
-      className={cn("[&_tr]:border-b", className)}
-      {...props}
-    />
-  );
-}
-
-function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
-  return (
-    <tbody
-      data-slot="table-body"
-      className={cn("[&_tr:last-child]:border-0", className)}
-      {...props}
-    />
-  );
-}
-
-function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
-  return (
-    <tfoot
-      data-slot="table-footer"
-      className={cn(
-        "bg-muted/50 border-t font-medium [&>tr]:last:border-b-0",
-        className,
-      )}
-      {...props}
-    />
-  );
-}
-
-function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
-  return (
-    <tr
-      data-slot="table-row"
-      className={cn(
-        "hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors",
-        className,
-      )}
-      {...props}
-    />
-  );
-}
-
-function TableHead({ className, ...props }: React.ComponentProps<"th">) {
-  return (
-    <th
-      data-slot="table-head"
-      className={cn(
-        "text-foreground h-10 whitespace-nowrap px-2 text-left align-middle font-medium [&:has([role=checkbox])]:pr-0",
-        className,
-      )}
-      {...props}
-    />
-  );
-}
-
-function TableCell({ className, ...props }: React.ComponentProps<"td">) {
-  return (
-    <td
-      data-slot="table-cell"
-      className={cn(
-        "whitespace-nowrap p-2 align-middle [&:has([role=checkbox])]:pr-0",
-        className,
-      )}
-      {...props}
-    />
-  );
-}
-
-function TableCaption({
-  className,
-  ...props
-}: React.ComponentProps<"caption">) {
-  return (
-    <caption
-      data-slot="table-caption"
-      className={cn("text-muted-foreground mt-4 text-sm", className)}
-      {...props}
-    />
-  );
-}
-
+export * from "./components/base-table";
+export { DataTable, type DataTableHandle } from "./components/data-table";
+export { DataTableColumnHeader } from "./components/data-table-column-header";
+export { DataTablePagination } from "./components/data-table-pagination";
+export { DataTableToolbar } from "./components/data-table-toolbar";
+export { DataTableViewOptions } from "./components/data-table-view-options";
+export { DataTableVirtualBody } from "./components/data-table-virtual-body";
 export {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-};
+  RowDragHandle,
+  RowDragHandleContext,
+  type RowDragHandleContextValue,
+} from "./components/row-drag-handle";
+export { RowExpandToggle } from "./components/row-expand-toggle";
+export { useDataTable, useScrollShadow } from "./hooks/use-data-table";
+export type {
+  AnyColumn,
+  CellMergeMeta,
+  ColSpanContext,
+  DataTableColumn,
+  DataTableFeatures,
+  DataTablePropsType,
+  DataTableState,
+  DataTableStateHandlers,
+  DataTableVirtualOptions,
+  RowOrderChangeInfo,
+  RowSpanContext,
+  ScrollShadowState,
+} from "./type";
+export {
+  computeCellSpans,
+  getColumnPinningClassName,
+  getCommonPinningStyles,
+  panelIdFor,
+} from "./utils";
+export type { CellSpan, CellSpanMap } from "./utils";
