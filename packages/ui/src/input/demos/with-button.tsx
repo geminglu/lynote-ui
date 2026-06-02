@@ -21,7 +21,9 @@ const App: React.FC = () => {
         </InputGroupAddon>
         <InputGroupInput placeholder="搜索..." />
         <InputGroupAddon align="inline-end">
-          <InputGroupButton size="icon-sm">⌘K</InputGroupButton>
+          <InputGroupButton size="sm" icon>
+            ⌘K
+          </InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
 
@@ -32,7 +34,8 @@ const App: React.FC = () => {
         />
         <InputGroupAddon align="inline-end">
           <InputGroupButton
-            size="icon-sm"
+            size="sm"
+            icon
             aria-label={visible ? "隐藏密码" : "显示密码"}
             onClick={() => setVisible((v) => !v)}
           >

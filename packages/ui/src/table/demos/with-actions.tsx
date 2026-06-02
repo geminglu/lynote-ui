@@ -58,7 +58,7 @@ const App: React.FC = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger
                   render={
-                    <Button variant="ghost" size="icon-sm" aria-label="操作">
+                    <Button variant="ghost" size="sm" icon aria-label="操作">
                       <MoreHorizontalIcon />
                     </Button>
                   }

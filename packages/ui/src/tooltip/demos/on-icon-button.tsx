@@ -15,7 +15,7 @@ const App: React.FC = () => {
         <Tooltip>
           <TooltipTrigger
             render={
-              <Button variant="outline" size="icon" aria-label="复制">
+              <Button variant="outline" icon aria-label="复制">
                 <CopyIcon />
               </Button>
             }
@@ -26,7 +26,7 @@ const App: React.FC = () => {
         <Tooltip>
           <TooltipTrigger
             render={
-              <Button variant="outline" size="icon" aria-label="收藏">
+              <Button variant="outline" icon aria-label="收藏">
                 <StarIcon />
               </Button>
             }
@@ -37,7 +37,7 @@ const App: React.FC = () => {
         <Tooltip>
           <TooltipTrigger
             render={
-              <Button variant="outline" size="icon" aria-label="新建分支">
+              <Button variant="outline" icon aria-label="新建分支">
                 <GitBranchIcon />
               </Button>
             }

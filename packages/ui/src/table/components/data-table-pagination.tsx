@@ -59,7 +59,8 @@ export function DataTablePagination<TData>({
         </span>
         <Button
           variant="outline"
-          size="icon-sm"
+          size="sm"
+          icon
           aria-label="第一页"
           onClick={() => table.setPageIndex(0)}
           disabled={!table.getCanPreviousPage()}
@@ -68,7 +69,8 @@ export function DataTablePagination<TData>({
         </Button>
         <Button
           variant="outline"
-          size="icon-sm"
+          size="sm"
+          icon
           aria-label="上一页"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
@@ -77,7 +79,8 @@ export function DataTablePagination<TData>({
         </Button>
         <Button
           variant="outline"
-          size="icon-sm"
+          size="sm"
+          icon
           aria-label="下一页"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
@@ -86,7 +89,8 @@ export function DataTablePagination<TData>({
         </Button>
         <Button
           variant="outline"
-          size="icon-sm"
+          size="sm"
+          icon
           aria-label="最后一页"
           onClick={() => table.setPageIndex(pageCount - 1)}
           disabled={!table.getCanNextPage()}

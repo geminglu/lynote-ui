@@ -28,7 +28,8 @@ export default function App() {
                 <InputGroupButton
                   variant="ghost"
                   aria-label="More"
-                  size="icon-xs"
+                  size="xs"
+                  icon
                 >
                   <MoreHorizontal />
                 </InputGroupButton>

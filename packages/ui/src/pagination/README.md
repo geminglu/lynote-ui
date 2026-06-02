@@ -123,15 +123,16 @@ import {
 
 实际渲染为 `<a>`，内部用 `Button` 提供视觉，激活时切换 `variant`。
 
-| 参数      | 说明            | 类型                                                                                 | 默认值   |
-| --------- | --------------- | ------------------------------------------------------------------------------------ | -------- |
-| href      | 链接地址        | `string`                                                                             | -        |
-| isActive  | 是否为当前页    | `boolean`                                                                            | `false`  |
-| size      | 按钮尺寸        | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"icon"` |
-| onClick   | 点击回调        | `React.MouseEventHandler<HTMLAnchorElement>`                                         | -        |
-| className | 自定义类名      | `string`                                                                             | -        |
-| children  | 链接内容        | `React.ReactNode`                                                                    | -        |
-| ...props  | 原生 `<a>` 属性 | `React.ComponentProps<"a">`                                                          | -        |
+| 参数      | 说明             | 类型                                         | 默认值      |
+| --------- | ---------------- | -------------------------------------------- | ----------- |
+| href      | 链接地址         | `string`                                     | -           |
+| isActive  | 是否为当前页     | `boolean`                                    | `false`     |
+| size      | 按钮尺寸         | `"default" \| "xs" \| "sm" \| "lg"`          | `"default"` |
+| icon      | 是否为纯图标按钮 | `boolean`                                    | `true`      |
+| onClick   | 点击回调         | `React.MouseEventHandler<HTMLAnchorElement>` | -           |
+| className | 自定义类名       | `string`                                     | -           |
+| children  | 链接内容         | `React.ReactNode`                            | -           |
+| ...props  | 原生 `<a>` 属性  | `React.ComponentProps<"a">`                  | -           |
 
 ### PaginationPrevious
 

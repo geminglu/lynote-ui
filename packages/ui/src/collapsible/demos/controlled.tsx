@@ -23,7 +23,7 @@ const App: React.FC = () => {
         <h4 className="text-sm font-medium">本次发布更新</h4>
         <CollapsibleTrigger
           render={
-            <Button variant="ghost" size="icon-sm" aria-label="展开 / 收起">
+            <Button variant="ghost" size="sm" icon aria-label="展开 / 收起">
               <ChevronsUpDownIcon />
             </Button>
           }

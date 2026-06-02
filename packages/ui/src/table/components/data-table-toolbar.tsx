@@ -72,7 +72,8 @@ export function DataTableToolbar<TData>({
           <Button
             type="button"
             variant="ghost"
-            size="icon-xs"
+            size="xs"
+            icon
             className="absolute right-1 top-1/2 -translate-y-1/2"
             aria-label="清除搜索"
             onClick={() => handleChange("")}

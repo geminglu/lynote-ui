@@ -154,7 +154,7 @@ import { Input } from "lynote-ui";
 
 #### InputGroupButton
 
-行内按钮，自动适配 InputGroup 的高度。继承 `Button` 大部分属性，额外提供 `size="xs"`/`"icon-xs"`/`"icon-sm"`。
+行内按钮，自动适配 InputGroup 的高度。继承 `Button` 大部分属性，额外提供 `size="xs"`/`"sm"` 及 `icon` 属性。
 
 #### InputGroupText
 

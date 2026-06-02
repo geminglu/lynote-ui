@@ -12,13 +12,13 @@ const App: React.FC = () => {
   return (
     <div className="flex flex-col gap-4">
       <ButtonGroup>
-        <Button variant="outline" size="icon" aria-label="左对齐">
+        <Button variant="outline" icon aria-label="左对齐">
           <AlignLeftIcon />
         </Button>
-        <Button variant="outline" size="icon" aria-label="居中对齐">
+        <Button variant="outline" icon aria-label="居中对齐">
           <AlignCenterIcon />
         </Button>
-        <Button variant="outline" size="icon" aria-label="右对齐">
+        <Button variant="outline" icon aria-label="右对齐">
           <AlignRightIcon />
         </Button>
       </ButtonGroup>

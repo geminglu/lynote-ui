@@ -72,7 +72,8 @@ export function App() {
                 <InputGroupButton
                   id="date-picker"
                   variant="ghost"
-                  size="icon-xs"
+                  size="xs"
+                  icon
                   aria-label="Select date"
                 >
                   <CalendarIcon />

@@ -27,7 +27,7 @@ const App: React.FC = () => {
           <DropdownMenu>
             <DropdownMenuTrigger
               render={
-                <Button variant="ghost" size="icon-sm" aria-label="切换分组">
+                <Button variant="ghost" size="sm" icon aria-label="切换分组">
                   <BreadcrumbEllipsis />
                 </Button>
               }

@@ -20,7 +20,7 @@ const App: React.FC = () => {
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <Button size="icon" aria-label="更多发布选项">
+            <Button icon aria-label="更多发布选项">
               <ChevronDownIcon />
             </Button>
           }

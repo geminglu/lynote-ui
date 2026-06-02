@@ -104,7 +104,8 @@ import {
 | 参数      | 说明                               | 类型                                                                          | 默认值      |
 | --------- | ---------------------------------- | ----------------------------------------------------------------------------- | ----------- |
 | variant   | Button 视觉变体                    | `"default" \| "outline" \| "secondary" \| "ghost" \| "destructive" \| "link"` | `"outline"` |
-| size      | Button 尺寸                        | `Button["size"]`                                                              | `"icon-sm"` |
+| size      | Button 尺寸                        | `"default" \| "xs" \| "sm" \| "lg"`                                           | `"sm"`      |
+| icon      | 是否为纯图标按钮                   | `boolean`                                                                     | `true`      |
 | onClick   | 点击回调（会覆盖默认行为）         | `React.MouseEventHandler<HTMLButtonElement>`                                  | -           |
 | className | 自定义类名                         | `string`                                                                      | -           |
 | children  | 自定义内容（缺省为 `ChevronLeft`） | `React.ReactNode`                                                             | -           |
@@ -116,7 +117,8 @@ import {
 | 参数      | 说明                                | 类型                                                                          | 默认值      |
 | --------- | ----------------------------------- | ----------------------------------------------------------------------------- | ----------- |
 | variant   | Button 视觉变体                     | `"default" \| "outline" \| "secondary" \| "ghost" \| "destructive" \| "link"` | `"outline"` |
-| size      | Button 尺寸                         | `Button["size"]`                                                              | `"icon-sm"` |
+| size      | Button 尺寸                         | `"default" \| "xs" \| "sm" \| "lg"`                                           | `"sm"`      |
+| icon      | 是否为纯图标按钮                    | `boolean`                                                                     | `true`      |
 | onClick   | 点击回调（会覆盖默认行为）          | `React.MouseEventHandler<HTMLButtonElement>`                                  | -           |
 | className | 自定义类名                          | `string`                                                                      | -           |
 | children  | 自定义内容（缺省为 `ChevronRight`） | `React.ReactNode`                                                             | -           |

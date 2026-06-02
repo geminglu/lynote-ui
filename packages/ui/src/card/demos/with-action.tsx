@@ -16,7 +16,7 @@ const App: React.FC = () => {
         <CardTitle>带操作按钮的卡片</CardTitle>
         <CardDescription>卡片头部可以包含操作按钮</CardDescription>
         <CardAction>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" icon>
             <MoreHorizontalIcon />
           </Button>
         </CardAction>

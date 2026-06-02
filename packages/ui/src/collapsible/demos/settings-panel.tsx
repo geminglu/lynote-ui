@@ -65,7 +65,7 @@ const App: React.FC = () => {
             render={
               <Button
                 variant="outline"
-                size="icon"
+                icon
                 aria-label="Toggle additional radius inputs"
               >
                 {isOpen ? <MinimizeIcon /> : <MaximizeIcon />}

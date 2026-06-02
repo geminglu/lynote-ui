@@ -7,7 +7,7 @@ const App: React.FC = () => {
   return (
     <div className="flex items-center gap-3">
       <div className="relative inline-flex">
-        <Button variant="outline" size="icon" aria-label="通知">
+        <Button variant="outline" icon aria-label="通知">
           <BellIcon />
         </Button>
         <Badge
@@ -19,7 +19,7 @@ const App: React.FC = () => {
       </div>
 
       <div className="relative inline-flex">
-        <Button variant="outline" size="icon" aria-label="邮件">
+        <Button variant="outline" icon aria-label="邮件">
           <MailIcon />
         </Button>
         <Badge

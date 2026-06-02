@@ -25,16 +25,23 @@ const buttonVariants = cva(
         default:
           "has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 h-8 gap-1.5 px-2.5",
         xs: "in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs [&_svg:not([class*='size-'])]:size-3",
-        sm: "in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] [&_svg:not([class*='size-'])]:size-3.5",
+        sm: "in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem]",
         lg: "has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3 h-9 gap-1.5 px-2.5",
-        icon: "size-8",
-        "icon-xs":
-          "in-data-[slot=button-group]:rounded-lg size-6 rounded-[min(var(--radius-md),10px)] [&_svg:not([class*='size-'])]:size-3",
-        "icon-sm":
-          "in-data-[slot=button-group]:rounded-lg size-7 rounded-[min(var(--radius-md),12px)]",
-        "icon-lg": "size-9",
+      },
+      icon: {
+        true: "p-0",
+      },
+      radius: {
+        none: "!rounded-none",
+        full: "!rounded-full",
       },
     },
+    compoundVariants: [
+      { icon: true, size: "default", className: "size-8" },
+      { icon: true, size: "xs", className: "size-6" },
+      { icon: true, size: "sm", className: "size-7" },
+      { icon: true, size: "lg", className: "size-9" },
+    ],
     defaultVariants: {
       variant: "default",
       size: "default",
@@ -46,12 +53,14 @@ function Button({
   className,
   variant = "default",
   size = "default",
+  icon,
+  radius,
   ...props
 }: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
   return (
     <ButtonPrimitive
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(buttonVariants({ variant, size, icon, radius, className }))}
       {...props}
     />
   );

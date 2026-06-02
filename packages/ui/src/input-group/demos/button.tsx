@@ -18,7 +18,7 @@ export default function App() {
       <InputGroup>
         <InputGroupInput placeholder="https://x.com/shadcn" readOnly />
         <InputGroupAddon align="inline-end">
-          <InputGroupButton aria-label="Copy" title="Copy" size="icon-xs">
+          <InputGroupButton aria-label="Copy" title="Copy" size="xs" icon>
             <Copy />
           </InputGroupButton>
         </InputGroupAddon>
@@ -28,7 +28,7 @@ export default function App() {
           <PopoverTrigger
             render={
               <InputGroupAddon>
-                <InputGroupButton variant="secondary" size="icon-xs">
+                <InputGroupButton variant="secondary" size="xs" icon>
                   <Info />
                 </InputGroupButton>
               </InputGroupAddon>
@@ -49,7 +49,8 @@ export default function App() {
         <InputGroupAddon align="inline-end">
           <InputGroupButton
             onClick={() => setIsFavorite(!isFavorite)}
-            size="icon-xs"
+            size="xs"
+            icon
           >
             <Star
               data-favorite={isFavorite}

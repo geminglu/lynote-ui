@@ -28,10 +28,10 @@ export default function App() {
             <FileCode />
             script.js
           </InputGroupText>
-          <InputGroupButton className="ml-auto" size="icon-xs">
+          <InputGroupButton className="ml-auto" size="xs" icon>
             <RefreshCcw />
           </InputGroupButton>
-          <InputGroupButton variant="ghost" size="icon-xs">
+          <InputGroupButton variant="ghost" size="xs" icon>
             <Copy />
           </InputGroupButton>
         </InputGroupAddon>

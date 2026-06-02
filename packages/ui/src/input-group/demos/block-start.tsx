@@ -39,7 +39,7 @@ export default function App() {
           <InputGroupAddon align="block-start">
             <FileCodeIcon className="text-muted-foreground" />
             <InputGroupText className="font-mono">script.js</InputGroupText>
-            <InputGroupButton size="icon-xs" className="ml-auto">
+            <InputGroupButton size="xs" icon className="ml-auto">
               <CopyIcon />
               <span className="sr-only">复制</span>
             </InputGroupButton>

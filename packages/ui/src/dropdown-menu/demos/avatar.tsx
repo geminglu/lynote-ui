@@ -20,7 +20,7 @@ const App: React.FC = () => {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button variant="ghost" size="icon" className="rounded-full">
+          <Button variant="ghost" icon className="rounded-full">
             <Avatar>
               <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
               <AvatarFallback>LR</AvatarFallback>

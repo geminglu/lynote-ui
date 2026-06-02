@@ -13,7 +13,6 @@ const BUTTON_VARIANTS = [
 ] as const;
 
 const TEXT_BUTTON_SIZES = ["xs", "sm", "default", "lg"] as const;
-const ICON_BUTTON_SIZES = ["icon-xs", "icon-sm", "icon", "icon-lg"] as const;
 const DISABLED_VARIANTS = [
   "default",
   "outline",
@@ -47,7 +46,11 @@ const meta = {
     size: {
       control: "select",
       description: "按钮尺寸",
-      options: [...TEXT_BUTTON_SIZES, ...ICON_BUTTON_SIZES],
+      options: TEXT_BUTTON_SIZES,
+    },
+    icon: {
+      control: "boolean",
+      description: "是否为纯图标按钮（正方形）",
     },
     disabled: {
       control: "boolean",
@@ -114,10 +117,11 @@ export const IconButtons: Story = {
   name: "图标按钮",
   args: {
     children: <ArrowUpIcon />,
+    icon: true,
   },
   render: (args) => (
     <div className="flex flex-wrap items-center gap-3">
-      {ICON_BUTTON_SIZES.map((size) => (
+      {TEXT_BUTTON_SIZES.map((size) => (
         <Button key={size} {...args} size={size} aria-label={`icon-${size}`}>
           <ArrowUpIcon />
         </Button>

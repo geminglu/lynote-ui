@@ -92,7 +92,7 @@ const columns: ColumnDef<Payment>[] = [
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <Button variant="ghost" size="icon-sm" aria-label="打开菜单">
+            <Button variant="ghost" size="sm" icon aria-label="打开菜单">
               <MoreHorizontalIcon />
             </Button>
           }

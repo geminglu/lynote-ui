@@ -31,7 +31,7 @@ const App: React.FC = () => {
   return (
     <ButtonGroup>
       <ButtonGroup className="hidden sm:flex">
-        <Button variant="outline" size="icon" aria-label="Go Back">
+        <Button variant="outline" icon aria-label="Go Back">
           <ArrowLeftIcon />
         </Button>
       </ButtonGroup>
@@ -44,7 +44,7 @@ const App: React.FC = () => {
         <DropdownMenu>
           <DropdownMenuTrigger
             render={
-              <Button variant="outline" size="icon" aria-label="More Options">
+              <Button variant="outline" icon aria-label="More Options">
                 <MoreHorizontalIcon />
               </Button>
             }

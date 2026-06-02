@@ -18,7 +18,7 @@ compact: true
 ## 特性
 
 - **6 种视觉变体**：`default` / `outline` / `secondary` / `ghost` / `destructive` / `link`，覆盖常见的视觉强度需求。
-- **8 种尺寸**：常规 4 档（`xs` / `sm` / `default` / `lg`）+ 4 档纯图标（`icon-xs` / `icon-sm` / `icon` / `icon-lg`）。
+- **4 种尺寸 + 图标模式**：`xs` / `sm` / `default` / `lg` 四档尺寸，配合 `icon` 属性可切换为等宽高的纯图标按钮。
 - **多态渲染**：通过 `render` prop 可将按钮渲染为 `<a>` 或任意自定义元素，保留按钮的样式与交互。
 - **图标槽位**：在内部 `<svg>` 上设置 `data-icon="inline-start"` 或 `data-icon="inline-end"`，组件会自动调整内边距与对齐。
 - **键盘与无障碍**：基于 Base UI 的 Button 原语，自动处理焦点环、`disabled` 行为以及与 Tooltip / DropdownMenu 等控件的组合语义。
@@ -83,6 +83,8 @@ import { Button } from "lynote-ui";
 
 <code src="./demos/size.tsx">尺寸</code>
 
+<code src="./demos/radius.tsx">圆角</code>
+
 <code src="./demos/with-icon.tsx">带图标</code>
 
 <code src="./demos/loading.tsx">加载状态</code>
@@ -101,7 +103,7 @@ import { Button } from "lynote-ui";
 
 - **一屏只有一个主按钮**：同一视野中只放一个 `variant="default"` 主按钮，避免视觉重心被分散。次操作用 `outline` 或 `secondary`，第三层级用 `ghost`。
 - **删除/不可逆操作用 destructive**：仅在二次确认（如对话框内的确认按钮）或显著操作（如列表行的删除按钮）使用。
-- **图标按钮务必带 aria-label**：当 `size="icon*"` 时，按钮内只有图标无文本，必须显式提供 `aria-label` 描述其语义。
+- **图标按钮务必带 aria-label**：当使用 `icon` 属性时，按钮内只有图标无文本，必须显式提供 `aria-label` 描述其语义。
 - **加载状态保持宽度稳定**：在 loading 时，建议同时替换图标为 `<Spinner />` 并保留文本（如 `"提交"` → `"提交中..."`），避免按钮抖动。
 - **图标位置约定**：左侧图标使用 `data-icon="inline-start"`，右侧使用 `data-icon="inline-end"`，组件会自动调整 padding。
 - **不要嵌套交互元素**：按钮内部不要再放置 `<a>` 或其他 `<button>`，会破坏可访问性。需要让按钮跳转链接时，请使用 `render={<a />}`。
@@ -123,18 +125,20 @@ import { Button } from "lynote-ui";
 
 ### Button
 
-| 参数         | 说明                                                                                           | 类型                                                                                 | 默认值      |
-| ------------ | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------- |
-| variant      | 视觉变体，决定按钮的视觉强度                                                                   | `"default" \| "outline" \| "secondary" \| "ghost" \| "destructive" \| "link"`        | `"default"` |
-| size         | 按钮尺寸，`icon*` 用于纯图标按钮                                                               | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"default"` |
-| type         | 原生 button 类型，表单内默认会触发提交，避免误触请显式声明                                     | `"button" \| "submit" \| "reset"`                                                    | `"button"`  |
-| disabled     | 是否禁用                                                                                       | `boolean`                                                                            | `false`     |
-| render       | 自定义渲染元素（基于 Base UI 的多态机制），用于把按钮渲染为 `<a>` 或其他组件                   | `React.ReactElement \| ((props, state) => React.ReactNode)`                          | -           |
-| nativeButton | 是否强制以原生 `<button>` 元素挂载（与非按钮元素 `render` 配合时控制）                         | `boolean`                                                                            | `true`      |
-| className    | 自定义类名，会与默认样式合并                                                                   | `string`                                                                             | -           |
-| children     | 按钮内容，可同时包含图标与文本                                                                 | `React.ReactNode`                                                                    | -           |
-| onClick      | 点击回调                                                                                       | `React.MouseEventHandler<HTMLButtonElement>`                                         | -           |
-| ...props     | 透传 `@base-ui/react` Button 与原生 `<button>` 的剩余属性（如 `form`、`name`、`autoFocus` 等） | `ButtonPrimitive.Props`                                                              | -           |
+| 参数         | 说明                                                                                           | 类型                                                                          | 默认值      |
+| ------------ | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------- |
+| variant      | 视觉变体，决定按钮的视觉强度                                                                   | `"default" \| "outline" \| "secondary" \| "ghost" \| "destructive" \| "link"` | `"default"` |
+| size         | 按钮尺寸                                                                                       | `"default" \| "xs" \| "sm" \| "lg"`                                           | `"default"` |
+| icon         | 是否为纯图标按钮，设为 `true` 后按钮变为正方形（等宽等高），去掉内边距                         | `boolean`                                                                     | `false`     |
+| radius       | 圆角覆盖，`none` 无圆角（直角），`full` 全圆角（胶囊形），不传则保持默认圆角                   | `"none" \| "full"`                                                            | -           |
+| type         | 原生 button 类型，表单内默认会触发提交，避免误触请显式声明                                     | `"button" \| "submit" \| "reset"`                                             | `"button"`  |
+| disabled     | 是否禁用                                                                                       | `boolean`                                                                     | `false`     |
+| render       | 自定义渲染元素（基于 Base UI 的多态机制），用于把按钮渲染为 `<a>` 或其他组件                   | `React.ReactElement \| ((props, state) => React.ReactNode)`                   | -           |
+| nativeButton | 是否强制以原生 `<button>` 元素挂载（与非按钮元素 `render` 配合时控制）                         | `boolean`                                                                     | `true`      |
+| className    | 自定义类名，会与默认样式合并                                                                   | `string`                                                                      | -           |
+| children     | 按钮内容，可同时包含图标与文本                                                                 | `React.ReactNode`                                                             | -           |
+| onClick      | 点击回调                                                                                       | `React.MouseEventHandler<HTMLButtonElement>`                                  | -           |
+| ...props     | 透传 `@base-ui/react` Button 与原生 `<button>` 的剩余属性（如 `form`、`name`、`autoFocus` 等） | `ButtonPrimitive.Props`                                                       | -           |
 
 #### 子元素约定
 
@@ -142,7 +146,7 @@ import { Button } from "lynote-ui";
 | -------------------------- | ------------ | ------------------------------------ |
 | `data-icon="inline-start"` | 子级 `<svg>` | 标记图标在文本前，自动调整左侧内边距 |
 | `data-icon="inline-end"`   | 子级 `<svg>` | 标记图标在文本后，自动调整右侧内边距 |
-| `aria-label`               | 根元素       | 纯图标按钮（`size="icon*"`）必须提供 |
+| `aria-label`               | 根元素       | 纯图标按钮（`icon`）必须提供         |
 | `aria-expanded`            | 根元素       | 与下拉/弹层组合时会激活高亮态        |
 | `aria-invalid`             | 根元素       | 校验失败状态，触发红色环             |
 

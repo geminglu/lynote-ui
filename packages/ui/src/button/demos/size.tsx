@@ -8,16 +8,16 @@ const App: React.FC = () => {
       <Button size="sm">sm</Button>
       <Button size="default">default</Button>
       <Button size="lg">lg</Button>
-      <Button size="icon-xs">
+      <Button size="xs" icon>
         <ArrowUpIcon />
       </Button>
-      <Button size="icon-sm">
+      <Button size="sm" icon>
         <ArrowUpIcon />
       </Button>
-      <Button size="icon">
+      <Button icon>
         <ArrowUpIcon />
       </Button>
-      <Button size="icon-lg">
+      <Button size="lg" icon>
         <ArrowUpIcon />
       </Button>
     </div>

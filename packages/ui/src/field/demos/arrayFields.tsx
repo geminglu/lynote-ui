@@ -97,7 +97,8 @@ export default function App() {
                               <InputGroupButton
                                 type="button"
                                 variant="ghost"
-                                size="icon-xs"
+                                size="xs"
+                                icon
                                 onClick={() => remove(index)}
                                 aria-label={`删除电子邮件 ${index + 1}`}
                               >

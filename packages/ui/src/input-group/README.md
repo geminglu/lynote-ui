@@ -58,7 +58,7 @@ import {
   </InputGroupAddon>
   <InputGroupInput placeholder="..." />
   <InputGroupAddon align="inline-end">
-    <InputGroupButton size="icon-sm" />
+    <InputGroupButton size="sm" icon />
   </InputGroupAddon>
 </InputGroup>
 ```
@@ -134,16 +134,17 @@ import {
 
 行内按钮，继承 `Button` 大部分属性，但提供专用 size。
 
-| 参数      | 说明       | 类型                                                                          | 默认值     |
-| --------- | ---------- | ----------------------------------------------------------------------------- | ---------- |
-| size      | 按钮尺寸   | `"xs" \| "sm" \| "icon-xs" \| "icon-sm"`                                      | `"xs"`     |
-| variant   | 视觉变体   | `"default" \| "outline" \| "secondary" \| "ghost" \| "destructive" \| "link"` | `"ghost"`  |
-| type      | 表单类型   | `"button" \| "submit" \| "reset"`                                             | `"button"` |
-| disabled  | 是否禁用   | `boolean`                                                                     | `false`    |
-| onClick   | 点击回调   | `React.MouseEventHandler<HTMLButtonElement>`                                  | -          |
-| render    | 多态渲染   | `React.ReactElement \| ((props, state) => React.ReactNode)`                   | -          |
-| className | 自定义类名 | `string`                                                                      | -          |
-| children  | 按钮内容   | `React.ReactNode`                                                             | -          |
+| 参数      | 说明                       | 类型                                                                          | 默认值     |
+| --------- | -------------------------- | ----------------------------------------------------------------------------- | ---------- |
+| size      | 按钮尺寸                   | `"xs" \| "sm"`                                                                | `"xs"`     |
+| icon      | 是否为纯图标按钮（正方形） | `boolean`                                                                     | `false`    |
+| variant   | 视觉变体                   | `"default" \| "outline" \| "secondary" \| "ghost" \| "destructive" \| "link"` | `"ghost"`  |
+| type      | 表单类型                   | `"button" \| "submit" \| "reset"`                                             | `"button"` |
+| disabled  | 是否禁用                   | `boolean`                                                                     | `false`    |
+| onClick   | 点击回调                   | `React.MouseEventHandler<HTMLButtonElement>`                                  | -          |
+| render    | 多态渲染                   | `React.ReactElement \| ((props, state) => React.ReactNode)`                   | -          |
+| className | 自定义类名                 | `string`                                                                      | -          |
+| children  | 按钮内容                   | `React.ReactNode`                                                             | -          |
 
 ### InputGroupText
 
