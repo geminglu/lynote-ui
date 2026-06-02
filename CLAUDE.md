@@ -55,16 +55,18 @@ demos/*.tsx      # dumi/storybook examples (excluded from dts output)
 README.md        # component docs (consumed by docs site)
 ```
 
-Complex components (see `form/`) may add `components/`, `context/`, `hooks/`, `type.ts`.
+Complex components (see `table/`, `field/`) may add `components/`, `hooks/`, `type.ts`, `utils.ts`.
 
 Patterns to follow (verified against `button/index.tsx` and the cursor rules):
 
-- Primitives come from `@base-ui/react` (not Radix, despite older README copy). `@radix-ui/react-slot` is also a dep.
-- Variants use `cva` from `class-variance-authority`, exported alongside the component (`buttonVariants`).
+- **Primitives**: Most interactive components wrap `@base-ui/react` primitives (35+ components). Some components wrap other libraries: `cmdk` → `command/`, `vaul` → `drawer/`, `sonner` → `sonner/`, `input-otp` → `input-otp/`, `recharts` → `chart/`, `react-resizable-panels` → `resizable/`, `embla-carousel-react` → `carousel/`, `@tanstack/react-table` + `@tanstack/react-virtual` → `table/`. `@radix-ui/react-slot` is used only for the `Slottable` pattern. Icons come from `lucide-react`.
+- Variants use `cva` from `class-variance-authority`, exported alongside the component (`buttonVariants`). `cva` and `VariantProps` can also be imported from `../../lib` (re-exported in `lib/cva.ts`).
 - Class merging uses `cn` from `packages/ui/lib/utils.ts` (`twMerge(clsx(...))`). Import as `import { cn } from "../../lib"`.
 - Set `data-slot="<component>"` on the root element — selectors in this codebase target `data-slot` rather than class names.
 - Files that ship a React component start with `"use client";`.
+- Components are plain functions (not `FC<PropsType>`) with inline prop types. `forwardRef` is **not used** except in `table/components/data-table.tsx` where it's needed for the imperative API.
 - Tailwind 4 + `tw-animate-css` + shadcn tokens. Design tokens live in `packages/ui/style/index.css` as oklch CSS variables with `.dark` overrides.
+- TS path alias `@/*` → `./src/*` is configured in `packages/ui/tsconfig.json`.
 
 ## TS / naming / commits (from `.cursor/rules/`)
 
@@ -74,7 +76,30 @@ Patterns to follow (verified against `button/index.tsx` and the cursor rules):
 - JSDoc props in Chinese; every React component should have a top-level JSDoc describing it.
 - **Commit messages must be in Simplified Chinese**, format `<type>(<scope>): <subject>` (e.g. `feat(select): 添加多选支持`). See `git log` for established style.
 - Husky + lint-staged run prettier + eslint on staged `.{js,jsx,ts,tsx}` under `packages/**` and `app/**` on commit.
+- The cursor rules mention `FC<PropsType>` and `forwardRef` but the actual codebase uses plain function components with destructured props. Follow the existing pattern, not the cursor rule examples.
 
 ## Docs site quirks
 
-`app/docs/scripts/generate-component-markdown.mjs` walks `packages/ui/src/**` README frontmatter and produces per-component markdown under `app/docs/docs-dist/components/` for an LLM-readable docs export. It runs as part of `docs:build` (`pnpm llms:build`). It depends on README frontmatter (`title`, nested group `title`/`order`) — keep that shape when adding component docs.
+`app/docs/scripts/generate-component-markdown.mjs` globs `*/README.md` (one level deep) inside `packages/ui/src/` and produces per-component markdown under `app/docs/docs-dist/components/` for an LLM-readable docs export. It runs as part of `docs:build` (`pnpm llms:build`). Required README frontmatter shape:
+
+```yaml
+---
+category: Components
+title: Button 按钮 # component display name
+group:
+  title: 通用 # sidebar group name
+  order: 1 # group sort order
+---
+```
+
+The script also replaces `<code src="./demos/foo.tsx">` tags with the actual demo source as a fenced code block. Keep `demos/` files importable and the `<code>` tags pointing at them.
+
+## New component checklist
+
+When adding a new component, do all of the following (order matters for the build):
+
+1. Create `packages/ui/src/<kebab-name>/` with `index.tsx`, `demos/`, and `README.md`.
+2. Add `export * from "./<kebab-name>"` (or named exports if needed) to `packages/ui/src/index.ts`.
+3. Add the `"./<kebab-name>"` subpath entry to `packages/ui/package.json` `exports` map — copy the shape of an existing entry (types/require/import).
+4. Run `pnpm --filter lynote-ui build` to verify the new entry is picked up by the vite config and that types emit correctly.
+5. Add a Storybook story in `app/storybook/src/stories/` if desired.
