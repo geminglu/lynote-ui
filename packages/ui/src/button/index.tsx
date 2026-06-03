@@ -32,8 +32,8 @@ const buttonVariants = cva(
         true: "p-0",
       },
       radius: {
-        none: "!rounded-none",
-        full: "!rounded-full",
+        none: "rounded-none",
+        full: "rounded-full",
       },
     },
     compoundVariants: [
