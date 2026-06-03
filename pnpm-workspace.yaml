@@ -1,3 +1,11 @@
 packages:
   - "packages/**/**"
   - "app/**/**"
+allowBuilds:
+  "@parcel/watcher": true
+  "@swc/core": true
+  core-js: true
+  core-js-pure: true
+  es5-ext: true
+  esbuild: true
+  msw: true
