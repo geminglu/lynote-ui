@@ -41,6 +41,11 @@
       "require": "./dist/aspect-ratio/index.js",
       "import": "./dist/aspect-ratio/index.mjs"
     },
+    "./attachment": {
+      "types": "./dist/attachment/index.d.ts",
+      "require": "./dist/attachment/index.js",
+      "import": "./dist/attachment/index.mjs"
+    },
     "./avatar": {
       "types": "./dist/avatar/index.d.ts",
       "require": "./dist/avatar/index.js",
@@ -55,6 +60,11 @@
       "types": "./dist/breadcrumb/index.d.ts",
       "require": "./dist/breadcrumb/index.js",
       "import": "./dist/breadcrumb/index.mjs"
+    },
+    "./bubble": {
+      "types": "./dist/bubble/index.d.ts",
+      "require": "./dist/bubble/index.js",
+      "import": "./dist/bubble/index.mjs"
     },
     "./button": {
       "types": "./dist/button/index.d.ts",
@@ -185,6 +195,21 @@
       "types": "./dist/menubar/index.d.ts",
       "require": "./dist/menubar/index.js",
       "import": "./dist/menubar/index.mjs"
+    },
+    "./marker": {
+      "types": "./dist/marker/index.d.ts",
+      "require": "./dist/marker/index.js",
+      "import": "./dist/marker/index.mjs"
+    },
+    "./message": {
+      "types": "./dist/message/index.d.ts",
+      "require": "./dist/message/index.js",
+      "import": "./dist/message/index.mjs"
+    },
+    "./message-scroller": {
+      "types": "./dist/message-scroller/index.d.ts",
+      "require": "./dist/message-scroller/index.js",
+      "import": "./dist/message-scroller/index.mjs"
     },
     "./native-select": {
       "types": "./dist/native-select/index.d.ts",
@@ -344,6 +369,7 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@hookform/resolvers": "^5.2.2",
     "@radix-ui/react-slot": "^1.2.4",
+    "@shadcn/react": "^0.2.1",
     "@tanstack/react-table": "^8.21.3",
     "@tanstack/react-virtual": "^3.13.25",
     "class-variance-authority": "^0.7.1",
