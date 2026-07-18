@@ -101,7 +101,7 @@ import { Input } from "lynote-ui";
 
 <code src="./demos/form.tsx" description="与 `Field` / `FieldLabel` / `FieldDescription` / `FieldError` 组合可获得标签、说明文字和错误提示。">表单字段</code>
 
-<code src="./demos/size.tsx">不同占位文本</code>
+<code src="./demos/size.tsx">尺寸</code>
 
 ## 最佳实践
 
@@ -122,20 +122,21 @@ import { Input } from "lynote-ui";
 
 ### Input
 
-| 参数         | 说明                               | 类型                                         | 默认值   |
-| ------------ | ---------------------------------- | -------------------------------------------- | -------- |
-| type         | 输入类型                           | `React.HTMLInputTypeAttribute`               | `"text"` |
-| value        | 输入值（受控）                     | `string \| number \| readonly string[]`      | -        |
-| defaultValue | 默认输入值（非受控）               | `string \| number \| readonly string[]`      | -        |
-| placeholder  | 占位文本                           | `string`                                     | -        |
-| disabled     | 是否禁用                           | `boolean`                                    | `false`  |
-| readOnly     | 是否只读                           | `boolean`                                    | `false`  |
-| required     | 是否必填                           | `boolean`                                    | `false`  |
-| aria-invalid | 是否处于错误态，触发红色环         | `boolean`                                    | -        |
-| autoComplete | 浏览器自动填充类别                 | `string`                                     | -        |
-| onChange     | 输入变化回调                       | `React.ChangeEventHandler<HTMLInputElement>` | -        |
-| className    | 自定义类名                         | `string`                                     | -        |
-| ...props     | 透传原生 `<input>` 与 Base UI 属性 | `React.ComponentProps<"input">`              | -        |
+| 参数         | 说明                               | 类型                                         | 默认值      |
+| ------------ | ---------------------------------- | -------------------------------------------- | ----------- |
+| type         | 输入类型                           | `React.HTMLInputTypeAttribute`               | `"text"`    |
+| value        | 输入值（受控）                     | `string \| number \| readonly string[]`      | -           |
+| defaultValue | 默认输入值（非受控）               | `string \| number \| readonly string[]`      | -           |
+| placeholder  | 占位文本                           | `string`                                     | -           |
+| disabled     | 是否禁用                           | `boolean`                                    | `false`     |
+| readOnly     | 是否只读                           | `boolean`                                    | `false`     |
+| required     | 是否必填                           | `boolean`                                    | `false`     |
+| aria-invalid | 是否处于错误态，触发红色环         | `boolean`                                    | -           |
+| autoComplete | 浏览器自动填充类别                 | `string`                                     | -           |
+| onChange     | 输入变化回调                       | `React.ChangeEventHandler<HTMLInputElement>` | -           |
+| size         | 输入框尺寸                         | `"xs" \| "sm" \| "default" \| "lg"`          | `"default"` |
+| className    | 自定义类名                         | `string`                                     | -           |
+| ...props     | 透传原生 `<input>` 与 Base UI 属性 | `React.ComponentProps<"input">`              | -           |
 
 ### InputGroup
 

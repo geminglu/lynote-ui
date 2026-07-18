@@ -54,6 +54,8 @@ import { Slider } from "lynote-ui/slider";
 
 <code src="./demos/vertical.tsx" description="垂直方向需要在父级提供高度。">垂直方向</code>
 
+<code src="./demos/size.tsx" description="xs / sm / default / lg 四种轨道粗细。">尺寸</code>
+
 ## 最佳实践
 
 - **显示当前值**:让用户清楚拖到哪儿了,可在滑块旁实时显示数字。
@@ -77,14 +79,15 @@ import { Slider } from "lynote-ui/slider";
 
 ### Slider
 
-| 参数          | 说明           | 类型                         | 默认值         |
-| ------------- | -------------- | ---------------------------- | -------------- |
-| value         | 当前值(受控)   | `number[]`                   | -              |
-| defaultValue  | 默认值(非受控) | `number[]`                   | `[min, max]`   |
-| onValueChange | 值变化回调     | `(value: number[]) => void`  | -              |
-| min           | 最小值         | `number`                     | `0`            |
-| max           | 最大值         | `number`                     | `100`          |
-| step          | 步长           | `number`                     | `1`            |
-| orientation   | 排列方向       | `"horizontal" \| "vertical"` | `"horizontal"` |
-| disabled      | 是否禁用       | `boolean`                    | `false`        |
-| className     | 自定义类名     | `string`                     | -              |
+| 参数          | 说明           | 类型                                | 默认值         |
+| ------------- | -------------- | ----------------------------------- | -------------- |
+| value         | 当前值(受控)   | `number[]`                          | -              |
+| defaultValue  | 默认值(非受控) | `number[]`                          | `[min, max]`   |
+| onValueChange | 值变化回调     | `(value: number[]) => void`         | -              |
+| min           | 最小值         | `number`                            | `0`            |
+| max           | 最大值         | `number`                            | `100`          |
+| step          | 步长           | `number`                            | `1`            |
+| orientation   | 排列方向       | `"horizontal" \| "vertical"`        | `"horizontal"` |
+| size          | 轨道尺寸       | `"xs" \| "sm" \| "default" \| "lg"` | `"default"`    |
+| disabled      | 是否禁用       | `boolean`                           | `false`        |
+| className     | 自定义类名     | `string`                            | -              |

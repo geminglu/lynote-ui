@@ -4,6 +4,7 @@ import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 import * as React from "react";
 
 import { CheckIcon, ChevronDownIcon, XIcon } from "lucide-react";
+import type { Size } from "../../lib";
 import { cn } from "../../lib";
 import { Button } from "../button";
 import {
@@ -55,13 +56,15 @@ function ComboboxInput({
   disabled = false,
   showTrigger = true,
   showClear = false,
+  size,
   ...props
 }: ComboboxPrimitive.Input.Props & {
   showTrigger?: boolean;
   showClear?: boolean;
+  size?: Size;
 }) {
   return (
-    <InputGroup className={cn("w-auto", className)}>
+    <InputGroup size={size} className={cn("w-auto", className)}>
       <ComboboxPrimitive.Input
         render={<InputGroupInput disabled={disabled} />}
         {...props}

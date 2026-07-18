@@ -46,6 +46,8 @@ import { Kbd, KbdGroup } from "lynote-ui/kbd";
 
 <code src="./demos/in-button.tsx" description="常见于全局搜索 / 命令面板 trigger 的右侧。">嵌入按钮</code>
 
+<code src="./demos/size.tsx">尺寸</code>
+
 ## 最佳实践
 
 - **保留键盘语义**：单个按键用 `Kbd`，组合键用 `KbdGroup`，不要用普通 `span` 模拟。
@@ -57,11 +59,12 @@ import { Kbd, KbdGroup } from "lynote-ui/kbd";
 
 ### Kbd
 
-| 参数      | 说明       | 类型                          | 默认值 |
-| --------- | ---------- | ----------------------------- | ------ |
-| className | 自定义类名 | `string`                      | -      |
-| children  | 按键文字   | `React.ReactNode`             | -      |
-| ...props  | 原生 kbd   | `React.ComponentProps<"kbd">` | -      |
+| 参数      | 说明       | 类型                                | 默认值      |
+| --------- | ---------- | ----------------------------------- | ----------- |
+| size      | 尺寸       | `"xs" \| "sm" \| "default" \| "lg"` | `"default"` |
+| className | 自定义类名 | `string`                            | -           |
+| children  | 按键文字   | `React.ReactNode`                   | -           |
+| ...props  | 原生 kbd   | `React.ComponentProps<"kbd">`       | -           |
 
 ### KbdGroup
 

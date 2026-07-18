@@ -48,6 +48,8 @@ import { Textarea } from "lynote-ui/textarea";
 
 <code src="./demos/resize.tsx">尺寸控制</code>
 
+<code src="./demos/size.tsx">尺寸</code>
+
 <code src="./demos/with-counter.tsx" description="实时显示字数 / 上限并联动错误态。">字数统计</code>
 
 <code src="./demos/form.tsx" description="与 `Field` 组合呈现 label / 描述 / 错误。">配合 Field 校验</code>
@@ -63,17 +65,18 @@ import { Textarea } from "lynote-ui/textarea";
 
 ### Textarea
 
-| 参数         | 说明                       | 类型                                            | 默认值  |
-| ------------ | -------------------------- | ----------------------------------------------- | ------- |
-| value        | 输入值（受控）             | `string`                                        | -       |
-| defaultValue | 默认值（非受控）           | `string`                                        | -       |
-| placeholder  | 占位文本                   | `string`                                        | -       |
-| rows         | 初始最小行数               | `number`                                        | -       |
-| disabled     | 是否禁用                   | `boolean`                                       | `false` |
-| readOnly     | 是否只读                   | `boolean`                                       | `false` |
-| required     | 是否必填                   | `boolean`                                       | `false` |
-| maxLength    | 最大字符数                 | `number`                                        | -       |
-| aria-invalid | 是否处于错误态             | `boolean`                                       | -       |
-| onChange     | 输入变化回调               | `React.ChangeEventHandler<HTMLTextAreaElement>` | -       |
-| className    | 自定义类名                 | `string`                                        | -       |
-| ...props     | 透传原生 `<textarea>` 属性 | `React.ComponentProps<"textarea">`              | -       |
+| 参数         | 说明                       | 类型                                            | 默认值      |
+| ------------ | -------------------------- | ----------------------------------------------- | ----------- |
+| value        | 输入值（受控）             | `string`                                        | -           |
+| defaultValue | 默认值（非受控）           | `string`                                        | -           |
+| placeholder  | 占位文本                   | `string`                                        | -           |
+| rows         | 初始最小行数               | `number`                                        | -           |
+| disabled     | 是否禁用                   | `boolean`                                       | `false`     |
+| readOnly     | 是否只读                   | `boolean`                                       | `false`     |
+| required     | 是否必填                   | `boolean`                                       | `false`     |
+| maxLength    | 最大字符数                 | `number`                                        | -           |
+| aria-invalid | 是否处于错误态             | `boolean`                                       | -           |
+| onChange     | 输入变化回调               | `React.ChangeEventHandler<HTMLTextAreaElement>` | -           |
+| size         | 文本域尺寸                 | `"xs" \| "sm" \| "default" \| "lg"`             | `"default"` |
+| className    | 自定义类名                 | `string`                                        | -           |
+| ...props     | 透传原生 `<textarea>` 属性 | `React.ComponentProps<"textarea">`              | -           |

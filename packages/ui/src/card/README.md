@@ -105,7 +105,7 @@ import {
 
 <code src="./demos/complex.tsx">数据卡片</code>
 
-<code src="./demos/size.tsx" description="`size=\"sm\"` 用于紧凑布局（如多列统计卡）。">尺寸</code>
+<code src="./demos/size.tsx" description="`size='sm'` 用于紧凑布局（如多列统计卡）。">尺寸</code>
 
 <code src="./demos/stats.tsx" description="多个统计指标的并排展示，常用于 Dashboard 顶部。">统计卡片组</code>
 

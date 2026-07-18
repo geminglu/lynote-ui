@@ -1,25 +1,38 @@
 "use client";
 
 import { Avatar as AvatarPrimitive } from "@base-ui/react/avatar";
+import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
-import { cn } from "../../lib";
+import { cn, useConfigProvider } from "../../lib";
+
+const avatarVariants = cva(
+  "group/avatar after:border-border relative flex shrink-0 select-none rounded-full after:absolute after:inset-0 after:rounded-full after:border after:mix-blend-darken dark:after:mix-blend-lighten",
+  {
+    variants: {
+      size: {
+        default: "size-8",
+        xs: "size-6",
+        sm: "size-6",
+        lg: "size-10",
+      },
+    },
+    defaultVariants: { size: "default" },
+  },
+);
 
 function Avatar({
   className,
-  size = "default",
+  size,
   ...props
-}: AvatarPrimitive.Root.Props & {
-  size?: "default" | "sm" | "lg";
-}) {
+}: AvatarPrimitive.Root.Props & VariantProps<typeof avatarVariants>) {
+  const { size: resolvedSize } = useConfigProvider({ size });
+
   return (
     <AvatarPrimitive.Root
       data-slot="avatar"
-      data-size={size}
-      className={cn(
-        "group/avatar after:border-border relative flex size-8 shrink-0 select-none rounded-full after:absolute after:inset-0 after:rounded-full after:border after:mix-blend-darken data-[size=lg]:size-10 data-[size=sm]:size-6 dark:after:mix-blend-lighten",
-        className,
-      )}
+      data-size={resolvedSize}
+      className={cn(avatarVariants({ size: resolvedSize }), className)}
       {...props}
     />
   );
@@ -106,4 +119,5 @@ export {
   AvatarGroup,
   AvatarGroupCount,
   AvatarImage,
+  avatarVariants,
 };

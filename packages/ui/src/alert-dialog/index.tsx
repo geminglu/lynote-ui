@@ -3,11 +3,19 @@
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog";
 import * as React from "react";
 
-import { cn } from "../../lib";
+import type { Size as SizeType } from "../../lib";
+import { cn, ConfigProvider, useConfigProvider } from "../../lib";
 import { Button } from "../button";
 
-function AlertDialog({ ...props }: AlertDialogPrimitive.Root.Props) {
-  return <AlertDialogPrimitive.Root data-slot="alert-dialog" {...props} />;
+function AlertDialog({
+  ...props
+}: AlertDialogPrimitive.Root.Props & { size: SizeType }) {
+  const { size } = useConfigProvider({ size: props.size });
+  return (
+    <ConfigProvider size={size}>
+      <AlertDialogPrimitive.Root data-slot="alert-dialog" {...props} />
+    </ConfigProvider>
+  );
 }
 
 function AlertDialogTrigger({ ...props }: AlertDialogPrimitive.Trigger.Props) {
@@ -157,7 +165,7 @@ function AlertDialogAction({
 function AlertDialogCancel({
   className,
   variant = "outline",
-  size = "default",
+  size,
   ...props
 }: AlertDialogPrimitive.Close.Props &
   Pick<React.ComponentProps<typeof Button>, "variant" | "size">) {

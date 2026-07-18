@@ -3,7 +3,7 @@ import { useRender } from "@base-ui/react/use-render";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
-import { cn } from "../../lib";
+import { cn, useConfigProvider } from "../../lib";
 import { Separator } from "../separator";
 
 function ItemGroup({ className, ...props }: React.ComponentProps<"div">) {
@@ -45,6 +45,7 @@ const itemVariants = cva(
       },
       size: {
         default: "gap-2.5 px-3 py-2.5",
+        lg: "gap-3 px-4 py-3",
         sm: "gap-2.5 px-3 py-2.5",
         xs: "in-data-[slot=dropdown-menu-content]:p-0 gap-2 px-2.5 py-2",
       },
@@ -59,15 +60,17 @@ const itemVariants = cva(
 function Item({
   className,
   variant = "default",
-  size = "default",
+  size,
   render,
   ...props
 }: useRender.ComponentProps<"div"> & VariantProps<typeof itemVariants>) {
+  const { size: resolvedSize } = useConfigProvider({ size });
+
   return useRender({
     defaultTagName: "div",
     props: mergeProps<"div">(
       {
-        className: cn(itemVariants({ variant, size, className })),
+        className: cn(itemVariants({ variant, size: resolvedSize, className })),
       },
       props,
     ),
@@ -75,7 +78,7 @@ function Item({
     state: {
       slot: "item",
       variant,
-      size,
+      size: resolvedSize,
     },
   });
 }

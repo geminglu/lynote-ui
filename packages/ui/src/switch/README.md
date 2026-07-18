@@ -17,7 +17,7 @@ Switch 用于在两种状态之间切换，常见于设置面板中表达"立即
 
 ## 特性
 
-- **两种尺寸**：`size="default" | "sm"`。
+- **四种尺寸**：`size="xs" | "sm" | "default" | "lg"`。
 - **受控/非受控**：通过 `checked` + `onCheckedChange` 或 `defaultChecked` 控制。
 - **支持表单**：可使用 `name` 参与原生表单序列化。
 - **校验态**：`aria-invalid` 会触发红色边框。
@@ -77,7 +77,7 @@ import { Switch } from "lynote-ui";
 
 <code src="./demos/controlled.tsx">受控用法</code>
 
-<code src="./demos/size.tsx" description="两种尺寸，紧凑布局中使用 `sm`。">尺寸</code>
+<code src="./demos/size.tsx" description="四种尺寸，适配不同布局密度。">尺寸</code>
 
 <code src="./demos/disabled.tsx">禁用状态</code>
 
@@ -108,16 +108,16 @@ import { Switch } from "lynote-ui";
 
 ### Switch
 
-| 参数            | 说明                       | 类型                         | 默认值      |
-| --------------- | -------------------------- | ---------------------------- | ----------- |
-| checked         | 选中状态（受控）           | `boolean`                    | -           |
-| defaultChecked  | 默认选中状态（非受控）     | `boolean`                    | `false`     |
-| onCheckedChange | 状态变化回调               | `(checked: boolean) => void` | -           |
-| size            | 控件尺寸                   | `"default" \| "sm"`          | `"default"` |
-| disabled        | 是否禁用                   | `boolean`                    | `false`     |
-| required        | 是否必填，用于原生表单校验 | `boolean`                    | `false`     |
-| name            | 表单字段名                 | `string`                     | -           |
-| value           | 选中时的字段值             | `string`                     | `"on"`      |
-| aria-invalid    | 是否处于错误态             | `boolean`                    | -           |
-| id              | 元素 id，用于关联 label    | `string`                     | -           |
-| className       | 自定义类名                 | `string`                     | -           |
+| 参数            | 说明                       | 类型                                | 默认值      |
+| --------------- | -------------------------- | ----------------------------------- | ----------- |
+| checked         | 选中状态（受控）           | `boolean`                           | -           |
+| defaultChecked  | 默认选中状态（非受控）     | `boolean`                           | `false`     |
+| onCheckedChange | 状态变化回调               | `(checked: boolean) => void`        | -           |
+| size            | 控件尺寸                   | `"xs" \| "sm" \| "default" \| "lg"` | `"default"` |
+| disabled        | 是否禁用                   | `boolean`                           | `false`     |
+| required        | 是否必填，用于原生表单校验 | `boolean`                           | `false`     |
+| name            | 表单字段名                 | `string`                            | -           |
+| value           | 选中时的字段值             | `string`                            | `"on"`      |
+| aria-invalid    | 是否处于错误态             | `boolean`                           | -           |
+| id              | 元素 id，用于关联 label    | `string`                            | -           |
+| className       | 自定义类名                 | `string`                            | -           |

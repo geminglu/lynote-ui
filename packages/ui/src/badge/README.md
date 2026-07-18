@@ -43,6 +43,8 @@ import { Badge } from "lynote-ui/badge";
 
 <code src="./demos/base.tsx">基本用法</code>
 
+<code src="./demos/size.tsx">尺寸</code>
+
 <code src="./demos/variant.tsx">变体</code>
 
 <code src="./demos/with-icon.tsx" description="状态徽标常配图标，使用 `data-icon` 槽位让组件自动调整内边距。">带图标</code>
@@ -67,6 +69,7 @@ import { Badge } from "lynote-ui/badge";
 | 参数      | 说明                       | 类型                                                                          | 默认值      |
 | --------- | -------------------------- | ----------------------------------------------------------------------------- | ----------- |
 | variant   | 视觉变体                   | `"default" \| "secondary" \| "destructive" \| "outline" \| "ghost" \| "link"` | `"default"` |
+| size      | 徽标尺寸                   | `"xs" \| "sm" \| "default" \| "lg"`                                           | `"default"` |
 | render    | 多态渲染（如渲染为 `<a>`） | `React.ReactElement \| ((props, state) => React.ReactElement)`                | -           |
 | className | 自定义类名                 | `string`                                                                      | -           |
 | children  | 徽标内容                   | `React.ReactNode`                                                             | -           |

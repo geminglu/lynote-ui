@@ -18,7 +18,7 @@ compact: true
 ## 特性
 
 - **图片加载兜底**：`AvatarImage` 加载失败时自动切到 `AvatarFallback`，无需手动判断 onError。
-- **三种尺寸**：`sm` / `default` / `lg`。
+- **四种尺寸**：`xs` / `sm` / `default` / `lg`。
 - **角标 / 在线状态**：`AvatarBadge` 自动定位到右下角，尺寸随头像变化。
 - **堆叠分组**：`AvatarGroup` + `AvatarGroupCount` 实现"前 N + 剩余数"。
 
@@ -85,11 +85,11 @@ import {
 
 ### Avatar
 
-| 参数      | 说明       | 类型                        | 默认值      |
-| --------- | ---------- | --------------------------- | ----------- |
-| size      | 头像尺寸   | `"sm" \| "default" \| "lg"` | `"default"` |
-| className | 自定义类名 | `string`                    | -           |
-| children  | 子组件     | `React.ReactNode`           | -           |
+| 参数      | 说明       | 类型                                | 默认值      |
+| --------- | ---------- | ----------------------------------- | ----------- |
+| size      | 头像尺寸   | `"xs" \| "sm" \| "default" \| "lg"` | `"default"` |
+| className | 自定义类名 | `string`                            | -           |
+| children  | 子组件     | `React.ReactNode`                   | -           |
 
 ### AvatarImage
 

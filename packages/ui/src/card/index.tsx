@@ -1,22 +1,28 @@
 import * as React from "react";
 
-import { cn } from "../../lib";
+import type { Size } from "../../lib";
+import { cn, ConfigProvider } from "../../lib";
 
 function Card({
   className,
-  size = "default",
+  size,
   ...props
-}: React.ComponentProps<"div"> & { size?: "default" | "sm" }) {
-  return (
+}: React.ComponentProps<"div"> & { size?: Size }) {
+  const content = (
     <div
       data-slot="card"
       data-size={size}
       className={cn(
-        "group/card bg-card text-card-foreground ring-foreground/10 has-data-[slot=card-footer]:pb-0 data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl flex flex-col gap-4 overflow-hidden rounded-xl py-4 text-sm ring-1 has-[>img:first-child]:pt-0 data-[size=sm]:gap-3 data-[size=sm]:py-3",
+        "group/card bg-card text-card-foreground ring-foreground/10 has-data-[slot=card-footer]:pb-0 data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl flex flex-col gap-4 overflow-hidden rounded-xl py-4 text-sm ring-1 has-[>img:first-child]:pt-0 data-[size=lg]:gap-6 data-[size=sm]:gap-3 data-[size=xs]:gap-2 data-[size=lg]:py-6 data-[size=sm]:py-3 data-[size=xs]:py-2",
         className,
       )}
       {...props}
     />
+  );
+  return size ? (
+    <ConfigProvider size={size}>{content}</ConfigProvider>
+  ) : (
+    content
   );
 }
 

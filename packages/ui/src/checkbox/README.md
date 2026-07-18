@@ -88,6 +88,8 @@ import { Checkbox } from "lynote-ui";
 
 <code src="./demos/card.tsx" description="卡片式可点击区域，用于价格方案、订阅类型等强视觉选择场景。">卡片式选择</code>
 
+<code src="./demos/size.tsx">尺寸</code>
+
 ## 最佳实践
 
 - **始终关联 label**：通过 `htmlFor` 或外层 `<FieldLabel>` 包裹，提升点击区域和读屏体验。
@@ -111,16 +113,17 @@ import { Checkbox } from "lynote-ui";
 
 ### Checkbox
 
-| 参数            | 说明                                        | 类型                         | 默认值  |
-| --------------- | ------------------------------------------- | ---------------------------- | ------- |
-| checked         | 选中状态（受控）                            | `boolean`                    | -       |
-| defaultChecked  | 默认选中状态（非受控）                      | `boolean`                    | `false` |
-| indeterminate   | 是否以"部分选中"状态显示，与 `checked` 独立 | `boolean`                    | `false` |
-| onCheckedChange | 选中状态变化回调                            | `(checked: boolean) => void` | -       |
-| disabled        | 是否禁用                                    | `boolean`                    | `false` |
-| required        | 是否必填，用于原生表单校验                  | `boolean`                    | `false` |
-| name            | 表单字段名，参与原生序列化                  | `string`                     | -       |
-| value           | 表单字段值，参与原生序列化                  | `string`                     | `"on"`  |
-| aria-invalid    | 是否处于错误态                              | `boolean`                    | -       |
-| className       | 自定义类名                                  | `string`                     | -       |
-| id              | 元素 id，用于和 label 关联                  | `string`                     | -       |
+| 参数            | 说明                                        | 类型                                | 默认值  |
+| --------------- | ------------------------------------------- | ----------------------------------- | ------- |
+| checked         | 选中状态（受控）                            | `boolean`                           | -       |
+| defaultChecked  | 默认选中状态（非受控）                      | `boolean`                           | `false` |
+| indeterminate   | 是否以"部分选中"状态显示，与 `checked` 独立 | `boolean`                           | `false` |
+| onCheckedChange | 选中状态变化回调                            | `(checked: boolean) => void`        | -       |
+| disabled        | 是否禁用                                    | `boolean`                           | `false` |
+| required        | 是否必填，用于原生表单校验                  | `boolean`                           | `false` |
+| name            | 表单字段名，参与原生序列化                  | `string`                            | -       |
+| value           | 表单字段值，参与原生序列化                  | `string`                            | `"on"`  |
+| aria-invalid    | 是否处于错误态                              | `boolean`                           | -       |
+| size            | 复选框尺寸                                  | `"xs" \| "sm" \| "default" \| "lg"` | -       |
+| className       | 自定义类名                                  | `string`                            | -       |
+| id              | 元素 id，用于和 label 关联                  | `string`                            | -       |

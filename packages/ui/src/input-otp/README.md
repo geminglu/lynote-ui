@@ -51,6 +51,8 @@ import {
 
 <code src="./demos/with-form.tsx" description="`InputOTPSeparator` 把 OTP 拆成 3 + 3,配合 Field 提供 label 与描述。">分组 + 表单</code>
 
+<code src="./demos/size.tsx" description="xs / sm / default / lg 四种插槽尺寸。">尺寸</code>
+
 ## 最佳实践
 
 - **常用长度 4 / 6**:超过 8 位会让用户视觉疲劳。
@@ -79,6 +81,7 @@ import {
 | pasteTransformer            | 粘贴时对文本的预处理函数                | `(pasted: string) => string`                                                | -                  |
 | textAlign                   | 输入文本对齐方式                        | `"left" \| "center" \| "right"`                                             | `"left"`           |
 | pushPasswordManagerStrategy | 与密码管理器协作策略                    | `"increase-width" \| "none"`                                                | `"increase-width"` |
+| size                        | 插槽尺寸                                | `"xs" \| "sm" \| "default" \| "lg"`                                         | `"default"`        |
 | containerClassName          | 容器类名                                | `string`                                                                    | -                  |
 | className                   | 内部 input 元素类名                     | `string`                                                                    | -                  |
 | name                        | 表单字段名                              | `string`                                                                    | -                  |

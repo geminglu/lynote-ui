@@ -3,7 +3,7 @@
 import { Tabs as TabsPrimitive } from "@base-ui/react/tabs";
 import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "../../lib";
+import { cn, useConfigProvider } from "../../lib";
 
 function Tabs({
   className,
@@ -24,16 +24,23 @@ function Tabs({
 }
 
 const tabsListVariants = cva(
-  "group/tabs-list text-muted-foreground group-data-horizontal/tabs:h-8 group-data-vertical/tabs:h-fit group-data-vertical/tabs:flex-col inline-flex w-fit items-center justify-center rounded-lg p-[3px] data-[variant=line]:rounded-none",
+  "group/tabs-list text-muted-foreground group-data-vertical/tabs:h-fit group-data-vertical/tabs:flex-col inline-flex w-fit items-center justify-center rounded-lg p-[3px] data-[variant=line]:rounded-none",
   {
     variants: {
       variant: {
         default: "bg-muted",
         line: "gap-1 bg-transparent",
       },
+      size: {
+        default: "group-data-horizontal/tabs:h-8",
+        xs: "group-data-horizontal/tabs:h-6",
+        sm: "group-data-horizontal/tabs:h-7",
+        lg: "group-data-horizontal/tabs:h-9",
+      },
     },
     defaultVariants: {
       variant: "default",
+      size: "default",
     },
   },
 );
@@ -41,13 +48,20 @@ const tabsListVariants = cva(
 function TabsList({
   className,
   variant = "default",
+  size,
   ...props
 }: TabsPrimitive.List.Props & VariantProps<typeof tabsListVariants>) {
+  const { size: resolvedSize } = useConfigProvider({ size });
+
   return (
     <TabsPrimitive.List
       data-slot="tabs-list"
       data-variant={variant}
-      className={cn(tabsListVariants({ variant }), className)}
+      data-size={resolvedSize}
+      className={cn(
+        tabsListVariants({ variant, size: resolvedSize }),
+        className,
+      )}
       {...props}
     />
   );

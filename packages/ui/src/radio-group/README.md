@@ -57,6 +57,8 @@ import { RadioGroup, RadioGroupItem } from "lynote-ui/radio-group";
 
 <code src="./demos/disabled.tsx">禁用状态</code>
 
+<code src="./demos/size.tsx">尺寸</code>
+
 <code src="./demos/card.tsx" description="卡片式可选项,适合套餐 / 付款方式 / 主题等强视觉场景。">卡片式选择</code>
 
 <code src="./demos/form.tsx" description="与 `FieldSet` + `FieldError` 组合实现表单校验。">配合 Field 校验</code>
@@ -96,10 +98,11 @@ import { RadioGroup, RadioGroupItem } from "lynote-ui/radio-group";
 
 ### RadioGroupItem
 
-| 参数         | 说明             | 类型      | 默认值  |
-| ------------ | ---------------- | --------- | ------- |
-| value        | 选项值           | `string`  | -       |
-| id           | 关联 label 的 id | `string`  | -       |
-| disabled     | 是否禁用         | `boolean` | `false` |
-| aria-invalid | 是否处于错误态   | `boolean` | -       |
-| className    | 自定义类名       | `string`  | -       |
+| 参数         | 说明             | 类型                                | 默认值      |
+| ------------ | ---------------- | ----------------------------------- | ----------- |
+| value        | 选项值           | `string`                            | -           |
+| id           | 关联 label 的 id | `string`                            | -           |
+| size         | 控件尺寸         | `"xs" \| "sm" \| "default" \| "lg"` | `"default"` |
+| disabled     | 是否禁用         | `boolean`                           | `false`     |
+| aria-invalid | 是否处于错误态   | `boolean`                           | -           |
+| className    | 自定义类名       | `string`                            | -           |

@@ -19,7 +19,7 @@ compact: true
 
 - **CSS 动画**：使用 `animate-spin`，零 JS。
 - **可访问语义**：默认 `role="status"`，读屏器会朗读"Loading"。
-- **任意尺寸**：通过 `className="size-*"` 覆盖默认 `size-4`。
+- **四种尺寸**：`size="xs" | "sm" | "default" | "lg"`，也可通过 `className="size-*"` 覆盖。
 
 ## 何时使用
 
@@ -43,7 +43,7 @@ import { Spinner } from "lynote-ui/spinner";
 
 <code src="./demos/base.tsx">基本用法</code>
 
-<code src="./demos/sizes.tsx" description="通过 Tailwind `size-*` 控制尺寸。">尺寸</code>
+<code src="./demos/sizes.tsx" description="通过 `size` 属性控制尺寸。">尺寸</code>
 
 <code src="./demos/in-button.tsx" description="按钮内的 loading 状态，配合 `disabled` 防止重复点击。">按钮内</code>
 
@@ -60,7 +60,8 @@ import { Spinner } from "lynote-ui/spinner";
 
 ### Spinner
 
-| 参数      | 说明                         | 类型                          | 默认值 |
-| --------- | ---------------------------- | ----------------------------- | ------ |
-| className | 自定义类名（控制大小、颜色） | `string`                      | -      |
-| ...props  | 透传原生 `<svg>` 属性        | `React.ComponentProps<"svg">` | -      |
+| 参数      | 说明                     | 类型                                | 默认值      |
+| --------- | ------------------------ | ----------------------------------- | ----------- |
+| size      | 加载器尺寸               | `"xs" \| "sm" \| "default" \| "lg"` | `"default"` |
+| className | 自定义类名（控制颜色等） | `string`                            | -           |
+| ...props  | 透传原生 `<svg>` 属性    | `React.ComponentProps<"svg">`       | -           |

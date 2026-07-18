@@ -49,6 +49,8 @@ import { Skeleton } from "lynote-ui/skeleton";
 
 <code src="./demos/list.tsx" description="重复列表项的占位，建议项数与真实数据接近以减少抖动。">列表占位</code>
 
+<code src="./demos/size.tsx" description="xs / sm / default / lg 四种高度。">尺寸</code>
+
 ## 最佳实践
 
 - **骨架结构要贴近真实数据**：宽度、高度、行数尽量与真实内容一致，否则数据到位时会出现明显抖动。
@@ -59,7 +61,8 @@ import { Skeleton } from "lynote-ui/skeleton";
 
 ### Skeleton
 
-| 参数      | 说明                               | 类型                          | 默认值 |
-| --------- | ---------------------------------- | ----------------------------- | ------ |
-| className | 自定义类名（控制宽高、形状、间距） | `string`                      | -      |
-| ...props  | 透传原生 `<div>` 属性              | `React.ComponentProps<"div">` | -      |
+| 参数      | 说明                               | 类型                                | 默认值      |
+| --------- | ---------------------------------- | ----------------------------------- | ----------- |
+| size      | 骨架屏尺寸                         | `"xs" \| "sm" \| "default" \| "lg"` | `"default"` |
+| className | 自定义类名（控制宽高、形状、间距） | `string`                            | -           |
+| ...props  | 透传原生 `<div>` 属性              | `React.ComponentProps<"div">`       | -           |

@@ -169,12 +169,13 @@ import {
 
 外观与 `Button` 一致的触发器。
 
-| 参数      | 说明       | 类型                      | 默认值 |
-| --------- | ---------- | ------------------------- | ------ |
-| disabled  | 是否禁用   | `boolean`                 | -      |
-| className | 自定义类名 | `string`                  | -      |
-| children  | 内容       | `React.ReactNode`         | -      |
-| onClick   | 点击回调   | `React.MouseEventHandler` | -      |
+| 参数      | 说明       | 类型                                | 默认值      |
+| --------- | ---------- | ----------------------------------- | ----------- |
+| size      | 触发器尺寸 | `"xs" \| "sm" \| "default" \| "lg"` | `"default"` |
+| disabled  | 是否禁用   | `boolean`                           | -           |
+| className | 自定义类名 | `string`                            | -           |
+| children  | 内容       | `React.ReactNode`                   | -           |
+| onClick   | 点击回调   | `React.MouseEventHandler`           | -           |
 
 ### SelectValue
 

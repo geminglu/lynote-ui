@@ -1,42 +1,33 @@
-import { CheckCircle2Icon } from "lucide-react";
-
-import {
-  Item,
-  ItemContent,
-  ItemDescription,
-  ItemGroup,
-  ItemMedia,
-  ItemTitle,
-} from "lynote-ui/item";
+import { Item, ItemContent, ItemGroup, ItemTitle } from "lynote-ui";
 
 const App: React.FC = () => {
   return (
-    <div className="flex w-full max-w-md flex-col gap-4">
+    <div className="flex flex-col gap-6">
+      <ItemGroup size="xs">
+        <Item variant="muted" size="xs">
+          <ItemContent>
+            <ItemTitle>xs 尺寸</ItemTitle>
+          </ItemContent>
+        </Item>
+      </ItemGroup>
+      <ItemGroup size="sm">
+        <Item variant="muted" size="sm">
+          <ItemContent>
+            <ItemTitle>sm 尺寸</ItemTitle>
+          </ItemContent>
+        </Item>
+      </ItemGroup>
       <ItemGroup>
-        <Item size="xs" variant="muted">
-          <ItemMedia variant="icon">
-            <CheckCircle2Icon />
-          </ItemMedia>
+        <Item variant="muted">
           <ItemContent>
-            <ItemTitle>极小尺寸 (xs)</ItemTitle>
+            <ItemTitle>default 尺寸</ItemTitle>
           </ItemContent>
         </Item>
-        <Item size="sm" variant="muted">
-          <ItemMedia variant="icon">
-            <CheckCircle2Icon />
-          </ItemMedia>
+      </ItemGroup>
+      <ItemGroup size="lg">
+        <Item variant="muted" size="lg">
           <ItemContent>
-            <ItemTitle>小尺寸 (sm)</ItemTitle>
-            <ItemDescription>用于密集列表</ItemDescription>
-          </ItemContent>
-        </Item>
-        <Item size="default" variant="muted">
-          <ItemMedia variant="icon">
-            <CheckCircle2Icon />
-          </ItemMedia>
-          <ItemContent>
-            <ItemTitle>默认尺寸</ItemTitle>
-            <ItemDescription>一般业务列表</ItemDescription>
+            <ItemTitle>lg 尺寸</ItemTitle>
           </ItemContent>
         </Item>
       </ItemGroup>

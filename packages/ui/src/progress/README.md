@@ -50,6 +50,8 @@ import { Progress } from "lynote-ui/progress";
 
 <code src="./demos/variant.tsx">变体</code>
 
+<code src="./demos/size.tsx" description="xs / sm / default / lg 四种高度。">尺寸</code>
+
 ## 最佳实践
 
 - **进度可预估时显示百分比**:数字让用户更有掌控感。
@@ -61,8 +63,9 @@ import { Progress } from "lynote-ui/progress";
 
 ### Progress
 
-| 参数      | 说明                             | 类型              | 默认值 |
-| --------- | -------------------------------- | ----------------- | ------ |
-| value     | 当前进度(0-100),不传则为不确定态 | `number \| null`  | -      |
-| className | 自定义类名                       | `string`          | -      |
-| children  | 可选 label / 自定义子节点        | `React.ReactNode` | -      |
+| 参数      | 说明                             | 类型                                | 默认值      |
+| --------- | -------------------------------- | ----------------------------------- | ----------- |
+| value     | 当前进度(0-100),不传则为不确定态 | `number \| null`                    | -           |
+| size      | 进度条尺寸                       | `"xs" \| "sm" \| "default" \| "lg"` | `"default"` |
+| className | 自定义类名                       | `string`                            | -           |
+| children  | 可选 label / 自定义子节点        | `React.ReactNode`                   | -           |

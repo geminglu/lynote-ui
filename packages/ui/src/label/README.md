@@ -44,7 +44,9 @@ import { Label } from "lynote-ui/label";
 
 <code src="./demos/with-input.tsx">配合输入框</code>
 
-<code src="./demos/required.tsx" description="通过手动追加 `*` 或 “(可选)” 标记字段的必填/可选属性。">必填与可选</code>
+<code src=”./demos/required.tsx” description=”通过手动追加 `*` 或 “(可选)” 标记字段的必填/可选属性。”>必填与可选</code>
+
+<code src=”./demos/size.tsx”>尺寸</code>
 
 ## 最佳实践
 
@@ -56,9 +58,10 @@ import { Label } from "lynote-ui/label";
 
 ### Label
 
-| 参数      | 说明               | 类型                            | 默认值 |
-| --------- | ------------------ | ------------------------------- | ------ |
-| htmlFor   | 关联控件 id        | `string`                        | -      |
-| className | 自定义类名         | `string`                        | -      |
-| children  | 标签内容           | `React.ReactNode`               | -      |
-| ...props  | 透传原生 `<label>` | `React.ComponentProps<"label">` | -      |
+| 参数      | 说明               | 类型                                | 默认值      |
+| --------- | ------------------ | ----------------------------------- | ----------- |
+| size      | 尺寸               | `"xs" \| "sm" \| "default" \| "lg"` | `"default"` |
+| htmlFor   | 关联控件 id        | `string`                            | -           |
+| className | 自定义类名         | `string`                            | -           |
+| children  | 标签内容           | `React.ReactNode`                   | -           |
+| ...props  | 透传原生 `<label>` | `React.ComponentProps<"label">`     | -           |

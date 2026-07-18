@@ -94,6 +94,8 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "lynote-ui";
 
 <code src="./demos/with-card.tsx" description="与 Card 组合的典型业务场景：每个 tab 各自承载一组表单。">配合 Card 的业务场景</code>
 
+<code src="./demos/size.tsx">尺寸</code>
+
 ## 最佳实践
 
 - **首屏默认值要语义化**：用 `defaultValue` 指向用户最关心的视图，而不是第一个 tab。
@@ -130,12 +132,13 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "lynote-ui";
 
 ### TabsList
 
-| 参数        | 说明                                                    | 类型                         | 默认值         |
-| ----------- | ------------------------------------------------------- | ---------------------------- | -------------- |
-| variant     | 视觉变体：`default` 带背景的分段控件，`line` 底部下划线 | `"default" \| "line"`        | `"default"`    |
-| orientation | 排列方向，会被父 `<Tabs>` 自动同步，通常无需手动设置    | `"horizontal" \| "vertical"` | `"horizontal"` |
-| className   | 自定义类名                                              | `string`                     | -              |
-| children    | `TabsTrigger` 列表                                      | `React.ReactNode`            | -              |
+| 参数        | 说明                                                    | 类型                                | 默认值         |
+| ----------- | ------------------------------------------------------- | ----------------------------------- | -------------- |
+| variant     | 视觉变体：`default` 带背景的分段控件，`line` 底部下划线 | `"default" \| "line"`               | `"default"`    |
+| orientation | 排列方向，会被父 `<Tabs>` 自动同步，通常无需手动设置    | `"horizontal" \| "vertical"`        | `"horizontal"` |
+| size        | 尺寸                                                    | `"xs" \| "sm" \| "default" \| "lg"` | `"default"`    |
+| className   | 自定义类名                                              | `string`                            | -              |
+| children    | `TabsTrigger` 列表                                      | `React.ReactNode`                   | -              |
 
 ### TabsTrigger
 

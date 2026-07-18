@@ -1,10 +1,11 @@
 "use client";
 
 import { Select as SelectPrimitive } from "@base-ui/react/select";
+import { cva, type VariantProps } from "class-variance-authority";
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import * as React from "react";
 
-import { cn } from "../../lib";
+import { cn, useConfigProvider } from "../../lib";
 import { SelectContext } from "./context";
 import { SelectMultipleValue } from "./SelectMultipleValue";
 import type {
@@ -135,27 +136,43 @@ function SelectValue({
   );
 }
 
+const selectTriggerVariants = cva(
+  "border-input focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 data-placeholder:text-muted-foreground dark:bg-input/30 dark:hover:bg-input/50 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 flex w-fit select-none items-center justify-between gap-1.5 rounded-lg border bg-transparent py-2 pl-2.5 pr-2 text-sm outline-none transition-colors disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  {
+    variants: {
+      size: {
+        default:
+          "h-8 whitespace-nowrap *:data-[slot=select-value]:line-clamp-1",
+        xs: "h-6 whitespace-nowrap rounded-[min(var(--radius-md),10px)] px-2 py-0.5 text-xs *:data-[slot=select-value]:line-clamp-1",
+        sm: "h-7 whitespace-nowrap rounded-[min(var(--radius-md),12px)] px-2.5 py-1 text-[0.8rem] *:data-[slot=select-value]:line-clamp-1",
+        lg: "h-9 whitespace-nowrap px-3 py-1.5 text-base *:data-[slot=select-value]:line-clamp-1",
+      },
+    },
+    defaultVariants: {
+      size: "default",
+    },
+  },
+);
+
 function SelectTrigger({
   className,
-  size = "default",
+  size,
   children,
   ...props
-}: SelectPrimitive.Trigger.Props & {
-  size?: "sm" | "default";
-}) {
+}: SelectPrimitive.Trigger.Props & VariantProps<typeof selectTriggerVariants>) {
   const selectContext = React.useContext(SelectContext);
   const isMultiple = Boolean(selectContext?.multiple);
+  const { size: resolvedSize } = useConfigProvider({ size });
 
   return (
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
-      data-size={size}
+      data-size={resolvedSize}
       data-multiple={isMultiple ? true : undefined}
       className={cn(
-        "border-input focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 data-placeholder:text-muted-foreground dark:bg-input/30 dark:hover:bg-input/50 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 flex w-fit select-none items-center justify-between gap-1.5 rounded-lg border bg-transparent py-2 pl-2.5 pr-2 text-sm outline-none transition-colors disabled:cursor-not-allowed disabled:opacity-50 data-[size=sm]:rounded-[min(var(--radius-md),10px)] *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
-        isMultiple
-          ? "h-auto min-h-8 whitespace-normal py-1.5 *:data-[slot=select-value]:line-clamp-none"
-          : "whitespace-nowrap data-[size=default]:h-8 data-[size=sm]:h-7 *:data-[slot=select-value]:line-clamp-1",
+        selectTriggerVariants({ size: resolvedSize }),
+        isMultiple &&
+          "h-auto min-h-8 whitespace-normal py-1.5 *:data-[slot=select-value]:line-clamp-none",
         className,
       )}
       {...props}
@@ -312,6 +329,7 @@ export {
   SelectScrollUpButton,
   SelectSeparator,
   SelectTrigger,
+  selectTriggerVariants,
   SelectValue,
 };
 

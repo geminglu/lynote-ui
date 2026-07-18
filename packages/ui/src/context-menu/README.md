@@ -74,7 +74,7 @@ import {
 
 <code src="./demos/radio.tsx" description="使用 `ContextMenuRadioGroup` 和 `ContextMenuRadioItem` 表示互斥选项。">单选项</code>
 
-<code src="./demos/destructive.tsx" description="使用 `variant=\"destructive\"` 标记危险操作。">危险操作</code>
+<code src="./demos/destructive.tsx" description="使用 `variant=\'destructive\'` 标记危险操作。">危险操作</code>
 
 <code src="./demos/sides.tsx" description="使用 `side` 属性控制菜单的展开方向。">方向控制</code>
 

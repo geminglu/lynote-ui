@@ -18,7 +18,7 @@ NativeSelect 是原生 `<select>` 的样式化封装。比起 `Select`,它体积
 ## 特性
 
 - **完全原生**:用户体验与系统一致;移动端唤起原生 picker。
-- **2 种尺寸**:`default` / `sm`。
+- **4 种尺寸**:`xs` / `sm` / `default` / `lg`。
 - **支持 `optgroup`**:通过 `NativeSelectOptGroup` 给选项分组。
 - **校验态**:`aria-invalid` 触发红色边框与焦点环。
 
@@ -50,6 +50,8 @@ import {
 
 <code src="./demos/group.tsx" description="使用 `NativeSelectOptGroup` 给选项分组。">分组</code>
 
+<code src="./demos/size.tsx">尺寸</code>
+
 ## 最佳实践
 
 - **配合 `Label`**:务必通过 `htmlFor` 关联 label。
@@ -62,7 +64,7 @@ import {
 
 | 参数      | 说明                     | 类型                                          | 默认值      |
 | --------- | ------------------------ | --------------------------------------------- | ----------- |
-| size      | 控件尺寸                 | `"default" \| "sm"`                           | `"default"` |
+| size      | 控件尺寸                 | `"xs" \| "sm" \| "default" \| "lg"`           | `"default"` |
 | className | 自定义类名               | `string`                                      | -           |
 | ...props  | 透传原生 `<select>` 属性 | `Omit<React.ComponentProps<"select">,"size">` | -           |
 

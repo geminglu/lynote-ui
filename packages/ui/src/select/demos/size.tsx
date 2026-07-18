@@ -7,32 +7,42 @@ import {
 } from "lynote-ui";
 
 const App: React.FC = () => {
-  const items = [
-    { value: "apple", label: "苹果" },
-    { value: "banana", label: "香蕉" },
-    { value: "orange", label: "橙子" },
-  ];
   return (
-    <div className="flex flex-col gap-4">
-      <Select items={items}>
-        <SelectTrigger size="sm" className="w-[180px]">
-          <SelectValue placeholder="小尺寸" />
+    <div className="flex flex-col gap-3">
+      <Select>
+        <SelectTrigger size="xs" className="w-[180px]">
+          <SelectValue placeholder="xs 尺寸" />
         </SelectTrigger>
         <SelectContent>
-          {items.map((item) => (
-            <SelectItem value={item.value}>{item.label}</SelectItem>
-          ))}
+          <SelectItem value="1">选项一</SelectItem>
+          <SelectItem value="2">选项二</SelectItem>
         </SelectContent>
       </Select>
-
-      <Select items={items}>
-        <SelectTrigger size="default" className="w-[180px]">
-          <SelectValue placeholder="默认尺寸" />
+      <Select>
+        <SelectTrigger size="sm" className="w-[180px]">
+          <SelectValue placeholder="sm 尺寸" />
         </SelectTrigger>
         <SelectContent>
-          {items.map((item) => (
-            <SelectItem value={item.value}>{item.label}</SelectItem>
-          ))}
+          <SelectItem value="1">选项一</SelectItem>
+          <SelectItem value="2">选项二</SelectItem>
+        </SelectContent>
+      </Select>
+      <Select>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="default 尺寸" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="1">选项一</SelectItem>
+          <SelectItem value="2">选项二</SelectItem>
+        </SelectContent>
+      </Select>
+      <Select>
+        <SelectTrigger size="lg" className="w-[180px]">
+          <SelectValue placeholder="lg 尺寸" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="1">选项一</SelectItem>
+          <SelectItem value="2">选项二</SelectItem>
         </SelectContent>
       </Select>
     </div>

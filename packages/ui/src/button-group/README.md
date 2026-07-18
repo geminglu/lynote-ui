@@ -48,7 +48,7 @@ import {
 
 <code src="./demos/base.tsx" description="组合 Button + DropdownMenu 构建邮件列表的工具栏。">基本用法</code>
 
-<code src="./demos/vertical.tsx" description="通过 `orientation=\"vertical\"` 构建纵向工具栏。">纵向排列</code>
+<code src="./demos/vertical.tsx" description="通过 `orientation='vertical'` 构建纵向工具栏。">纵向排列</code>
 
 <code src="./demos/split-button.tsx" description="主按钮 + 下拉按钮组成常见的拆分按钮。">拆分按钮</code>
 

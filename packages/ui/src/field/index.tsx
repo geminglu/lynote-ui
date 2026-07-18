@@ -3,7 +3,8 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { useMemo } from "react";
 
-import { cn } from "../../lib";
+import type { Size } from "../../lib";
+import { cn, ConfigProvider } from "../../lib";
 import { Label } from "../label";
 import { Separator } from "../separator";
 
@@ -72,16 +73,24 @@ const fieldVariants = cva(
 function Field({
   className,
   orientation = "vertical",
+  size,
   ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof fieldVariants>) {
-  return (
+}: React.ComponentProps<"div"> &
+  VariantProps<typeof fieldVariants> & { size?: Size }) {
+  const content = (
     <div
       role="group"
       data-slot="field"
       data-orientation={orientation}
+      data-size={size}
       className={cn(fieldVariants({ orientation }), className)}
       {...props}
     />
+  );
+  return size ? (
+    <ConfigProvider size={size}>{content}</ConfigProvider>
+  ) : (
+    content
   );
 }
 

@@ -58,7 +58,7 @@ import { ToggleGroup, ToggleGroupItem } from "lynote-ui/toggle-group";
 
 <code src="./demos/with-icon.tsx" description="对齐方式 / 视图切换的典型组合。">带图标</code>
 
-<code src="./demos/outline.tsx" description="`variant=\"outline\"` 适合带间隙的分体按钮组。">边框变体</code>
+<code src="./demos/outline.tsx" description="`variant='outline'` 适合带间隙的分体按钮组。">边框变体</code>
 
 <code src="./demos/custom.tsx">自定义样式</code>
 

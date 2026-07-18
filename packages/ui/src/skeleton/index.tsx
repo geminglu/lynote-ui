@@ -1,13 +1,34 @@
-import { cn } from "../../lib";
+import { cva, type VariantProps } from "class-variance-authority";
 
-function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
+import { cn, useConfigProvider } from "../../lib";
+
+const skeletonVariants = cva("bg-muted animate-pulse rounded-md", {
+  variants: {
+    size: {
+      default: "h-4",
+      xs: "h-2",
+      sm: "h-3",
+      lg: "h-6",
+    },
+  },
+  defaultVariants: { size: "default" },
+});
+
+function Skeleton({
+  className,
+  size,
+  ...props
+}: React.ComponentProps<"div"> & VariantProps<typeof skeletonVariants>) {
+  const { size: resolvedSize } = useConfigProvider({ size });
+
   return (
     <div
       data-slot="skeleton"
-      className={cn("bg-muted animate-pulse rounded-md", className)}
+      data-size={resolvedSize}
+      className={cn(skeletonVariants({ size: resolvedSize, className }))}
       {...props}
     />
   );
 }
 
-export { Skeleton };
+export { Skeleton, skeletonVariants };

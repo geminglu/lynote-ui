@@ -17,7 +17,7 @@ Toggle 是一个可按下保持选中态的按钮，常用于工具栏中表达"
 
 ## 特性
 
-- **3 种尺寸**：`sm` / `default` / `lg`。
+- **4 种尺寸**：`xs` / `sm` / `default` / `lg`。
 - **2 种变体**：`default`（无边框）/ `outline`（带边框）。
 - **受控 / 非受控**：`pressed` + `onPressedChange` 或 `defaultPressed`。
 - **可访问语义**：自动 `aria-pressed`，读屏器明确朗读状态。
@@ -60,13 +60,13 @@ import { Toggle } from "lynote-ui/toggle";
 
 ### Toggle
 
-| 参数            | 说明                   | 类型                         | 默认值      |
-| --------------- | ---------------------- | ---------------------------- | ----------- |
-| pressed         | 按下状态（受控）       | `boolean`                    | -           |
-| defaultPressed  | 默认按下状态（非受控） | `boolean`                    | `false`     |
-| onPressedChange | 按下状态变化回调       | `(pressed: boolean) => void` | -           |
-| variant         | 视觉变体               | `"default" \| "outline"`     | `"default"` |
-| size            | 尺寸                   | `"default" \| "sm" \| "lg"`  | `"default"` |
-| disabled        | 是否禁用               | `boolean`                    | `false`     |
-| className       | 自定义类名             | `string`                     | -           |
-| children        | 按钮内容               | `React.ReactNode`            | -           |
+| 参数            | 说明                   | 类型                                | 默认值      |
+| --------------- | ---------------------- | ----------------------------------- | ----------- |
+| pressed         | 按下状态（受控）       | `boolean`                           | -           |
+| defaultPressed  | 默认按下状态（非受控） | `boolean`                           | `false`     |
+| onPressedChange | 按下状态变化回调       | `(pressed: boolean) => void`        | -           |
+| variant         | 视觉变体               | `"default" \| "outline"`            | `"default"` |
+| size            | 尺寸                   | `"xs" \| "sm" \| "default" \| "lg"` | `"default"` |
+| disabled        | 是否禁用               | `boolean`                           | `false`     |
+| className       | 自定义类名             | `string`                            | -           |
+| children        | 按钮内容               | `React.ReactNode`                   | -           |

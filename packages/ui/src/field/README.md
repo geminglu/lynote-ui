@@ -128,6 +128,8 @@ import {
 
 <code src="./demos/arrayFields.tsx" description="React Hook Form 提供了一个用于管理动态数组字段的 useFieldArray 钩子。这在需要动态添加或移除字段时非常有用。">数组字段</code>
 
+<code src="./demos/projectForm.tsx" description="一个完整的项目创建表单示例，综合运用了 Input、Textarea、Select、RadioGroup、Checkbox、Switch、Combobox（技术栈搜索选择）、DatePicker（Popover + Calendar 截止日期选择）、Slider（预算滑块）、InputOTP（邀请码输入）、动态数组等所有表单控件，并展示了 FieldSet 分组、FieldSeparator 分隔、字段联动（项目类型 → 里程碑模板）、条件渲染（邮件通知 → 每周报告）以及复杂的 zod 校验规则。">完整项目表单</code>
+
 ## 最佳实践
 
 - **每个控件都包一层 `<Field>`**：即使不需要描述/错误，仍能保证将来扩展时不破坏布局。

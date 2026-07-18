@@ -2,10 +2,11 @@ import { Input } from "lynote-ui";
 
 const App: React.FC = () => {
   return (
-    <div className="flex w-full max-w-sm flex-col gap-4">
-      <Input placeholder="小尺寸" />
-      <Input placeholder="默认尺寸" />
-      <Input placeholder="大尺寸" />
+    <div className="flex flex-col gap-3">
+      <Input size="xs" placeholder="xs 尺寸" />
+      <Input size="sm" placeholder="sm 尺寸" />
+      <Input size="default" placeholder="default 尺寸" />
+      <Input size="lg" placeholder="lg 尺寸" />
     </div>
   );
 };

@@ -124,17 +124,17 @@ import {
 
 <code src="./demos/avatar.tsx" description="头像 + 下拉菜单是用户菜单的标准写法。">头像菜单</code>
 
-<code src="./demos/destructive.tsx" description="危险操作通过 `variant=\"destructive\"` 着色，建议放在分隔线之后。">危险操作</code>
+<code src="./demos/destructive.tsx" description="危险操作通过 `variant='destructive'` 着色，建议放在分隔线之后。">危险操作</code>
 
 <code src="./demos/checkboxes.tsx" description="`DropdownMenuCheckboxItem` 适合用于显示/隐藏列、过滤标签等多选场景。">复选项</code>
 
 <code src="./demos/checkboxesIcons.tsx">复选项 + 图标</code>
 
-<code src="./demos/radioGroup.tsx" description="`DropdownMenuRadioGroup` 用于互斥单选，常见于"按字段排序"或主题切换。">单选组</code>
+<code src="./demos/radioGroup.tsx" description="`DropdownMenuRadioGroup` 用于互斥单选，常见于'按字段排序'或主题切换。">单选组</code>
 
 <code src="./demos/radioIcons.tsx">单选组 + 图标</code>
 
-<code src="./demos/submenu.tsx" description="子菜单适合放置二级动作（如"导出为 → CSV / Excel"）。建议层级不超过 2 级。">子菜单</code>
+<code src="./demos/submenu.tsx" description="子菜单适合放置二级动作（如'导出为 → CSV / Excel'）。建议层级不超过 2 级。">子菜单</code>
 
 <code src="./demos/placement.tsx">弹层位置</code>
 

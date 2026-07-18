@@ -1,13 +1,12 @@
-import { Spinner } from "lynote-ui/spinner";
+import { Spinner } from "lynote-ui";
 
 const App: React.FC = () => {
   return (
-    <div className="flex items-center gap-6">
-      <Spinner className="size-3" />
-      <Spinner className="size-4" />
-      <Spinner className="size-5" />
-      <Spinner className="size-6" />
-      <Spinner className="size-8" />
+    <div className="flex items-center gap-3">
+      <Spinner size="xs" />
+      <Spinner size="sm" />
+      <Spinner size="default" />
+      <Spinner size="lg" />
     </div>
   );
 };

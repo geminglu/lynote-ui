@@ -1,17 +1,19 @@
 import { BoldIcon } from "lucide-react";
-
-import { Toggle } from "lynote-ui/toggle";
+import { Toggle } from "lynote-ui";
 
 const App: React.FC = () => {
   return (
-    <div className="flex items-center gap-2">
-      <Toggle size="sm" aria-label="小尺寸">
+    <div className="flex flex-wrap items-center gap-2">
+      <Toggle size="xs" aria-label="Bold">
         <BoldIcon />
       </Toggle>
-      <Toggle size="default" aria-label="默认尺寸">
+      <Toggle size="sm" aria-label="Bold">
         <BoldIcon />
       </Toggle>
-      <Toggle size="lg" aria-label="大尺寸">
+      <Toggle size="default" aria-label="Bold">
+        <BoldIcon />
+      </Toggle>
+      <Toggle size="lg" aria-label="Bold">
         <BoldIcon />
       </Toggle>
     </div>

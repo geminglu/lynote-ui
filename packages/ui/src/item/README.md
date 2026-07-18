@@ -18,7 +18,7 @@ compact: true
 ## 特性
 
 - **三种变体**：`default`（无边框）/ `outline`（带边框）/ `muted`（次级背景）。
-- **三种尺寸**：`xs` / `sm` / `default`。
+- **四种尺寸**：`xs` / `sm` / `default` / `lg`。
 - **多态渲染**：通过 `render` 可整体渲染为 `<a>` / `<button>`。
 - **结构清晰**：所有子组件均通过 `data-slot` 标记，便于自定义样式。
 
@@ -76,7 +76,7 @@ import {
 
 <code src="./demos/with-action.tsx" description="右侧 `ItemActions` 放置管理按钮，搭配 `Avatar` 渲染用户列表。">用户列表（带操作）</code>
 
-<code src="./demos/sizes.tsx" description="三种尺寸的紧凑度对比。">尺寸</code>
+<code src="./demos/sizes.tsx" description="四种尺寸的紧凑度对比。">尺寸</code>
 
 <code src="./demos/variant.tsx" description="三种变体的对比。">变体</code>
 
@@ -98,7 +98,7 @@ import {
 | 参数      | 说明                              | 类型                                | 默认值      |
 | --------- | --------------------------------- | ----------------------------------- | ----------- |
 | variant   | 视觉变体                          | `"default" \| "outline" \| "muted"` | `"default"` |
-| size      | 尺寸                              | `"default" \| "sm" \| "xs"`         | `"default"` |
+| size      | 尺寸                              | `"xs" \| "sm" \| "default" \| "lg"` | `"default"` |
 | render    | 多态渲染（如 `<a>` / `<button>`） | `React.ReactElement`                | -           |
 | className | 自定义类名                        | `string`                            | -           |
 | children  | 子组件                            | `React.ReactNode`                   | -           |

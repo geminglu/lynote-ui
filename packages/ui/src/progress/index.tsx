@@ -1,37 +1,59 @@
 "use client";
 
 import { Progress as ProgressPrimitive } from "@base-ui/react/progress";
+import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "../../lib";
+import type { Size } from "../../lib";
+import { cn, useConfigProvider } from "../../lib";
+
+const progressTrackVariants = cva(
+  "bg-muted relative flex w-full items-center overflow-x-hidden rounded-full",
+  {
+    variants: {
+      size: {
+        default: "h-1",
+        xs: "h-0.5",
+        sm: "h-1",
+        lg: "h-2",
+      },
+    },
+    defaultVariants: { size: "default" },
+  },
+);
 
 function Progress({
   className,
   children,
   value,
+  size,
   ...props
-}: ProgressPrimitive.Root.Props) {
+}: ProgressPrimitive.Root.Props & { size?: Size }) {
+  const { size: resolvedSize } = useConfigProvider({ size });
+
   return (
     <ProgressPrimitive.Root
       value={value}
       data-slot="progress"
+      data-size={resolvedSize}
       className={cn("flex flex-wrap gap-3", className)}
       {...props}
     >
       {children}
-      <ProgressTrack>
+      <ProgressTrack size={resolvedSize}>
         <ProgressIndicator />
       </ProgressTrack>
     </ProgressPrimitive.Root>
   );
 }
 
-function ProgressTrack({ className, ...props }: ProgressPrimitive.Track.Props) {
+function ProgressTrack({
+  className,
+  size,
+  ...props
+}: ProgressPrimitive.Track.Props & VariantProps<typeof progressTrackVariants>) {
   return (
     <ProgressPrimitive.Track
-      className={cn(
-        "bg-muted relative flex h-1 w-full items-center overflow-x-hidden rounded-full",
-        className,
-      )}
+      className={cn(progressTrackVariants({ size, className }))}
       data-slot="progress-track"
       {...props}
     />
@@ -79,5 +101,6 @@ export {
   ProgressIndicator,
   ProgressLabel,
   ProgressTrack,
+  progressTrackVariants,
   ProgressValue,
 };
